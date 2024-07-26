@@ -25,9 +25,9 @@ const projectsData = [
   },
   {
     id: 3,
-    title: "E-commerce Application",
-    description: "Project 3 description",
-    image: "/images/projects/3.png",
+    title: "E-commerce Website",
+    description: "E-commerce Website for a client",
+    image: "/images/projects/work.png",
     tag: ["All", "Web"],
     gitUrl: "/",
     previewUrl: "/",
@@ -35,7 +35,7 @@ const projectsData = [
   {
     id: 4,
     title: "Food Ordering Application",
-    description: "Project 4 description",
+    description: "Built on React Native",
     image: "/images/projects/4.png",
     tag: ["All", "Mobile"],
     gitUrl: "/",
