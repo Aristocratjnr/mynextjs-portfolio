@@ -43,9 +43,9 @@ const projectsData = [
   },
   {
     id: 5,
-    title: "React Firebase Template",
-    description: "Authentication and CRUD operations",
-    image: "/images/projects/5.png",
+    title: "Portfolio Website",
+    description: "Nextjs Appication",
+    image: "/images/projects/next.png",
     tag: ["All", "Web"],
     gitUrl: "/",
     previewUrl: "/",
