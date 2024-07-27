@@ -11,8 +11,8 @@ const projectsData = [
     description: "Focused on furniture products",
     image: "/images/projects/test.png",
     tag: ["All", "Web"],
-    gitUrl: "https://github.com/Aristocratjnr/mywebtests.git",
-    previewUrl: "https://aristocratjnr.github.io/mywebtests",
+    gitUrl: "https://github.com/Aristocratjnr/HCI.git",
+    previewUrl: "https://aristocratjnr.github.io/HCI/",
   },
   {
     id: 2,
@@ -29,8 +29,8 @@ const projectsData = [
     description: "E-commerce Website for a client",
     image: "/images/projects/work.png",
     tag: ["All", "Web"],
-    gitUrl: "/",
-    previewUrl: "/",
+    gitUrl: "https://github.com/Aristocratjnr/mywebtests.git",
+    previewUrl: "https://aristocratjnr.github.io/mywebtests",
   },
   {
     id: 4,
