@@ -11,7 +11,7 @@ const projectsData = [
     description: "Focused on furniture products",
     image: "/images/projects/test.png",
     tag: ["All", "Web"],
-    gitUrl: "/",
+    gitUrl: "https://github.com/Aristocratjnr/mywebtests.git",
     previewUrl: "https://aristocratjnr.github.io/mywebtests",
   },
   {
