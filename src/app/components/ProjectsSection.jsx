@@ -47,8 +47,8 @@ const projectsData = [
     description: "Nextjs Appication",
     image: "/images/projects/next.png",
     tag: ["All", "Web"],
-    gitUrl: "/",
-    previewUrl: "/",
+    gitUrl: "https://github.com/Aristocratjnr/mynextjs-portfolio.git",
+    previewUrl: "https://mynextjs-portfolio-nu.vercel.app/",
   },
   {
     id: 6,
