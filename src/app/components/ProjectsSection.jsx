@@ -12,7 +12,7 @@ const projectsData = [
     image: "/images/projects/test.png",
     tag: ["All", "Web"],
     gitUrl: "/",
-    previewUrl: "/",
+    previewUrl: "https://aristocratjnr.github.io/mywebtests",
   },
   {
     id: 2,
