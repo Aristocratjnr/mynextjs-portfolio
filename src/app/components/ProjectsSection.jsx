@@ -20,8 +20,8 @@ const projectsData = [
     description: "Built for a client in G.C.B Kanieshie Branch",
     image: "/images/projects/gcb.png",
     tag: ["All", "Web"],
-    gitUrl: "/",
-    previewUrl: "/",
+    gitUrl: "https://github.com/The-DevGenius/GCB-Kaneshie-Website.git",
+    previewUrl: "http://the-devgenius.github.io/GCB-Kaneshie-Website/",
   },
   {
     id: 3,
