@@ -56,8 +56,8 @@ const projectsData = [
     description: "My first portfolio webpage", 
     image: "/images/projects/port.png",
     tag: ["All", "Web"],
-    gitUrl: "/",
-    previewUrl: "/",
+    gitUrl: "https://github.com/Aristocratjnr/my-portfolio.git",
+    previewUrl: "https://aristocratportfolio.vercel.app/",
   },
 ];
 
