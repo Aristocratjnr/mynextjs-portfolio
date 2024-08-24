@@ -1,6 +1,8 @@
 "use client";
 import React, { useTransition, useState } from "react";
 import Image from "next/image";
+import { FaHtml5, FaReact, FaPython, FaJsSquare } from "react-icons/fa"; // Import icons
+import { SiNextdotjs, SiTailwindcss } from "react-icons/si"; // Import icons
 import TabButton from "./TabButton";
 
 const TAB_DATA = [
@@ -9,12 +11,12 @@ const TAB_DATA = [
     id: "skills",
     content: (
       <ul className="list-disc pl-2">
-        <li>Html</li>
-        <li>Nextjs</li>
-        <li>TailwindCSS</li>
-        <li>Python</li>
-        <li>JavaScript</li>
-        <li>React</li>
+        <li><FaHtml5 className="inline mr-2 text-orange-600" />HTML</li>
+        <li><SiNextdotjs className="inline mr-2 text-black" />Next.js</li>
+        <li><SiTailwindcss className="inline mr-2 text-blue-500" />TailwindCSS</li>
+        <li><FaPython className="inline mr-2 text-yellow-500" />Python</li>
+        <li><FaJsSquare className="inline mr-2 text-yellow-400" />JavaScript</li>
+        <li><FaReact className="inline mr-2 text-blue-400" />React</li>
       </ul>
     ),
   },
@@ -35,7 +37,7 @@ const TAB_DATA = [
       <ul className="list-disc pl-2">
         <li>Intermediate Python in Data Science</li>
         <li>Data Analysis with Python, IBM</li>
-        <li>Introduction to Artificial Intelligence with Honours,IBM</li>
+        <li>Introduction to Artificial Intelligence with Honours, IBM</li>
       </ul>
     ),
   },
@@ -58,9 +60,9 @@ const AboutSection = () => {
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg">
-            I am a aspirant full stack web developer with a passion for creating
+            I am an aspiring full stack web developer with a passion for creating
             interactive and responsive web applications. I have experience
-            working with JavaScript, React, python, Next.js, Sql, HTML, CSS, and Git. I am a quick learner and I am always
+            working with JavaScript, React, Python, Next.js, SQL, HTML, CSS, and Git. I am a quick learner and I am always
             looking to expand my knowledge and skill set. I am a team player and
             I am excited to work with others to create amazing applications.
           </p>
@@ -69,22 +71,19 @@ const AboutSection = () => {
               selectTab={() => handleTabChange("skills")}
               active={tab === "skills"}
             >
-              {" "}
-              Skills{" "}
+              Skills
             </TabButton>
             <TabButton
               selectTab={() => handleTabChange("education")}
               active={tab === "education"}
             >
-              {" "}
-              Education{" "}
+              Education
             </TabButton>
             <TabButton
               selectTab={() => handleTabChange("certifications")}
               active={tab === "certifications"}
             >
-              {" "}
-              Certifications{" "}
+              Certifications
             </TabButton>
           </div>
           <div className="mt-8">
