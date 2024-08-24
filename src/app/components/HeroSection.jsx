@@ -37,7 +37,7 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-          A highly skilled IT student with a strong foundation in technology, and expertise in diagnosing and fixing software problems
+          A skilled IT student with a strong foundation in technology, and expertise in diagnosing and fixing software problems.
           </p>
           <div>
             <Link
