@@ -3,20 +3,24 @@ import Link from "next/link";
 import React, { useState } from "react";
 import NavLink from "./NavLink";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { FaUser, FaProjectDiagram, FaEnvelope } from "react-icons/fa"; // Correct icon import
 import MenuOverlay from "./MenuOverlay";
 
 const navLinks = [
   {
     title: "About",
     path: "#about",
+    icon: <FaUser className="inline mr-2 text-white" />, 
   },
   {
     title: "Projects",
     path: "#projects",
+    icon: <FaProjectDiagram className="inline mr-2 text-white" />, 
   },
   {
     title: "Contact",
     path: "#contact",
+    icon: <FaEnvelope className="inline mr-2 text-white" />, 
   },
 ];
 
@@ -53,7 +57,10 @@ const Navbar = () => {
           <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 mt-0">
             {navLinks.map((link, index) => (
               <li key={index}>
-                <NavLink href={link.path} title={link.title} />
+                <NavLink href={link.path} title={link.title}>
+                  {link.icon} {/* Render the icon here */}
+                  {link.title}
+                </NavLink>
               </li>
             ))}
           </ul>
