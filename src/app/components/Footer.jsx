@@ -11,7 +11,7 @@ const Footer = () => {
 
       {/* WhatsApp Icon */}
       <a
-        href="https://wa.me/0551784926" // Replace with your WhatsApp number
+        href="https://wa.me/+233551784926?text=Hello%20Aristocrat" // 
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-4 right-4 z-50 bg-green-500 p-3 rounded-full text-white hover:bg-green-600 transition-transform duration-300 transform hover:scale-110 shadow-lg"
