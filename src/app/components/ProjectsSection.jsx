@@ -37,7 +37,7 @@ const projectsData = [
     title: "Food Ordering Application",
     description: "Built on React Native",
     image: "/images/projects/4.png",
-    tag: ["All", "Mobile"],
+    tag: ["All", "E-commerce"],
     gitUrl: "/",
     previewUrl: "/",
   },
@@ -97,8 +97,8 @@ const ProjectsSection = () => {
         />
         <ProjectTag
           onClick={handleTagChange}
-          name="Mobile"
-          isSelected={tag === "Mobile"}
+          name="E-commerce"
+          isSelected={tag === "E-commerce"}
         />
       </div>
       <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
