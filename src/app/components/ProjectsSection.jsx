@@ -36,7 +36,7 @@ const projectsData = [
     id: 4,
     title: "Furniture Service",
     description: "Built on HTML5, Vanilla CSS & JS",
-    image: "/images/projects/4.png",
+    image: "/images/projects/work.png",
     tag: ["All", "E-commerce"],
     gitUrl: "/",
     previewUrl: "/",
