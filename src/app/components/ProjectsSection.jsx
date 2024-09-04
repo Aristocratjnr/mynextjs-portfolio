@@ -52,8 +52,8 @@ const projectsData = [
   },
   {
     id: 6,
-    title: "Portfolio Sample",
-    description: "My first portfolio webpage", 
+    title: " My First Portfolio",
+    description: "Built on React and Chakra UI", 
     image: "/images/projects/port.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/Aristocratjnr/my-portfolio.git",
