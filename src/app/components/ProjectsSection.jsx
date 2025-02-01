@@ -59,6 +59,7 @@ const projectsData = [
     gitUrl: "https://github.com/Aristocratjnr/my-portfolio.git",
     previewUrl: "https://aristocratportfolio.vercel.app/",
   },
+  
 ];
 
 const ProjectsSection = () => {
@@ -79,48 +80,86 @@ const ProjectsSection = () => {
     animate: { y: 0, opacity: 1 },
   };
 
+  const containerVariants = {
+    initial: {},
+    animate: {
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   return (
-    <section id="projects">
-      <h2 className="text-center text-4xl font-bold text-white mt-4 mb-8 md:mb-12">
-        My Projects
-      </h2>
-      <div className="text-white flex flex-row justify-center items-center gap-2 py-6">
+    <section className="py-20 px-4 max-w-7xl mx-auto">
+      <div className="space-y-8 mb-16">
+        <motion.h2 
+          className="text-center text-5xl font-bold text-white"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          My Projects
+        </motion.h2>
+        <motion.p 
+          className="text-center text-gray-400 max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          Explore my portfolio of web development projects, featuring e-commerce solutions and modern web applications.
+        </motion.p>
+      </div>
+
+      <motion.div 
+        className="flex flex-wrap justify-center items-center gap-4 mb-12"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
         <ProjectTag
           onClick={handleTagChange}
           name="All"
           isSelected={tag === "All"}
+          className="px-6 py-3 text-lg"
         />
         <ProjectTag
           onClick={handleTagChange}
           name="Web"
           isSelected={tag === "Web"}
+          className="px-6 py-3 text-lg"
         />
         <ProjectTag
           onClick={handleTagChange}
           name="E-commerce"
           isSelected={tag === "E-commerce"}
+          className="px-6 py-3 text-lg"
         />
-      </div>
-      <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
+      </motion.div>
+
+      <motion.ul 
+        ref={ref}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        variants={containerVariants}
+        initial="initial"
+        animate={isInView ? "animate" : "initial"}
+      >
         {filteredProjects.map((project, index) => (
           <motion.li
-            key={index}
+            key={project.id}
             variants={cardVariants}
-            initial="initial"
-            animate={isInView ? "animate" : "initial"}
-            transition={{ duration: 0.3, delay: index * 0.4 }}
+            className="h-full"
           >
             <ProjectCard
-              key={project.id}
               title={project.title}
               description={project.description}
               imgUrl={project.image}
               gitUrl={project.gitUrl}
               previewUrl={project.previewUrl}
+              className="h-full transition-transform duration-300 hover:scale-105"
             />
           </motion.li>
         ))}
-      </ul>
+      </motion.ul>
     </section>
   );
 };
