@@ -8,7 +8,7 @@ const ProjectTag = ({ name, onClick, isSelected }) => {
       whileTap={{ scale: 0.95 }}
       onClick={() => onClick(name)}
       className={`
-        relative px-6 py-2.5 rounded-full text-sm font-medium
+        relative px-6 py-2.5 rounded-full text-md font-medium
         transition-all duration-300 ease-out
         ${isSelected 
           ? "text-white bg-gradient-to-r from-primary-500 to-secondary-500 shadow-lg shadow-primary-500/25" 
