@@ -1,16 +1,104 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const ProjectTag = ({ name, onClick, isSelected }) => {
-  const buttonStyles = isSelected
-    ? "text-white border-primary-500"
-    : "text-[#ADB7BE] border-slate-600 hover:border-white";
   return (
-    <button
-      className={`${buttonStyles} rounded-full border-2 px-6 py-3 text-xl cursor-pointer`}
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       onClick={() => onClick(name)}
+      className={`
+        relative px-7 py-3 rounded-full text-lg font-medium
+        transition-all duration-300 ease-out
+        group overflow-hidden
+        ${isSelected 
+          ? "text-white shadow-2xl shadow-primary-500/30" 
+          : "text-gray-300 bg-white/5 hover:bg-white/10 hover:text-white"
+        }
+      `}
     >
-      {name}
-    </button>
+      {/* Background layer */}
+      {isSelected && (
+        <motion.div
+          layoutId="activeTab"
+          className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500"
+          initial={false}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        />
+      )}
+      
+      {/* Border animation */}
+      <div className="absolute inset-0 rounded-full overflow-hidden">
+        <motion.div
+          className={`absolute inset-0 rounded-full border ${
+            isSelected 
+              ? "border-primary-500/50" 
+              : "border-white/10 group-hover:border-white/20"
+          }`}
+          initial={false}
+        />
+      </div>
+
+      {/* Content */}
+      <span className="relative z-10 flex items-center gap-2">
+        {name}
+        {isSelected && (
+          <motion.span
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="w-2 h-2 bg-white rounded-full"
+          />
+        )}
+      </span>
+
+      {/* Shine effect */}
+      <div className="absolute inset-0 rounded-full overflow-hidden">
+        <motion.div
+          className={`
+            absolute top-0 left-0 w-1/4 h-full 
+            bg-gradient-to-r from-transparent via-white/20 to-transparent
+            transform -skew-x-45 translate-x-[-200%]
+            ${isSelected ? 'opacity-40' : 'opacity-0'}
+          `}
+          animate={{
+            translateX: isSelected ? ["-200%", "400%"] : "400%"
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "linear",
+            delay: isSelected ? 0 : 0.3
+          }}
+        />
+      </div>
+
+      {/* Particles effect */}
+      {isSelected && (
+        <div className="absolute inset-0 rounded-full overflow-hidden">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-0.5 h-0.5 bg-white/30 rounded-full"
+              initial={{
+                scale: 0,
+                opacity: 0,
+                x: Math.random() * 100 - 50 + "%",
+                y: Math.random() * 100 - 50 + "%"
+              }}
+              animate={{
+                scale: [0, 1, 0],
+                opacity: [0, 0.5, 0]
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: Math.random() * 1.5
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </motion.button>
   );
 };
 
