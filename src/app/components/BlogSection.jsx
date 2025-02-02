@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Clock, Tag, ChevronRight, BookOpen } from 'lucide-react';
+import { Search, Clock, Tag, ChevronRight, BookOpen, Code, TrendingUp, Palette, FileCode, Briefcase } from 'lucide-react';
 
 const articles = [
+  // Development Articles
   {
     title: "Building Scalable React Applications",
     excerpt: "Learn essential patterns and practices for creating maintainable React applications that scale.",
@@ -14,6 +15,17 @@ const articles = [
     imageUrl: "/images/react.jpg",
   },
   {
+    title: "Advanced TypeScript Patterns",
+    excerpt: "Deep dive into TypeScript's advanced features and design patterns for better code organization.",
+    date: "2024-01-28",
+    readTime: "12 min read",
+    category: "Development",
+    tags: ["TypeScript", "Patterns", "Development"],
+    imageUrl: "/images/develop.jpg",
+  },
+  
+  // Tech Trends Articles
+  {
     title: "The Future of Web Development",
     excerpt: "Exploring upcoming trends and technologies that will shape the future of web development.",
     date: "2024-01-15",
@@ -23,6 +35,17 @@ const articles = [
     imageUrl: "/images/next.png",
   },
   {
+    title: "AI in Modern Web Applications",
+    excerpt: "How artificial intelligence is transforming the way we build and interact with web applications.",
+    date: "2024-01-12",
+    readTime: "7 min read",
+    category: "Tech Trends",
+    tags: ["AI", "Innovation", "Web Dev"],
+    imageUrl: "/images/web.jpg",
+  },
+
+  // CSS Articles
+  {
     title: "Mastering CSS Grid",
     excerpt: "Deep dive into CSS Grid with practical examples and advanced techniques.",
     date: "2024-01-01",
@@ -30,14 +53,71 @@ const articles = [
     category: "CSS",
     tags: ["CSS", "Layout", "Design"],
     imageUrl: "/images/develop.jpg",
-  }
+  },
+  {
+    title: "Modern CSS Animation Techniques",
+    excerpt: "Create stunning animations using modern CSS features and best practices.",
+    date: "2024-01-05",
+    readTime: "9 min read",
+    category: "CSS",
+    tags: ["CSS", "Animation", "UI"],
+    imageUrl: "/images/web.jpg",
+  },
+
+  // JavaScript Articles
+  {
+    title: "Understanding JavaScript Promises",
+    excerpt: "Master asynchronous programming with JavaScript Promises and async/await patterns.",
+    date: "2024-01-20",
+    readTime: "11 min read",
+    category: "JavaScript",
+    tags: ["JavaScript", "Async", "ES6"],
+    imageUrl: "/images/react.jpg",
+  },
+  {
+    title: "JavaScript Performance Optimization",
+    excerpt: "Tips and techniques for optimizing JavaScript code for better performance.",
+    date: "2024-01-18",
+    readTime: "8 min read",
+    category: "JavaScript",
+    tags: ["JavaScript", "Performance", "Optimization"],
+    imageUrl: "/images/next.png",
+  },
+
+  // Career Articles
+  {
+    title: "Breaking into Tech: A Guide",
+    excerpt: "Comprehensive guide for beginners looking to start their career in tech.",
+    date: "2024-01-25",
+    readTime: "15 min read",
+    category: "Career",
+    tags: ["Career", "Guide", "Tech"],
+    imageUrl: "/images/develop.jpg",
+  },
+  {
+    title: "From Junior to Senior Developer",
+    excerpt: "Key milestones and skills needed to progress from junior to senior developer role.",
+    date: "2024-01-22",
+    readTime: "13 min read",
+    category: "Career",
+    tags: ["Career", "Growth", "Skills"],
+    imageUrl: "/images/web.jpg",
+  },
 ];
 
-const categories = ["All", "Development", "Tech Trends", "CSS", "JavaScript", "Career"];
+const categories = [
+  { id: "All", icon: <BookOpen className="w-4 h-4" /> },
+  { id: "Development", icon: <Code className="w-4 h-4" /> },
+  { id: "Tech Trends", icon: <TrendingUp className="w-4 h-4" /> },
+  { id: "CSS", icon: <Palette className="w-4 h-4" /> },
+  { id: "JavaScript", icon: <FileCode className="w-4 h-4" /> },
+  { id: "Career", icon: <Briefcase className="w-4 h-4" /> },
+];
 
 const BlogSection = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [hoveredArticle, setHoveredArticle] = useState(null);
 
   const filteredArticles = articles.filter(article => {
     const matchesCategory = selectedCategory === "All" || article.category === selectedCategory;
@@ -105,24 +185,26 @@ const BlogSection = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-12 pr-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl 
                 focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                text-white placeholder-gray-400 transition-all duration-300 "
+                text-white placeholder-gray-400 transition-all duration-300"
             />
           </div>
 
           <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
+            {categories.map(({ id, icon }) => (
               <motion.button
-                key={category}
+                key={id}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => setSelectedCategory(id)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300
-                  ${selectedCategory === category
+                  flex items-center gap-2
+                  ${selectedCategory === id
                     ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg shadow-blue-500/25'
                     : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50'
                   }`}
               >
-                {category}
+                {icon}
+                {id}
               </motion.button>
             ))}
           </div>
@@ -136,6 +218,8 @@ const BlogSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              onHoverStart={() => setHoveredArticle(article.title)}
+              onHoverEnd={() => setHoveredArticle(null)}
               className="group relative bg-gray-800/50 rounded-2xl overflow-hidden 
                 border border-gray-700/50 hover:border-gray-600/50
                 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/5 backdrop-blur-sm"
@@ -146,6 +230,7 @@ const BlogSection = () => {
                   alt={article.title}
                   className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               
               <div className="p-6 space-y-4">
@@ -179,11 +264,22 @@ const BlogSection = () => {
                   ))}
                 </div>
 
-                <button className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-300">
+                <motion.button 
+                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors duration-300"
+                  whileHover={{ x: 5 }}
+                >
                   Read More
                   <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
+                </motion.button>
               </div>
+
+              {hoveredArticle === article.title && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent pointer-events-none"
+                />
+              )}
             </motion.article>
           ))}
         </div>
