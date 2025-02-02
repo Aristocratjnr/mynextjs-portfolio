@@ -126,7 +126,7 @@ const HeroSection = () => {
                 transition={{ delay: 0.6 }}
               >
                 <Link
-                  href="/#contact"
+                  href="mailto:ayimobuobi@gmail.com"
                   className="group relative overflow-hidden flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/30 w-full sm:w-auto"
                 >
                   <span className="relative z-10">Hire Me</span>
