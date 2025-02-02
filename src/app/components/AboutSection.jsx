@@ -216,7 +216,7 @@ const AboutSection = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {['Next.js', 'React', 'TypeScript', 'Python', 'Tailwind'].map((tech) => (
+                  {['Next.js', 'React', 'TypeScript', 'Python', 'TailwindCSS'].map((tech) => (
                     <span key={tech} className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-300/30 hover:text-cyan-300 transition-all">
                       {tech}
                     </span>
