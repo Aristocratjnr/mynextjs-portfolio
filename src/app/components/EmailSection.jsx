@@ -63,7 +63,7 @@ const EmailSection = () => {
               <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl">
                 I&apos;m currently looking for new opportunities in tech industries. 
                 Whether you have a question or just want to say hi, I&apos;ll try my 
-                best to get back to you! 🧸🎈
+                best to get back to you🧸🎈
               </p>
             </div>
 
@@ -130,7 +130,7 @@ const EmailSection = () => {
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 
                       focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300
                       hover:border-white/20"
-                    placeholder="your-mail@gmail.com"
+                    placeholder="your-mail@mail-provider.com"
                   />
                 </div>
 
@@ -147,7 +147,7 @@ const EmailSection = () => {
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 
                       focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-300
                       hover:border-white/20"
-                    placeholder="Just saying hello world!"
+                    placeholder="type your message subject"
                   />
                 </div>
 
