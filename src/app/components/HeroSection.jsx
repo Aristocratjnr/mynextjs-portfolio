@@ -10,7 +10,7 @@ const HeroSection = () => {
   const floatingStars = Array(30).fill(null);
 
   return (
-    <section className="min-h-screen flex items-center py-12 lg:py-24 overflow-hidden relative isolate">
+    <section className="min-h-[100dvh] flex items-center py-8 sm:py-12 lg:py-24 overflow-hidden relative isolate">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
         {/* Floating Particles */}
@@ -47,20 +47,20 @@ const HeroSection = () => {
             repeat: Infinity,
             ease: "linear"
           }}
-          className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-gradient-to-r from-primary-500/15 to-secondary-500/15 rounded-full blur-[150px]"
+          className="absolute top-1/4 -left-1/4 w-[300px] sm:w-[400px] lg:w-[600px] h-[300px] sm:h-[400px] lg:h-[600px] bg-gradient-to-r from-primary-500/15 to-secondary-500/15 rounded-full blur-[100px] sm:blur-[150px]"
         />
       </div>
 
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Content Column */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="col-span-7 space-y-10"
+            className="col-span-7 space-y-6 sm:space-y-10 text-center lg:text-left"
           >
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {/* Welcome Badge */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -68,12 +68,12 @@ const HeroSection = () => {
                 transition={{ delay: 0.2 }}
                 className="inline-block"
               >
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-lg border border-primary-500/30 hover:border-primary-500/50 transition-all group">
+                <span className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/5 backdrop-blur-lg border border-primary-500/30 hover:border-primary-500/50 transition-all group">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-400" />
                   </span>
-                  <span className="text-sm font-medium bg-gradient-to-r from-primary-300 to-secondary-300 bg-clip-text text-transparent">
+                  <span className="text-xs sm:text-sm font-medium bg-gradient-to-r from-primary-300 to-secondary-300 bg-clip-text text-transparent">
                     Welcome to my portfolio
                   </span>
                   <div className="ml-2 w-4 h-4 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -81,7 +81,7 @@ const HeroSection = () => {
               </motion.div>
 
               {/* Main Heading */}
-              <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
+              <h1 className="text-white text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600 relative inline-block">
                   <span className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent opacity-20" />
                   Hello, I&apos;m{" "}
@@ -108,7 +108,7 @@ const HeroSection = () => {
 
             {/* Description */}
             <motion.p 
-              className="text-gray-300/90 text-lg md:text-xl max-w-2xl leading-relaxed"
+              className="text-gray-300/90 text-base sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -119,7 +119,7 @@ const HeroSection = () => {
             </motion.p>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -127,7 +127,7 @@ const HeroSection = () => {
               >
                 <Link
                   href="/#contact"
-                  className="group relative overflow-hidden flex items-center justify-center gap-3 px-8 py-3.5 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/30"
+                  className="group relative overflow-hidden flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/30 w-full sm:w-auto"
                 >
                   <span className="relative z-10">Hire Me</span>
                   <ArrowDownRight className="w-5 h-5 relative z-10 transition-transform group-hover:translate-x-1 group-hover:-translate-y-0.5" />
@@ -142,7 +142,7 @@ const HeroSection = () => {
               >
                 <Link
                   href="https://profile.indeed.com/p/davido-z6ym5ng"
-                  className="group relative flex items-center justify-center gap-3 px-8 py-3.5 rounded-full bg-white/10 text-white font-medium backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:scale-105"
+                  className="group relative flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-white/10 text-white font-medium backdrop-blur-sm transition-all duration-300 hover:bg-white/20 hover:scale-105 w-full sm:w-auto"
                 >
                   <Download className="w-5 h-5 transition-transform group-hover:scale-110" />
                   <span className="relative z-10">Download CV</span>
@@ -157,12 +157,12 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="col-span-5 justify-self-center lg:justify-self-end relative"
+            className="col-span-5 justify-self-center lg:justify-self-end relative mt-8 lg:mt-0"
           >
             <div className="relative group group-hover:[transform-style:preserve-3d]">
               {/* Floating Effect */}
               <motion.div 
-                className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary-500 to-secondary-500 blur-3xl opacity-30 animate-pulse"
+                className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary-500 to-secondary-500 blur-2xl sm:blur-3xl opacity-30 animate-pulse"
                 animate={{ 
                   scale: [1, 1.2, 1],
                   rotate: [0, 180, 360]
@@ -182,7 +182,7 @@ const HeroSection = () => {
                   scale: 1.05
                 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="relative rounded-full bg-[#181818] w-[280px] h-[280px] lg:w-[400px] lg:h-[400px] overflow-hidden shadow-2xl shadow-black/50 border-2 border-white/10 backdrop-blur-sm"
+                className="relative rounded-full bg-[#181818] w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] lg:w-[400px] lg:h-[400px] overflow-hidden shadow-2xl shadow-black/50 border-2 border-white/10 backdrop-blur-sm"
               >
                 <Image
                   src="/images/aristocrat.png"
@@ -196,11 +196,11 @@ const HeroSection = () => {
 
               {/* Floating Badge */}
               <motion.div
-                className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-lg border border-white/10 hover:border-white/20 transition-all flex items-center gap-2"
+                className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/5 backdrop-blur-lg border border-white/10 hover:border-white/20 transition-all flex items-center gap-2"
                 whileHover={{ y: -5 }}
               >
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-sm font-medium bg-gradient-to-r from-primary-300 to-secondary-300 bg-clip-text text-transparent">
+                <span className="text-xs sm:text-sm font-medium bg-gradient-to-r from-primary-300 to-secondary-300 bg-clip-text text-transparent whitespace-nowrap">
                   Available for work
                 </span>
               </motion.div>
