@@ -52,7 +52,7 @@ const EmailSection = () => {
                 transition={{ delay: 0.2 }}
               >
                 <span className="text-sm sm:text-base bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-400 py-2 px-4 rounded-full">
-                  Let's Talk
+                  Let&apos;s Talk
                 </span>
               </motion.div>
               
@@ -61,8 +61,8 @@ const EmailSection = () => {
               </h2>
               
               <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl">
-                I'm currently looking for new opportunities in tech industries. 
-                Whether you have a question or just want to say hi, I'll try my 
+                I&apos;m currently looking for new opportunities in tech industries. 
+                Whether you have a question or just want to say hi, I&apos;ll try my 
                 best to get back to you! 🧸🎈
               </p>
             </div>
@@ -112,7 +112,7 @@ const EmailSection = () => {
                     <Send className="w-8 h-8" />
                   </motion.div>
                   <h3 className="text-xl font-semibold text-white">Message Sent!</h3>
-                  <p className="text-gray-400">Thank you for your message. I'll get back to you soon!</p>
+                  <p className="text-gray-400">Thank you for your message. I&apos;ll get back to you soon!</p>
                 </div>
               </motion.div>
             ) : (

@@ -40,7 +40,7 @@ const achievementsList = [
 
 const AchievementsSection = () => {
   return (
-    <div className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950 overflow-hidden">
+    <div className="rounded-lg py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950 overflow-hidden">
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
