@@ -89,7 +89,7 @@ const HeroSection = () => {
                 <br />
                 <TypeAnimation
                   sequence={[
-                    "Aristocrat",
+                    "David A. Obuobi",
                     1000,
                     "Web Developer",
                     1000,
@@ -185,7 +185,7 @@ const HeroSection = () => {
                 className="relative rounded-full bg-[#181818] w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] lg:w-[400px] lg:h-[400px] overflow-hidden shadow-2xl shadow-black/50 border-2 border-white/10 backdrop-blur-sm"
               >
                 <Image
-                  src="/images/aristocrat.png"
+                  src="/images/junior.jpeg"
                   alt="Aristocrat Jnr"
                   className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 transition-all duration-500 group-hover:scale-110"
                   width={400}
