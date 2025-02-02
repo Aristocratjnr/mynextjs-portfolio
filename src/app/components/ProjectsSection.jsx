@@ -34,9 +34,9 @@ const projectsData = [
   },
   {
     id: 4,
-    title: "Furniture Service",
-    description: "Built on HTML5, Vanilla CSS & JS",
-    image: "/images/projects/work.png",
+    title: "Laundry Service",
+    description: "Built on Nextjs",
+    image: "/images/projects/laundry.png",
     tag: ["All", "E-commerce"],
     gitUrl: "/",
     previewUrl: "/",
