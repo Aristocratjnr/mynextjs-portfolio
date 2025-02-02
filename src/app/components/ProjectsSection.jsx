@@ -27,7 +27,7 @@ const projectsData = [
     id: 3,
     title: "E-commerce Website",
     description: "E-commerce Website for a client",
-    image: "/images/projects/work.png",
+    image: "/images/projects/service.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/Aristocratjnr/mywebtests.git",
     previewUrl: "https://aristocratjnr.github.io/mywebtests",
