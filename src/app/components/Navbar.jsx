@@ -108,7 +108,7 @@ const Navbar = () => {
                
               </motion.div>
               <span className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-indigo-400 hover:from-purple-200 hover:to-indigo-300 transition-all duration-300">
-                Portfolio
+                David.
               </span>
               <motion.div
                 className="absolute inset-0 rounded-lg"

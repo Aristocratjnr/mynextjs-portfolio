@@ -252,7 +252,7 @@ const AboutSection = () => {
                 className="absolute bottom-0 left-0 right-0 p-6 sm:p-8"
               >
                 <h3 className="text-2xl font-bold text-white mb-2">David Ayim Obuobi</h3>
-                <p className="text-lg text-cyan-300/90 mb-4">Aspirant Full Stack Developer</p>
+                <p className="text-lg text-cyan-300 mb-4 font font-semi-bold">Aspirant Full Stack Developer</p>
                 <div className="flex gap-4">
                   <a 
                     href="#"
