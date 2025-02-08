@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 import { Github, Twitter, Linkedin, Mail, ExternalLink, Heart } from "lucide-react";
 
 const socialLinks = [
-  { icon: <Github className="w-4 h-4" />, href: "#", label: "GitHub" },
+  { icon: <Github className="w-4 h-4" />, href: "https://github.com/Aristocratjnr", label: "GitHub" },
   { icon: <Twitter className="w-4 h-4" />, href: "#", label: "Twitter" },
-  { icon: <Linkedin className="w-4 h-4" />, href: "#", label: "LinkedIn" },
-  { icon: <Mail className="w-4 h-4" />, href: "#", label: "Email" },
+  { icon: <Linkedin className="w-4 h-4" />, href: "https://www.linkedin.com/in/obuobi-david-ayim", label: "LinkedIn" },
+  { icon: <Mail className="w-4 h-4" />, href: "mailto:ayimobuobi@gmail.com", label: "Email" },
 ];
 
 const Footer = () => {

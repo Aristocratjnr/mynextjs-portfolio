@@ -10,7 +10,7 @@ const HeroSection = () => {
   const floatingStars = Array(40).fill(null);
   
   const skillBadges = [
-    { icon: <Code className="w-3 h-3 sm:w-4 sm:h-4" />, text: "Full Stack Dev" },
+    { icon: <Code className="w-3 h-3 sm:w-4 sm:h-4" />, text: "Aspirant Full Stack Dev" },
     { icon: <Boxes className="w-3 h-3 sm:w-4 sm:h-4" />, text: "UI/UX Design" },
     { icon: <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />, text: "Problem Solving" },
   ];
@@ -108,7 +108,7 @@ const HeroSection = () => {
               >
                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-400 rounded-full animate-pulse" />
                 <span className="text-xs sm:text-sm md:text-base font-medium bg-gradient-to-r from-primary-300 via-white to-secondary-300 bg-clip-text text-transparent whitespace-nowrap">
-                  Available for work
+                  Available for work🧑‍💻
                 </span>
               </motion.div>
             </div>
