@@ -38,8 +38,8 @@ const projectsData = [
     description: "Built on Nextjs",
     image: "/images/projects/laundry.png",
     tag: ["All", "E-commerce"],
-    gitUrl: "/",
-    previewUrl: "/",
+    gitUrl: "https://github.com/DCIT-415/Consumer-dashboard",
+    previewUrl: "https://tulundry.onrender.com",
   },
   {
     id: 5,
