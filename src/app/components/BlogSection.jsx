@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Search, Clock, Tag, ChevronRight, BookOpen, Code2, TrendingUp, Palette, FileCode, Briefcase } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, Clock, Tag, ChevronRight, BookOpen, Code2, TrendingUp, Palette, FileCode, Briefcase, Calendar } from 'lucide-react';
+import Image from 'next/image';
 
 const articles = [
   // Development Articles
@@ -106,12 +107,12 @@ const articles = [
 ];
 
 const categories = [
-  { id: "All", icon: <BookOpen className="w-4 h-4" /> },
-  { id: "Development", icon: <Code2 className="w-4 h-4" /> },
-  { id: "Tech Trends", icon: <TrendingUp className="w-4 h-4" /> },
-  { id: "CSS", icon: <Palette className="w-4 h-4" /> },
-  { id: "JavaScript", icon: <FileCode className="w-4 h-4" /> },
-  { id: "Career", icon: <Briefcase className="w-4 h-4" /> },
+  { id: "All", icon: <BookOpen className="w-4 h-4" />, color: "from-blue-500 to-indigo-500" },
+  { id: "Development", icon: <Code2 className="w-4 h-4" />, color: "from-emerald-500 to-teal-500" },
+  { id: "Tech Trends", icon: <TrendingUp className="w-4 h-4" />, color: "from-violet-500 to-purple-500" },
+  { id: "CSS", icon: <Palette className="w-4 h-4" />, color: "from-pink-500 to-rose-500" },
+  { id: "JavaScript", icon: <FileCode className="w-4 h-4" />, color: "from-amber-500 to-orange-500" },
+  { id: "Career", icon: <Briefcase className="w-4 h-4" />, color: "from-cyan-500 to-sky-500" },
 ];
 
 const BlogSection = () => {
@@ -127,177 +128,232 @@ const BlogSection = () => {
     return matchesCategory && matchesSearch;
   });
 
+  const getCategoryColor = (categoryId) => {
+    const category = categories.find(c => c.id === categoryId);
+    return category ? category.color : "from-blue-500 to-indigo-500";
+  };
+
   return (
-    <div className="rounded-lg py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 relative overflow-hidden">
+    <div className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-[#0A0118] relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
           animate={{ 
             rotate: 360,
             scale: [1, 1.2, 1],
           }}
           transition={{ 
-            duration: 20,
+            duration: 30,
             repeat: Infinity,
             ease: "linear"
           }}
-          className="absolute top-1/4 -left-1/4 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-[100px] sm:blur-[150px]"
+          className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 rounded-full blur-[120px]"
         />
         <motion.div
           animate={{ 
             rotate: -360,
-            scale: [1, 1.1, 1],
+            scale: [1, 1.3, 1],
           }}
           transition={{ 
-            duration: 25,
+            duration: 35,
             repeat: Infinity,
             ease: "linear"
           }}
-          className="absolute bottom-1/4 -right-1/4 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-[100px] sm:blur-[150px]"
+          className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full blur-[120px]"
         />
       </div>
 
       <div className="max-w-7xl mx-auto relative">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12">
+        <div className="text-center mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="space-y-4"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-3 sm:mb-4">
-              Tech Insights
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-blue-400">
+                Tech Insights
+              </span>
             </h2>
-            <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto px-4">
+            <p className="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto">
               Exploring the latest in web development, design patterns, and technology trends
             </p>
           </motion.div>
         </div>
 
         {/* Search and Filter */}
-        <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
-          <div className="relative max-w-[280px] xs:max-w-sm sm:max-w-md mx-auto px-4 sm:px-0">
-            <Search className="absolute left-6 sm:left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search articles..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-2.5 sm:py-3 bg-gray-800/50 border border-gray-700 rounded-xl 
-                focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                text-white placeholder-gray-400 transition-all duration-300
-                text-sm sm:text-base"
-            />
+        <div className="mb-12 sm:mb-16 space-y-6 sm:space-y-8">
+          {/* Search Bar */}
+          <div className="relative max-w-lg mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative"
+            >
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search articles..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl
+                  focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50
+                  text-white placeholder-gray-400 transition-all duration-300"
+              />
+              <motion.div
+                className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-violet-500/20 to-blue-500/20 opacity-0 transition-opacity duration-300 blur-xl"
+                animate={{ opacity: searchQuery ? 0.5 : 0 }}
+              />
+            </motion.div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 px-2 sm:px-4">
-            {categories.map(({ id, icon }) => (
+          {/* Categories */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-3"
+          >
+            {categories.map(({ id, icon, color }) => (
               <motion.button
                 key={id}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCategory(id)}
-                className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300
-                  flex items-center gap-1.5 sm:gap-2
+                className={`
+                  px-4 py-2.5 rounded-xl text-sm font-medium
+                  flex items-center gap-2 transition-all duration-300
                   ${selectedCategory === id
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg shadow-blue-500/25'
-                    : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50'
-                  }`}
+                    ? `bg-gradient-to-r ${color} shadow-lg shadow-violet-500/25`
+                    : 'bg-white/5 hover:bg-white/10 backdrop-blur-lg'
+                  }
+                `}
               >
                 {icon}
                 {id}
               </motion.button>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Articles Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-4">
-          {filteredArticles.map((article, index) => (
-            <motion.article
-              key={article.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              onHoverStart={() => setHoveredArticle(article.title)}
-              onHoverEnd={() => setHoveredArticle(null)}
-              className="group relative bg-gray-800/50 rounded-xl sm:rounded-2xl overflow-hidden 
-                border border-gray-700/50 hover:border-gray-600/50
-                transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/5 backdrop-blur-sm"
-            >
-              <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-                <img
-                  src={article.imageUrl}
-                  alt={article.title}
-                  className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              
-              <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
-                <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-400">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
-                    {article.readTime}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Tag className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
-                    {article.category}
-                  </span>
+        <motion.div 
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredArticles.map((article, index) => (
+              <motion.article
+                key={article.title}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                className="group relative bg-white/[0.02] backdrop-blur-xl rounded-2xl overflow-hidden
+                  border border-white/10 hover:border-white/20
+                  transition-all duration-500 hover:shadow-2xl hover:shadow-violet-500/10"
+              >
+                {/* Image Container */}
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <Image
+                    src={article.imageUrl}
+                    alt={article.title}
+                    width={800}
+                    height={450}
+                    className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0118]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
-                <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300 line-clamp-2">
-                  {article.title}
-                </h3>
-
-                <p className="text-sm sm:text-base text-gray-400 line-clamp-2 sm:line-clamp-3">
-                  {article.excerpt}
-                </p>
-
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {article.tags.map(tag => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 text-xs font-medium rounded-md bg-gray-700/50 text-gray-300 hover:bg-gray-600/50 transition-colors duration-300"
-                    >
-                      {tag}
+                {/* Content */}
+                <div className="p-6 space-y-4">
+                  {/* Meta Info */}
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
+                    <span className="flex items-center gap-1.5">
+                      <Calendar className="w-4 h-4" />
+                      {new Date(article.date).toLocaleDateString('en-US', { 
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                      })}
                     </span>
-                  ))}
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-4 h-4" />
+                      {article.readTime}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold">
+                    <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                      {article.title}
+                    </span>
+                  </h3>
+
+                  {/* Excerpt */}
+                  <p className="text-gray-400 line-clamp-2">
+                    {article.excerpt}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2">
+                    {article.tags.map(tag => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 text-xs font-medium rounded-lg
+                          bg-white/5 text-gray-300 border border-white/10
+                          hover:bg-white/10 transition-colors duration-300"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Read More Button */}
+                  <motion.button 
+                    whileHover={{ x: 5 }}
+                    className="flex items-center gap-2 text-sm font-medium text-violet-400 hover:text-violet-300 transition-colors duration-300"
+                  >
+                    Read Article
+                    <ChevronRight className="w-4 h-4" />
+                  </motion.button>
                 </div>
 
-                <motion.button 
-                  className="flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base text-blue-400 hover:text-blue-300 transition-colors duration-300"
-                  whileHover={{ x: 5 }}
-                >
-                  Read More
-                  <ChevronRight className="w-3.5 sm:w-4 h-3.5 sm:h-4 transition-transform group-hover:translate-x-1" />
-                </motion.button>
-              </div>
-
-              {hoveredArticle === article.title && (
+                {/* Hover Overlay */}
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent pointer-events-none"
+                  initial={false}
+                  animate={{ opacity: hoveredArticle === article.title ? 1 : 0 }}
+                  className="absolute inset-0 bg-gradient-to-t from-violet-950/50 via-transparent to-transparent pointer-events-none"
                 />
-              )}
-            </motion.article>
-          ))}
-        </div>
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {/* View All Button */}
-        <div className="mt-8 sm:mt-12 text-center px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-12 sm:mt-16 text-center"
+        >
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl
-              hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-lg shadow-blue-500/25
-              text-sm sm:text-base"
+            className="inline-flex items-center gap-2 px-6 py-3 
+              bg-gradient-to-r from-violet-500 to-blue-500 
+              hover:from-violet-600 hover:to-blue-600
+              text-white rounded-xl font-medium
+              shadow-lg shadow-violet-500/25 transition-all duration-300"
           >
-            <BookOpen className="w-4 sm:w-5 h-4 sm:h-5" />
-            View All Articles
+            <BookOpen className="w-5 h-5" />
+            Browse All Articles
           </motion.button>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
