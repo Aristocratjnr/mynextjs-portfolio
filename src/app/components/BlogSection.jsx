@@ -1,8 +1,10 @@
 "use client";
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Clock, Tag, ChevronRight, BookOpen, Code2, TrendingUp, Palette, FileCode, Briefcase, Calendar } from 'lucide-react';
 import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 const articles = [
   // Development Articles
@@ -119,6 +121,7 @@ const BlogSection = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [hoveredArticle, setHoveredArticle] = useState(null);
+  const { theme } = useTheme();
 
   const filteredArticles = articles.filter(article => {
     const matchesCategory = selectedCategory === "All" || article.category === selectedCategory;
@@ -134,7 +137,7 @@ const BlogSection = () => {
   };
 
   return (
-    <div className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-[#0A0118] relative overflow-hidden">
+    <div className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
@@ -177,7 +180,7 @@ const BlogSection = () => {
                 Tech Insights
               </span>
             </h2>
-            <p className="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg sm:text-xl max-w-2xl mx-auto">
               Exploring the latest in web development, design patterns, and technology trends
             </p>
           </motion.div>
@@ -193,15 +196,15 @@ const BlogSection = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl
+                className="w-full pl-12 pr-4 py-3 bg-muted/50 dark:bg-white/5 backdrop-blur-xl border border-border
                   focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50
-                  text-white placeholder-gray-400 transition-all duration-300"
+                  text-foreground placeholder-muted-foreground transition-all duration-300 rounded-2xl"
               />
               <motion.div
                 className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-violet-500/20 to-blue-500/20 opacity-0 transition-opacity duration-300 blur-xl"
@@ -227,8 +230,8 @@ const BlogSection = () => {
                   px-4 py-2.5 rounded-xl text-sm font-medium
                   flex items-center gap-2 transition-all duration-300
                   ${selectedCategory === id
-                    ? `bg-gradient-to-r ${color} shadow-lg shadow-violet-500/25`
-                    : 'bg-white/5 hover:bg-white/10 backdrop-blur-lg'
+                    ? `bg-gradient-to-r ${color} text-white shadow-lg shadow-violet-500/25`
+                    : 'bg-muted/50 dark:bg-white/5 hover:bg-muted dark:hover:bg-white/10 backdrop-blur-lg text-foreground'
                   }
                 `}
               >
@@ -253,8 +256,8 @@ const BlogSection = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="group relative bg-white/[0.02] backdrop-blur-xl rounded-2xl overflow-hidden
-                  border border-white/10 hover:border-white/20
+                className="group relative bg-card/50 dark:bg-white/[0.02] backdrop-blur-xl rounded-2xl overflow-hidden
+                  border border-border hover:border-primary/20
                   transition-all duration-500 hover:shadow-2xl hover:shadow-violet-500/10"
               >
                 {/* Image Container */}
@@ -266,13 +269,13 @@ const BlogSection = () => {
                     height={450}
                     className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0118]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
                 {/* Content */}
                 <div className="p-6 space-y-4">
                   {/* Meta Info */}
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1.5">
                       <Calendar className="w-4 h-4" />
                       {new Date(article.date).toLocaleDateString('en-US', { 
@@ -288,14 +291,12 @@ const BlogSection = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-bold">
-                    <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                      {article.title}
-                    </span>
+                  <h3 className="text-xl font-bold text-foreground">
+                    {article.title}
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-gray-400 line-clamp-2">
+                  <p className="text-muted-foreground line-clamp-2">
                     {article.excerpt}
                   </p>
 
@@ -305,8 +306,8 @@ const BlogSection = () => {
                       <span
                         key={tag}
                         className="px-2.5 py-1 text-xs font-medium rounded-lg
-                          bg-white/5 text-gray-300 border border-white/10
-                          hover:bg-white/10 transition-colors duration-300"
+                          bg-muted/50 dark:bg-white/5 text-foreground border border-border
+                          hover:bg-muted dark:hover:bg-white/10 transition-colors duration-300"
                       >
                         #{tag}
                       </span>
@@ -316,7 +317,7 @@ const BlogSection = () => {
                   {/* Read More Button */}
                   <motion.button 
                     whileHover={{ x: 5 }}
-                    className="flex items-center gap-2 text-sm font-medium text-violet-400 hover:text-violet-300 transition-colors duration-300"
+                    className="flex items-center gap-2 text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors duration-300"
                   >
                     Read Article
                     <ChevronRight className="w-4 h-4" />
