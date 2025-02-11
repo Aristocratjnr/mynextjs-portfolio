@@ -135,7 +135,7 @@ const HeroSection = () => {
                   wrapper="span"
                   speed={40}
                   repeat={Number.POSITIVE_INFINITY}
-                  className="text-gray-900 dark:text-white inline-block bg-gradient-to-r from-primary-600 via-gray-900 to-secondary-600 dark:from-primary-400 dark:via-white dark:to-secondary-600 bg-clip-text text-transparent"
+                  className="text-gray-900 dark:text-gray-200 inline-block bg-gradient-to-r from-primary-600 via-gray-900 to-secondary-600 dark:from-primary-400 dark:via-white dark:to-secondary-600 bg-clip-text text-transparent"
                 />
               </h1>
 
