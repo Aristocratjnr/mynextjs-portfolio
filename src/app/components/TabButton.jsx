@@ -1,28 +1,27 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"
 
 const TabButton = ({ active, selectTab, children }) => {
   const buttonVariants = {
     default: { scale: 1 },
     hover: { scale: 1.05 },
-    tap: { scale: 0.95 }
-  };
+    tap: { scale: 0.95 },
+  }
 
   const underlineVariants = {
-    default: { 
+    default: {
       width: 0,
-      opacity: 0 
+      opacity: 0,
     },
-    active: { 
+    active: {
       width: "100%",
       opacity: 1,
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 30
-      }
-    }
-  };
+        damping: 30,
+      },
+    },
+  }
 
   return (
     <motion.button
@@ -34,23 +33,22 @@ const TabButton = ({ active, selectTab, children }) => {
       className={`
         relative py-2 px-4
         transition-colors duration-200
-        ${active 
-          ? "text-white" 
-          : "text-gray-400 hover:text-white"
+        ${
+          active
+            ? "text-primary-600 dark:text-white"
+            : "text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-white"
         }
       `}
     >
       <div className="relative">
         {/* Main content */}
-        <div className="flex items-center gap-2 font-medium">
-          {children}
-        </div>
+        <div className="flex items-center gap-2 font-medium">{children}</div>
 
         {/* Bottom line */}
         <div className="relative h-1 mt-2">
           {/* Background line */}
-          <div className="absolute inset-x-0 h-full bg-white/10 rounded-full" />
-          
+          <div className="absolute inset-x-0 h-full bg-gray-200 dark:bg-white/10 rounded-full" />
+
           {/* Animated highlight line */}
           <motion.div
             variants={underlineVariants}
@@ -62,7 +60,7 @@ const TabButton = ({ active, selectTab, children }) => {
 
         {/* Hover highlight */}
         <motion.div
-          className="absolute inset-0 bg-white/5 rounded-lg"
+          className="absolute inset-0 bg-gray-100 dark:bg-white/5 rounded-lg"
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
@@ -77,8 +75,12 @@ const TabButton = ({ active, selectTab, children }) => {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         />
       )}
-    </motion.button>
-  );
-};
 
-export default TabButton;
+      {/* Border for light mode */}
+      <div className="absolute inset-0 rounded-lg border border-gray-200 dark:border-transparent pointer-events-none" />
+    </motion.button>
+  )
+}
+
+export default TabButton
+
