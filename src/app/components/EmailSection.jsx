@@ -29,7 +29,7 @@ const EmailSection = () => {
           {/* Left Section */}
           <motion.div className="space-y-6 sm:space-y-8">
             <span className="text-sm sm:text-base bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-700 dark:text-purple-400 py-2 px-4 rounded-full">
-              Let's Talk
+              Let&apos;s Talk
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white">
               Get in Touch
