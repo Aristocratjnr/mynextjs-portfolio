@@ -64,7 +64,7 @@ const EmailSection = () => {
                     <Send className="w-8 h-8" />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Message Sent!</h3>
-                  <p className="text-gray-700 dark:text-gray-400">Thank you for your message. I’ll get back to you soon!</p>
+                  <p className="text-gray-700 dark:text-gray-400">Thank you for your message. I&apos;ll get back to you soon!</p>
                 </div>
               </div>
             ) : (
