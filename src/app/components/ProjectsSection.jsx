@@ -44,7 +44,7 @@ const projectsData = [
   {
     id: 5,
     title: "Portfolio Website",
-    description: "Nextjs Appication",
+    description: "Nextjs Application",
     image: "/images/projects/next.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/Aristocratjnr/mynextjs-portfolio.git",
@@ -52,14 +52,13 @@ const projectsData = [
   },
   {
     id: 6,
-    title: " My First Portfolio",
-    description: "Built on React and Chakra UI", 
+    title: "My First Portfolio",
+    description: "Built on React and Chakra UI",
     image: "/images/projects/port.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/Aristocratjnr/my-portfolio.git",
     previewUrl: "https://aristocratportfolio.vercel.app/",
   },
-  
 ];
 
 const ProjectsSection = () => {
@@ -84,24 +83,24 @@ const ProjectsSection = () => {
     initial: {},
     animate: {
       transition: {
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   return (
     <section className="py-20 px-4 max-w-7xl mx-auto">
       <div className="space-y-8 mb-16">
-        <motion.h2 
-          className="text-center text-5xl font-bold text-white"
+        <motion.h2
+          className="text-center text-5xl font-bold text-gray-900 dark:text-white"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           My Projects
         </motion.h2>
-        <motion.p 
-          className="text-center text-gray-400 max-w-2xl mx-auto"
+        <motion.p
+          className="text-center text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -110,7 +109,7 @@ const ProjectsSection = () => {
         </motion.p>
       </div>
 
-      <motion.div 
+      <motion.div
         className="flex flex-wrap justify-center items-center gap-4 mb-12"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -136,7 +135,7 @@ const ProjectsSection = () => {
         />
       </motion.div>
 
-      <motion.ul 
+      <motion.ul
         ref={ref}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         variants={containerVariants}
@@ -144,11 +143,7 @@ const ProjectsSection = () => {
         animate={isInView ? "animate" : "initial"}
       >
         {filteredProjects.map((project, index) => (
-          <motion.li
-            key={project.id}
-            variants={cardVariants}
-            className="h-full"
-          >
+          <motion.li key={project.id} variants={cardVariants} className="h-full">
             <ProjectCard
               title={project.title}
               description={project.description}
