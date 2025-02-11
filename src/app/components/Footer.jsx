@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Github, Twitter, Linkedin, Mail, ExternalLink, Heart } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -63,6 +63,28 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
+         {/* WhatsApp Button */}
+         <Link
+          href="https://wa.me/+233551784926?text=Hello%20Aristocrat"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 z-50"
+          aria-label="Contact via WhatsApp"
+        >
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="relative p-2.5 sm:p-3 lg:p-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full 
+              shadow-lg shadow-green-500/25 group transition-all duration-300"
+          >
+            <FaWhatsapp className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 transition-transform duration-300 group-hover:rotate-[-8deg]" />
+            <div className="absolute -right-1 -top-1 w-2 h-2 sm:w-3 sm:h-3">
+              <div className="absolute inline-flex w-full h-full rounded-full bg-white opacity-75 animate-ping" />
+              <div className="relative inline-flex w-full h-full rounded-full bg-white" />
+            </div>
+          </motion.div>
+        </Link>
 
         {/* Bottom Section */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className={`mt-8 sm:mt-12 pt-6 sm:pt-8 border-t ${isDarkMode ? "border-white/10" : "border-gray-300"}`}>

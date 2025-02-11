@@ -20,7 +20,7 @@ export default function ThemeToggle() {
       onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
       className="p-2 rounded bg-purple-300 dark:bg-gray-800 dark:text-white"
     >
-      {currentTheme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode"}
+      {currentTheme === "dark" ? "☀️ " : "🌙 "}
     </button>
   );
 }
