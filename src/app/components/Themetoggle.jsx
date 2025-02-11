@@ -19,7 +19,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
-      className="p-2 rounded bg-purple-300 dark:bg-gray-800 dark:text-white"
+      className="p-2 rounded dark:bg-gray-800 dark:text-white"
     >
       {currentTheme === "dark" ? <Sun size={20} /> : <Moon size={20} />} {/* Use Lucide icons */}
     </button>
