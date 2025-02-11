@@ -1,7 +1,8 @@
-"use client";  
+"use client";
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react"; // Import Lucide icons
 
 export default function ThemeToggle() {
   const { theme, setTheme, systemTheme } = useTheme();
@@ -11,7 +12,7 @@ export default function ThemeToggle() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; 
+  if (!mounted) return null;
 
   const currentTheme = theme === "system" ? systemTheme : theme;
 
@@ -20,7 +21,7 @@ export default function ThemeToggle() {
       onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
       className="p-2 rounded bg-purple-300 dark:bg-gray-800 dark:text-white"
     >
-      {currentTheme === "dark" ? "☀️ " : "🌙 "}
+      {currentTheme === "dark" ? <Sun size={20} /> : <Moon size={20} />} {/* Use Lucide icons */}
     </button>
   );
 }
