@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import ThemeToggle from "./Themetoggle";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Code, User, Mail, Menu, X, Home, ExternalLink } from "lucide-react";
@@ -120,7 +121,7 @@ const Navbar = () => {
               />
             </Link>
           </motion.div>
-
+ <ThemeToggle />
           <motion.button
             className="block md:hidden p-2 rounded-lg bg-gray-800/50 backdrop-blur-sm hover:bg-gray-700 transition-colors duration-200"
             whileTap={{ scale: 0.9 }}

@@ -16,6 +16,16 @@
   }
 }
 
+/* Default Light Theme */
+html {
+  @apply bg-white text-black;
+}
+
+/* Dark Mode */
+html.dark {
+  @apply bg-[#121212] text-white;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
