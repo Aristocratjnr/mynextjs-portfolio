@@ -1,13 +1,13 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect, useTransition } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaHtml5, FaReact, FaPython, FaJsSquare } from "react-icons/fa";
-import { SiNextdotjs, SiTailwindcss } from "react-icons/si";
-import { BookOpen, Award, Code2, ExternalLink, Github } from "lucide-react";
-import TabButton from "./TabButton";
-import { useTheme } from "next-themes";
+import { useState, useEffect, useTransition } from "react"
+import Image from "next/image"
+import { motion, AnimatePresence } from "framer-motion"
+import { FaHtml5, FaReact, FaPython, FaJsSquare } from "react-icons/fa"
+import { SiNextdotjs, SiTailwindcss } from "react-icons/si"
+import { BookOpen, Award, Code2, ExternalLink, Github } from "lucide-react"
+import TabButton from "./TabButton"
+import { useTheme } from "next-themes"
 
 const TAB_DATA = [
   {
@@ -15,7 +15,7 @@ const TAB_DATA = [
     id: "skills",
     icon: <Code2 className="w-5 h-5" />,
     content: (
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4"
@@ -38,9 +38,7 @@ const TAB_DATA = [
           >
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-500/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
             <div className="flex flex-col items-center text-center space-y-3">
-              <div className="transform group-hover:scale-110 transition-transform duration-300">
-                {skill.icon}
-              </div>
+              <div className="transform group-hover:scale-110 transition-transform duration-300">{skill.icon}</div>
               <span className="font-medium text-base sm:text-lg text-foreground">{skill.name}</span>
               <div className="w-full bg-muted/50 dark:bg-white/10 rounded-full h-1.5">
                 <motion.div
@@ -61,11 +59,7 @@ const TAB_DATA = [
     id: "education",
     icon: <BookOpen className="w-5 h-5" />,
     content: (
-      <motion.div 
-        className="space-y-5"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
+      <motion.div className="space-y-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <motion.div
           whileHover={{ scale: 1.02 }}
           className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-background/50 to-transparent dark:from-white/[0.05] backdrop-blur-lg border border-border dark:border-white/10 hover:border-primary/20 dark:hover:border-white/20 transition-all duration-300"
@@ -102,35 +96,31 @@ const TAB_DATA = [
     id: "certifications",
     icon: <Award className="w-5 h-5" />,
     content: (
-      <motion.div 
-        className="grid gap-4 sm:gap-5"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
+      <motion.div className="grid gap-4 sm:gap-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         {[
-          { 
+          {
             title: "Python Data Science",
             issuer: "DataCamp",
             date: "2023",
             link: "#",
             color: "orange",
-            skills: ["Data Analysis", "Machine Learning", "Visualization"]
+            skills: ["Data Analysis", "Machine Learning", "Visualization"],
           },
-          { 
+          {
             title: "Data Analysis",
             issuer: "IBM",
             date: "2023",
             link: "#",
             color: "cyan",
-            skills: ["SQL", "Statistics", "Excel"]
+            skills: ["SQL", "Statistics", "Excel"],
           },
-          { 
+          {
             title: "AI Fundamentals",
             issuer: "IBM",
             date: "2022",
             link: "#",
             color: "purple",
-            skills: ["Neural Networks", "Deep Learning", "TensorFlow"]
+            skills: ["Neural Networks", "Deep Learning", "TensorFlow"],
           },
         ].map((cert, index) => (
           <motion.div
@@ -155,7 +145,7 @@ const TAB_DATA = [
                 </div>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {cert.skills.map((skill, skillIndex) => (
-                    <span 
+                    <span
                       key={skillIndex}
                       className="px-2 py-1 text-xs rounded-full bg-muted/30 dark:bg-white/5 text-muted-foreground"
                     >
@@ -164,7 +154,7 @@ const TAB_DATA = [
                   ))}
                 </div>
               </div>
-              <a 
+              <a
                 href={cert.link}
                 className="flex-shrink-0 p-2 rounded-full bg-muted/30 dark:bg-white/5 hover:bg-muted dark:hover:bg-white/10 transition-colors"
                 target="_blank"
@@ -178,51 +168,51 @@ const TAB_DATA = [
       </motion.div>
     ),
   },
-];
+]
 
 const AboutSection = () => {
-  const [tab, setTab] = useState("skills");
-  const [isPending, startTransition] = useTransition();
-  const [isClient, setIsClient] = useState(false);
-  const { theme } = useTheme();
+  const [tab, setTab] = useState("skills")
+  const [isPending, startTransition] = useTransition()
+  const [isClient, setIsClient] = useState(false)
+  const { theme } = useTheme()
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    setIsClient(true)
+  }, [])
 
   const handleTabChange = (id) => {
     startTransition(() => {
-      setTab(id);
-    });
-  };
+      setTab(id)
+    })
+  }
 
   return (
-    <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden" id="about">
+    <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden bg-gray-50 dark:bg-gray-900" id="about">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          animate={{ 
+          animate={{
             rotate: 360,
             scale: [1, 1.2, 1],
           }}
-          transition={{ 
+          transition={{
             duration: 30,
-            repeat: Infinity,
-            ease: "linear"
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
           }}
-          className="absolute top-1/3 left-1/4 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-cyan-500/10 rounded-full blur-[100px] sm:blur-[120px]"
+          className="absolute top-1/3 left-1/4 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-[100px] sm:blur-[120px]"
         />
         <motion.div
-          animate={{ 
+          animate={{
             rotate: -360,
             scale: [1, 1.1, 1],
           }}
-          transition={{ 
+          transition={{
             duration: 35,
-            repeat: Infinity,
-            ease: "linear"
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
           }}
-          className="absolute bottom-1/4 right-1/4 w-[250px] sm:w-[350px] lg:w-[450px] h-[250px] sm:h-[350px] lg:h-[450px] bg-orange-500/10 rounded-full blur-[100px] sm:blur-[120px]"
+          className="absolute bottom-1/4 right-1/4 w-[250px] sm:w-[350px] lg:w-[450px] h-[250px] sm:h-[350px] lg:h-[450px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[100px] sm:blur-[120px]"
         />
       </div>
 
@@ -234,39 +224,39 @@ const AboutSection = () => {
             animate={{ opacity: 1, x: 0 }}
             className="relative group max-w-[600px] mx-auto lg:mx-0"
           >
-            <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/30 via-transparent to-orange-500/30 rounded-3xl blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-500" />
+            <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-transparent to-orange-500/20 dark:from-cyan-500/30 dark:via-transparent dark:to-orange-500/30 rounded-3xl blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-500" />
             <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              className="relative rounded-2xl overflow-hidden border border-border dark:border-white/10 backdrop-blur-sm"
+              className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 backdrop-blur-sm"
             >
-              <Image 
-                src="/images/web.jpg" 
+              <Image
+                src="/images/web.jpg"
                 width={800}
                 height={800}
                 alt="About Image"
                 className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent dark:from-black/80 dark:via-black/20 opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
-              <motion.div 
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent dark:from-black/80 dark:via-black/20 opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+              <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
                 className="absolute bottom-0 left-0 right-0 p-6 sm:p-8"
               >
-                <h3 className="text-2xl font-bold text-foreground mb-2">David Ayim Obuobi</h3>
-                <p className="text-lg text-cyan-600 dark:text-cyan-300 mb-4 font-semibold">Aspirant Full Stack Developer</p>
+                <h3 className="text-2xl font-bold text-white mb-2">David Ayim Obuobi</h3>
+                <p className="text-lg text-cyan-300 mb-4 font-semibold">Aspirant Full Stack Developer</p>
                 <div className="flex gap-4">
-                  <a 
+                  <a
                     href="#"
-                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-background/10 hover:bg-background/20 dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-sm border border-border dark:border-white/10 hover:border-primary/20 dark:hover:border-white/20 transition-all duration-300"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300 text-white"
                   >
                     <Github className="w-4 h-4" />
                     <span className="text-sm">GitHub</span>
                   </a>
-                  <a 
+                  <a
                     href="#"
-                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/20 hover:bg-cyan-500/30 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/50 transition-all duration-300"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/20 hover:bg-cyan-500/30 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/50 transition-all duration-300 text-white"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span className="text-sm">Portfolio</span>
@@ -284,12 +274,8 @@ const AboutSection = () => {
           >
             {/* Header Section */}
             <div className="space-y-6 sm:space-y-8">
-              <motion.div 
-                className="inline-block"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
-                <span className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-muted/50 dark:bg-white/5 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/50 transition-all duration-300">
+              <motion.div className="inline-block" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <span className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-gray-200/50 dark:bg-white/5 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/50 transition-all duration-300">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400" />
@@ -305,24 +291,24 @@ const AboutSection = () => {
                   Crafting Digital
                 </span>
                 <br />
-                <span className="text-foreground">Experiences</span>
+                <span className="text-gray-900 dark:text-white">Experiences</span>
               </h2>
 
-              <div className="text-muted-foreground text-lg leading-relaxed space-y-6">
+              <div className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed space-y-6">
                 <p>
-                  Passionate developer specializing in modern web technologies, 
-                  dedicated to creating <span className="text-cyan-600 dark:text-cyan-300">immersive digital solutions</span> that 
-                  blend technical excellence with intuitive design.
+                  Passionate developer specializing in modern web technologies, dedicated to creating{" "}
+                  <span className="text-cyan-600 dark:text-cyan-300">immersive digital solutions</span> that blend
+                  technical excellence with intuitive design.
                 </p>
-                
+
                 <div className="flex flex-wrap gap-3">
-                  {['Next.js', 'React', 'TypeScript', 'Python', 'TailwindCSS'].map((tech, index) => (
-                    <motion.span 
+                  {["Next.js", "React", "TypeScript", "Python", "TailwindCSS"].map((tech, index) => (
+                    <motion.span
                       key={tech}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="px-4 py-2 text-sm rounded-full bg-muted/50 dark:bg-white/5 backdrop-blur-sm border border-border dark:border-white/10 hover:border-cyan-500/30 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all duration-300"
+                      className="px-4 py-2 text-sm rounded-full bg-gray-200/50 dark:bg-white/5 backdrop-blur-sm border border-gray-300 dark:border-gray-700 hover:border-cyan-500/30 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all duration-300"
                     >
                       {tech}
                     </motion.span>
@@ -335,16 +321,12 @@ const AboutSection = () => {
             <div className="space-y-8">
               <div className="flex flex-wrap gap-3">
                 {TAB_DATA.map((tabItem) => (
-                  <TabButton
-                    key={tabItem.id}
-                    selectTab={() => handleTabChange(tabItem.id)}
-                    active={tab === tabItem.id}
-                  >
+                  <TabButton key={tabItem.id} selectTab={() => handleTabChange(tabItem.id)} active={tab === tabItem.id}>
                     <div className="flex items-center gap-2.5 px-4 py-2.5 text-base">
                       {tabItem.icon}
                       {tabItem.title}
                       {tab === tabItem.id && (
-                        <motion.div 
+                        <motion.div
                           layoutId="activeTabIndicator"
                           className="ml-1 w-2 h-2 bg-cyan-400 rounded-full"
                           transition={{ type: "spring", stiffness: 500 }}
@@ -375,7 +357,8 @@ const AboutSection = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default AboutSection;
+export default AboutSection
+
