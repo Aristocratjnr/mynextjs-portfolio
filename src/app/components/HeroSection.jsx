@@ -10,14 +10,13 @@ const HeroSection = () => {
   const floatingStars = Array(40).fill(null);
   
   const skillBadges = [
-    { icon: <Code className="w-3 h-3 sm:w-4 sm:h-4" />, text: "Aspirant Full Stack Dev" },
-    { icon: <Boxes className="w-3 h-3 sm:w-4 sm:h-4" />, text: "UI/UX Design" },
-    { icon: <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />, text: "Problem Solving" },
+    { icon: <Code className="w-4 h-4" />, text: "Aspirant Full Stack Dev" },
+    { icon: <Boxes className="w-4 h-4" />, text: "UI/UX Design" },
+    { icon: <Sparkles className="w-4 h-4" />, text: "Problem Solving" },
   ];
 
   return (
-    <section className="min-h-[100dvh] flex items-center py-8 sm:py-16 lg:py-24 overflow-hidden relative isolate">
-      {/* Background elements remain the same */}
+    <section className="min-h-screen flex items-center py-8 lg:py-24 bg-light dark:bg-dark text-dark dark:text-light relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
         {floatingStars.map((_, i) => (
           <motion.div
@@ -44,22 +43,14 @@ const HeroSection = () => {
         ))}
 
         <motion.div
-          animate={{ 
-            rotate: 360,
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ 
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
-          }}
+          animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
           className="absolute top-1/4 -left-1/4 w-[400px] sm:w-[600px] lg:w-[800px] h-[400px] sm:h-[600px] lg:h-[800px] bg-gradient-to-r from-primary-500/20 to-secondary-500/20 rounded-full blur-[120px] sm:blur-[180px]"
         />
       </div>
 
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Enhanced Image Column - Moved to top on mobile */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -67,27 +58,14 @@ const HeroSection = () => {
             className="col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end"
           >
             <div className="relative group">
-              {/* Floating Effect */}
               <motion.div 
                 className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary-500 via-secondary-500 to-primary-500 blur-3xl opacity-30"
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 180, 360]
-                }}
-                transition={{ 
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
+                animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               />
               
-              {/* Image Container - Adjusted sizes for mobile */}
               <motion.div
-                whileHover={{ 
-                  rotateY: 8,
-                  rotateX: -8,
-                  scale: 1.05
-                }}
+                whileHover={{ rotateY: 8, rotateX: -8, scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
                 className="relative rounded-full bg-[#181818] w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] lg:w-[440px] lg:h-[440px] overflow-hidden shadow-2xl shadow-black/50 border-2 border-white/10 backdrop-blur-xl mx-auto"
               >
@@ -101,20 +79,18 @@ const HeroSection = () => {
                 />
               </motion.div>
 
-              {/* Floating Badge - Adjusted for mobile */}
               <motion.div
                 className="absolute -bottom-6 left-1/2 -translate-x-1/2 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300 flex items-center gap-2 sm:gap-3"
                 whileHover={{ y: -5, scale: 1.05 }}
               >
                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-xs sm:text-sm md:text-base font-medium bg-gradient-to-r from-primary-300 via-white to-secondary-300 bg-clip-text text-transparent whitespace-nowrap">
+                <span className="text-xs sm:text-sm md:text-base font-medium bg-gradient-to-r from-primary-300 via-white to-secondary-300 bg-clip-text text-transparent whitespace-nowrap text-black">
                   Available for work🧑‍💻
                 </span>
               </motion.div>
             </div>
           </motion.div>
 
-          {/* Content Column - Adjusted for mobile */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -122,7 +98,6 @@ const HeroSection = () => {
             className="col-span-7 space-y-6 sm:space-y-8 text-center lg:text-left order-2 lg:order-1"
           >
             <div className="space-y-4 sm:space-y-6">
-              {/* Welcome Badge - Adjusted for mobile */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -140,7 +115,6 @@ const HeroSection = () => {
                 </span>
               </motion.div>
 
-              {/* Main Heading - Adjusted for mobile */}
               <h1 className="text-white text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 <span className="relative inline-block">
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
@@ -166,7 +140,6 @@ const HeroSection = () => {
                 />
               </h1>
 
-              {/* Skill Badges - Adjusted for mobile */}
               <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
                 {skillBadges.map((badge, index) => (
                   <motion.div
@@ -183,7 +156,6 @@ const HeroSection = () => {
               </div>
             </div>
 
-            {/* Description - Adjusted for mobile */}
             <motion.p 
               className="text-gray-300/90 text-sm sm:text-base md:text-lg lg:text-xl max-w-2xl mx-auto lg:mx-0 leading-relaxed"
               initial={{ opacity: 0 }}
@@ -196,7 +168,6 @@ const HeroSection = () => {
               <span className="text-primary-300 font-semibold"> user-centric design</span>.
             </motion.p>
 
-            {/* Action Buttons - Adjusted for mobile */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -233,7 +204,6 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
           initial={{ opacity: 0, y: 20 }}
