@@ -5,7 +5,7 @@ import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { FaHtml5, FaReact, FaPython, FaJsSquare } from "react-icons/fa"
 import { SiNextdotjs, SiTailwindcss } from "react-icons/si"
-import { BookOpen, Award, Code2, ExternalLink, Github } from "lucide-react"
+import { BookOpen, Award, Code2, ExternalLink, Github, Briefcase, Code, Laptop } from "lucide-react"
 import TabButton from "./TabButton"
 import { useTheme } from "next-themes"
 
@@ -51,6 +51,101 @@ const TAB_DATA = [
             </div>
           </motion.div>
         ))}
+      </motion.div>
+    ),
+  },
+  {
+    title: "Experience",
+    id: "experience",
+    icon: <Briefcase className="w-5 h-5" />,
+    content: (
+      <motion.div className="space-y-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-background/50 to-transparent dark:from-white/[0.05] backdrop-blur-lg border border-border dark:border-white/10 hover:border-primary/20 dark:hover:border-white/20 transition-all duration-300"
+        >
+          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-transparent to-orange-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center">
+              <Briefcase className="w-6 h-6 text-cyan-500" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-semibold bg-gradient-to-r from-cyan-500 to-orange-500 bg-clip-text text-transparent">
+                Intern
+              </h3>
+              <p className="text-muted-foreground mt-1">Automation Ghana</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <span className="px-3 py-1 text-sm rounded-full bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
+                  February 2024 - March 2024
+                </span>
+                <span className="px-3 py-1 text-sm rounded-full bg-orange-500/10 text-orange-700 dark:text-orange-300 border border-orange-500/20">
+                  Spintex-Accra
+                </span>
+              </div>
+              <div className="mt-4 text-sm text-muted-foreground">
+              Expanded technical knowledge by learning Access Control Systems and developing an Alexa-based project for a non-smart system, demonstrating an ability to adapt and learn new technologies.
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-background/50 to-transparent dark:from-white/[0.05] backdrop-blur-lg border border-border dark:border-white/10 hover:border-primary/20 dark:hover:border-white/20 transition-all duration-300"
+        >
+          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-transparent to-orange-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
+              <Code className="w-6 h-6 text-purple-500" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Quality Assurance Engineer
+              </h3>
+              <p className="text-muted-foreground mt-1">Inkris CA</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <span className="px-3 py-1 text-sm rounded-full bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">
+                  March 2024 -  August 2024
+                </span>
+                <span className="px-3 py-1 text-sm rounded-full bg-pink-500/10 text-pink-700 dark:text-pink-300 border border-pink-500/20">
+                  Remote
+                </span>
+              </div>
+              <div className="mt-4 text-sm text-muted-foreground">
+              Developed and executed test cases to ensure a high-quality user experience and improved client visibility.
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-background/50 to-transparent dark:from-white/[0.05] backdrop-blur-lg border border-border dark:border-white/10 hover:border-primary/20 dark:hover:border-white/20 transition-all duration-300"
+        >
+          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-transparent to-orange-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
+              <Laptop className="w-6 h-6 text-green-500" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-semibold bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent">
+                Web Developer
+              </h3>
+              <p className="text-muted-foreground mt-1">University of Ghana Actuarial and Statistical Society</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <span className="px-3 py-1 text-sm rounded-full bg-green-500/10 text-green-700 dark:text-green-300 border border-green-500/20">
+                  August 2022 - October 2023
+                </span>
+                <span className="px-3 py-1 text-sm rounded-full bg-teal-500/10 text-teal-700 dark:text-teal-300 border border-teal-500/20">
+                  Legon, Accra
+                </span>
+              </div>
+              <div className="mt-4 text-sm text-muted-foreground">
+              Implemented updates and improvements to enhance user experience and ensure website accessibility.
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
     ),
   },
