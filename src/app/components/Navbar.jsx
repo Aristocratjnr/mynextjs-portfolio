@@ -100,21 +100,21 @@ const Navbar = () => {
                 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               ></motion.div>
-              <span className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-indigo-400 hover:from-purple-200 hover:to-indigo-300 transition-all duration-300">
+              <span className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300">
                 David.
               </span>
               <motion.div
                 className="absolute inset-0 rounded-lg"
                 animate={{
                   boxShadow:
-                    isHovered === "logo" ? "0 0 20px rgba(167, 139, 250, 0.3)" : "0 0 0px rgba(167, 139, 250, 0)",
+                    isHovered === "logo" ? "0 0 20px rgba(124, 58, 237, 0.3)" : "0 0 0px rgba(124, 58, 237, 0)",
                 }}
               />
             </Link>
           </motion.div>
           <ThemeToggle />
           <motion.button
-            className="block md:hidden p-2 rounded-lg bg-gray-200/50 dark:bg-gray-800/50 backdrop-blur-sm hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200"
+            className="block md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
             whileTap={{ scale: 0.9 }}
             whileHover={{ scale: 1.1 }}
             onClick={() => setNavbarOpen(!navbarOpen)}
@@ -162,13 +162,13 @@ const Navbar = () => {
                           }}
                           transition={{ type: "spring", stiffness: 300, damping: 20 }}
                         >
-                          <IconComponent className="w-5 h-5 text-purple-400" />
+                          <IconComponent className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                         </motion.div>
                         <span
                           className={`font-medium transition-colors duration-200 ${
                             activeSection === link.path.slice(1)
-                              ? "text-purple-400"
-                              : "text-gray-300 group-hover:text-white"
+                              ? "text-purple-600 dark:text-purple-400"
+                              : "text-gray-700 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400"
                           }`}
                         >
                           {link.title}
@@ -181,10 +181,10 @@ const Navbar = () => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
-                            className="absolute left-1/2 -bottom-12 transform -translate-x-1/2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg whitespace-nowrap"
+                            className="absolute left-1/2 -bottom-12 transform -translate-x-1/2 px-3 py-2 bg-white dark:bg-gray-900 text-gray-800 dark:text-white text-sm rounded-lg shadow-lg whitespace-nowrap border border-gray-200 dark:border-gray-700"
                           >
                             {link.description}
-                            <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45" />
+                            <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white dark:bg-gray-900 border-t border-l border-gray-200 dark:border-gray-700 rotate-45" />
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -203,7 +203,7 @@ const Navbar = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-800"
+              className="md:hidden overflow-hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800"
             >
               <ul className="px-4 py-4 space-y-3">
                 {navLinks.map((link, index) => {
@@ -219,10 +219,10 @@ const Navbar = () => {
                       <Link
                         href={link.path}
                         onClick={() => setNavbarOpen(false)}
-                        className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-all duration-200"
+                        className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
                       >
                         <div className="flex items-center space-x-3">
-                          <IconComponent className="w-5 h-5 text-purple-400" />
+                          <IconComponent className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                           <span className="font-medium text-gray-800 dark:text-gray-300">{link.title}</span>
                         </div>
                         <ExternalLink className="w-4 h-4 text-gray-600 dark:text-gray-500" />
@@ -239,4 +239,5 @@ const Navbar = () => {
   )
 }
 
-export default Navbar;
+export default Navbar
+
