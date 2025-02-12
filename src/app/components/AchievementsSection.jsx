@@ -1,13 +1,13 @@
-"use client";
-import React from "react";
-import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
-import { useTheme } from "next-themes";
+"use client"
+import { useEffect, useState } from "react"
+import dynamic from "next/dynamic"
+import { motion } from "framer-motion"
+import { Sparkles } from "lucide-react"
+import { useTheme } from "next-themes"
 
 const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
   ssr: false,
-});
+})
 
 const achievementsList = [
   {
@@ -36,18 +36,31 @@ const achievementsList = [
     icon: "⭐",
     description: "Years of dedicated experience",
   },
-];
+]
 
 const AchievementsSection = () => {
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null // or a loading placeholder
+  }
+
+  const currentTheme = theme === "system" ? systemTheme : theme
+  const isDarkMode = currentTheme === "dark"
 
   return (
     <div
-      className={`rounded-lg py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 ${
-        theme === "dark"
-          ? "bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950"
-          : "bg-gradient-to-br from-indigo-100 via-purple-200 to-indigo-100"
-      }`}
+      className={`rounded-lg py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300
+        ${
+          isDarkMode
+            ? "bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950"
+            : "bg-gradient-to-br from-indigo-100 via-purple-200 to-indigo-100"
+        }`}
     >
       <motion.div
         initial={{ opacity: 0 }}
@@ -62,34 +75,25 @@ const AchievementsSection = () => {
               scale: [1, 1.1, 1],
             }}
             transition={{
-              rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-              scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+              rotate: { duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
+              scale: { duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
             }}
             className="absolute opacity-20"
           >
-            <Sparkles
-              size={120}
-              className={`${
-                theme === "dark" ? "text-purple-300" : "text-purple-500"
-              }`}
-            />
+            <Sparkles size={120} className={isDarkMode ? "text-purple-300" : "text-purple-500"} />
           </motion.div>
           <div className="text-center space-y-2">
             <h2
               className={`text-3xl sm:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent 
                 ${
-                  theme === "dark"
+                  isDarkMode
                     ? "bg-gradient-to-r from-purple-300 to-indigo-300"
                     : "bg-gradient-to-r from-purple-600 to-indigo-700"
                 }`}
             >
               Milestones & Achievements
             </h2>
-            <p
-              className={`text-sm sm:text-base max-w-2xl mx-auto ${
-                theme === "dark" ? "text-gray-400" : "text-gray-600"
-              }`}
-            >
+            <p className={`text-sm sm:text-base max-w-2xl mx-auto ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
               Celebrating the journey of continuous growth and success
             </p>
           </div>
@@ -116,20 +120,21 @@ const AchievementsSection = () => {
                 className="relative group"
               >
                 <div
-                  className={`absolute inset-0 rounded-2xl blur-xl transition-all duration-300 ${
-                    theme === "dark"
-                      ? "bg-gradient-to-r from-purple-500/20 to-indigo-500/20"
-                      : "bg-gradient-to-r from-purple-200/30 to-indigo-300/30"
-                  }`}
+                  className={`absolute inset-0 rounded-2xl blur-xl transition-all duration-300 
+                    ${
+                      isDarkMode
+                        ? "bg-gradient-to-r from-purple-500/20 to-indigo-500/20"
+                        : "bg-gradient-to-r from-purple-200/30 to-indigo-300/30"
+                    }`}
                 />
                 <div
                   className={`relative rounded-2xl p-6 sm:p-8 border backdrop-blur-sm transition-all duration-300
-                  ${
-                    theme === "dark"
-                      ? "bg-gray-900/80 border-purple-500/10 text-white"
-                      : "bg-white border-gray-200 text-gray-900"
-                  } 
-                  group-hover:border-purple-500/20`}
+                    ${
+                      isDarkMode
+                        ? "bg-gray-900/80 border-purple-500/10 text-white"
+                        : "bg-white border-gray-200 text-gray-900"
+                    } 
+                    group-hover:border-purple-500/20`}
                 >
                   <div className="flex flex-col items-center space-y-4">
                     <motion.div
@@ -137,32 +142,20 @@ const AchievementsSection = () => {
                       whileHover={{ scale: 1.2, rotate: [0, -10, 10, -10, 0] }}
                       transition={{ duration: 0.5 }}
                     >
-                      <span className="text-4xl sm:text-5xl relative z-10">
-                        {achievement.icon}
-                      </span>
+                      <span className="text-4xl sm:text-5xl relative z-10">{achievement.icon}</span>
                       <div className="absolute inset-0 blur-xl rounded-full scale-150" />
                     </motion.div>
 
                     <h3 className="flex flex-row items-center justify-center gap-1 text-3xl sm:text-4xl font-bold">
                       {achievement.prefix && (
-                        <span
-                          className={`${
-                            theme === "dark"
-                              ? "text-purple-300"
-                              : "text-purple-500"
-                          }`}
-                        >
-                          {achievement.prefix}
-                        </span>
+                        <span className={isDarkMode ? "text-purple-300" : "text-purple-500"}>{achievement.prefix}</span>
                       )}
                       <AnimatedNumbers
                         includeComma
-                        animateToNumber={parseInt(
-                          achievement.value.replace(/,/g, "")
-                        )}
+                        animateToNumber={Number.parseInt(achievement.value.replace(/,/g, ""))}
                         locale="en-US"
                         className={`bg-clip-text text-transparent ${
-                          theme === "dark"
+                          isDarkMode
                             ? "bg-gradient-to-r from-purple-300 to-indigo-300"
                             : "bg-gradient-to-r from-purple-500 to-indigo-700"
                         }`}
@@ -173,13 +166,7 @@ const AchievementsSection = () => {
                         })}
                       />
                       {achievement.postfix && (
-                        <span
-                          className={`${
-                            theme === "dark"
-                              ? "text-purple-300"
-                              : "text-purple-500"
-                          }`}
-                        >
+                        <span className={isDarkMode ? "text-purple-300" : "text-purple-500"}>
                           {achievement.postfix}
                         </span>
                       )}
@@ -187,20 +174,17 @@ const AchievementsSection = () => {
 
                     <div className="space-y-2 text-center">
                       <p
-                        className={`text-base sm:text-lg font-medium ${
-                          theme === "dark"
-                            ? "text-purple-300"
-                            : "text-purple-500"
-                        }`}
+                        className={`text-base sm:text-lg font-medium ${isDarkMode ? "text-purple-300" : "text-purple-500"}`}
                       >
                         {achievement.metric}
                       </p>
                       <p
-                        className={`text-xs sm:text-sm transition-opacity duration-300 max-h-0 group-hover:max-h-20 overflow-hidden ${
-                          theme === "dark"
-                            ? "text-gray-400 opacity-0 group-hover:opacity-100"
-                            : "text-gray-600 opacity-0 group-hover:opacity-100"
-                        }`}
+                        className={`text-xs sm:text-sm transition-opacity duration-300 max-h-0 group-hover:max-h-20 overflow-hidden 
+                          ${
+                            isDarkMode
+                              ? "text-gray-400 opacity-0 group-hover:opacity-100"
+                              : "text-gray-600 opacity-0 group-hover:opacity-100"
+                          }`}
                       >
                         {achievement.description}
                       </p>
@@ -208,12 +192,13 @@ const AchievementsSection = () => {
                   </div>
                 </div>
               </motion.div>
-            );
+            )
           })}
         </div>
       </motion.div>
     </div>
-  );
-};
+  )
+}
 
-export default AchievementsSection;
+export default AchievementsSection
+
