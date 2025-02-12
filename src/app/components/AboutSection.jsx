@@ -83,7 +83,7 @@ const TAB_DATA = [
                 </span>
               </div>
               <div className="mt-4 text-sm text-muted-foreground">
-                Specializing in Software Engineering and Data Science
+                Specializing in Software Engineering and Web Development.
               </div>
             </div>
           </div>

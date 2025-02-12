@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Clock, Tag, ChevronRight, BookOpen, Code2, TrendingUp, Palette, FileCode, Briefcase, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
+import Link from 'next/link'; // Import the Link component
 
 const articles = [
   // Development Articles
@@ -16,6 +17,7 @@ const articles = [
     category: "Development",
     tags: ["React", "Architecture", "Performance"],
     imageUrl: "/images/react.jpg",
+    link: "/articles/building-scalable-react-applications", // Add link
   },
   {
     title: "Advanced TypeScript Patterns",
@@ -25,6 +27,7 @@ const articles = [
     category: "Development",
     tags: ["TypeScript", "Patterns", "Development"],
     imageUrl: "/images/develop.jpg",
+    link: "/articles/advanced-typescript-patterns", // Add link
   },
   
   // Tech Trends Articles
@@ -36,6 +39,7 @@ const articles = [
     category: "Tech Trends",
     tags: ["Web3", "AI", "Future Tech"],
     imageUrl: "/images/next.png",
+    link: "/articles/future-of-web-development", // Add link
   },
   {
     title: "AI in Modern Web Applications",
@@ -45,6 +49,7 @@ const articles = [
     category: "Tech Trends",
     tags: ["AI", "Innovation", "Web Dev"],
     imageUrl: "/images/web.jpg",
+    link: "/articles/ai-in-modern-web-applications", // Add link
   },
 
   // CSS Articles
@@ -56,6 +61,7 @@ const articles = [
     category: "CSS",
     tags: ["CSS", "Layout", "Design"],
     imageUrl: "/images/develop.jpg",
+    link: "/articles/mastering-css-grid", // Add link
   },
   {
     title: "Modern CSS Animation Techniques",
@@ -65,6 +71,7 @@ const articles = [
     category: "CSS",
     tags: ["CSS", "Animation", "UI"],
     imageUrl: "/images/web.jpg",
+    link: "/articles/modern-css-animation-techniques", // Add link
   },
 
   // JavaScript Articles
@@ -76,6 +83,7 @@ const articles = [
     category: "JavaScript",
     tags: ["JavaScript", "Async", "ES6"],
     imageUrl: "/images/react.jpg",
+    link: "/articles/understanding-javascript-promises", // Add link
   },
   {
     title: "JavaScript Performance Optimization",
@@ -85,6 +93,7 @@ const articles = [
     category: "JavaScript",
     tags: ["JavaScript", "Performance", "Optimization"],
     imageUrl: "/images/next.png",
+    link: "/articles/javascript-performance-optimization", // Add link
   },
 
   // Career Articles
@@ -96,6 +105,7 @@ const articles = [
     category: "Career",
     tags: ["Career", "Guide", "Tech"],
     imageUrl: "/images/develop.jpg",
+    link: "/articles/breaking-into-tech-guide", // Add link
   },
   {
     title: "From Junior to Senior Developer",
@@ -105,6 +115,7 @@ const articles = [
     category: "Career",
     tags: ["Career", "Growth", "Skills"],
     imageUrl: "/images/web.jpg",
+    link: "/articles/from-junior-to-senior-developer", // Add link
   },
 ];
 
@@ -249,88 +260,89 @@ const BlogSection = () => {
         >
           <AnimatePresence mode="popLayout">
             {filteredArticles.map((article, index) => (
-              <motion.article
-                key={article.title}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="group relative bg-card/50 dark:bg-white/[0.02] backdrop-blur-xl rounded-2xl overflow-hidden
-                  border border-border hover:border-primary/20
-                  transition-all duration-500 hover:shadow-2xl hover:shadow-violet-500/10"
-              >
-                {/* Image Container */}
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image
-                    src={article.imageUrl}
-                    alt={article.title}
-                    width={800}
-                    height={450}
-                    className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
-
-                {/* Content */}
-                <div className="p-6 space-y-4">
-                  {/* Meta Info */}
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                    <span className="flex items-center gap-1.5">
-                      <Calendar className="w-4 h-4" />
-                      {new Date(article.date).toLocaleDateString('en-US', { 
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                      })}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="w-4 h-4" />
-                      {article.readTime}
-                    </span>
+              <Link href={article.link} key={article.title} passHref> {/* Add Link here */}
+                <motion.article
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  className="group relative bg-card/50 dark:bg-white/[0.02] backdrop-blur-xl rounded-2xl overflow-hidden
+                    border border-border hover:border-primary/20
+                    transition-all duration-500 hover:shadow-2xl hover:shadow-violet-500/10"
+                >
+                  {/* Image Container */}
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <Image
+                      src={article.imageUrl}
+                      alt={article.title}
+                      width={800}
+                      height={450}
+                      className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-foreground">
-                    {article.title}
-                  </h3>
-
-                  {/* Excerpt */}
-                  <p className="text-muted-foreground line-clamp-2">
-                    {article.excerpt}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {article.tags.map(tag => (
-                      <span
-                        key={tag}
-                        className="px-2.5 py-1 text-xs font-medium rounded-lg
-                          bg-muted/50 dark:bg-white/5 text-foreground border border-border
-                          hover:bg-muted dark:hover:bg-white/10 transition-colors duration-300"
-                      >
-                        #{tag}
+                  {/* Content */}
+                  <div className="p-6 space-y-4">
+                    {/* Meta Info */}
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                      <span className="flex items-center gap-1.5">
+                        <Calendar className="w-4 h-4" />
+                        {new Date(article.date).toLocaleDateString('en-US', { 
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric'
+                        })}
                       </span>
-                    ))}
+                      <span className="flex items-center gap-1.5">
+                        <Clock className="w-4 h-4" />
+                        {article.readTime}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-foreground">
+                      {article.title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p className="text-muted-foreground line-clamp-2">
+                      {article.excerpt}
+                    </p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {article.tags.map(tag => (
+                        <span
+                          key={tag}
+                          className="px-2.5 py-1 text-xs font-medium rounded-lg
+                            bg-muted/50 dark:bg-white/5 text-foreground border border-border
+                            hover:bg-muted dark:hover:bg-white/10 transition-colors duration-300"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Read More Button */}
+                    <motion.button 
+                      whileHover={{ x: 5 }}
+                      className="flex items-center gap-2 text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors duration-300"
+                    >
+                      Read Article
+                      <ChevronRight className="w-4 h-4" />
+                    </motion.button>
                   </div>
 
-                  {/* Read More Button */}
-                  <motion.button 
-                    whileHover={{ x: 5 }}
-                    className="flex items-center gap-2 text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors duration-300"
-                  >
-                    Read Article
-                    <ChevronRight className="w-4 h-4" />
-                  </motion.button>
-                </div>
-
-                {/* Hover Overlay */}
-                <motion.div
-                  initial={false}
-                  animate={{ opacity: hoveredArticle === article.title ? 1 : 0 }}
-                  className="absolute inset-0 bg-gradient-to-t from-violet-950/50 via-transparent to-transparent pointer-events-none"
-                />
-              </motion.article>
+                  {/* Hover Overlay */}
+                  <motion.div
+                    initial={false}
+                    animate={{ opacity: hoveredArticle === article.title ? 1 : 0 }}
+                    className="absolute inset-0 bg-gradient-to-t from-violet-950/50 via-transparent to-transparent pointer-events-none"
+                  />
+                </motion.article>
+              </Link>
             ))}
           </AnimatePresence>
         </motion.div>
