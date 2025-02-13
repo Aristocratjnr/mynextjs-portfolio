@@ -83,7 +83,7 @@ const articles = [
     category: "JavaScript",
     tags: ["JavaScript", "Async", "ES6"],
     imageUrl: "/images/react.jpg",
-    link: "/articles/understanding-javascript-promises", // Add link
+    link: "https://dev.to/alexmercedcoder/understanding-javascript-promises-in-depth-5ga9", 
   },
   {
     title: "JavaScript Performance Optimization",
