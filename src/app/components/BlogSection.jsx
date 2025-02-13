@@ -61,7 +61,7 @@ const articles = [
     category: "CSS",
     tags: ["CSS", "Layout", "Design"],
     imageUrl: "/images/develop.jpg",
-    link: "/articles/mastering-css-grid", // Add link
+    link: "https://www.coltsteele.com/tutorials/mastering-css-grid", 
   },
   {
     title: "Modern CSS Animation Techniques",
