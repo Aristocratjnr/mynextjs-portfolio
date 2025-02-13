@@ -39,7 +39,7 @@ const articles = [
     category: "Tech Trends",
     tags: ["Web3", "AI", "Future Tech"],
     imageUrl: "/images/next.png",
-    link: "/articles/future-of-web-development", // Add link
+    link: "https://www.nividasoftware.com/blog/detail/how-the-future-of-web-development-will-change-till-2030", 
   },
   {
     title: "AI in Modern Web Applications",
