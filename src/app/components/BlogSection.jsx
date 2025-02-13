@@ -93,7 +93,7 @@ const articles = [
     category: "JavaScript",
     tags: ["JavaScript", "Performance", "Optimization"],
     imageUrl: "/images/next.png",
-    link: "/articles/javascript-performance-optimization", // Add link
+    link: "https://romgrk.com/posts/optimizing-javascript", 
   },
 
   // Career Articles
