@@ -105,7 +105,7 @@ const articles = [
     category: "Career",
     tags: ["Career", "Guide", "Tech"],
     imageUrl: "/images/develop.jpg",
-    link: "/articles/breaking-into-tech-guide", // Add link
+    link: "https://www.allskilled.com/post/breaking-into-the-tech-industry-your-guide-to-success-and-growth", 
   },
   {
     title: "From Junior to Senior Developer",
