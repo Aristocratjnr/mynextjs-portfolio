@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Clock, Tag, ChevronRight, BookOpen, Code2, TrendingUp, Palette, FileCode, Briefcase, Calendar } from 'lucide-react';
+import { Search, Clock, ChevronRight, BookOpen, Code2, TrendingUp, Palette, FileCode, Briefcase, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import Link from 'next/link'; // Import the Link component
@@ -17,7 +17,7 @@ const articles = [
     category: "Development",
     tags: ["React", "Architecture", "Performance"],
     imageUrl: "/images/react.jpg",
-    link: "/articles/building-scalable-react-applications", // Add link
+    link: "https://brainhub.eu/library/react-security-scalability", 
   },
   {
     title: "Advanced TypeScript Patterns",
@@ -26,8 +26,8 @@ const articles = [
     readTime: "12 min read",
     category: "Development",
     tags: ["TypeScript", "Patterns", "Development"],
-    imageUrl: "/images/develop.jpg",
-    link: "/articles/advanced-typescript-patterns", // Add link
+    imageUrl: "/images/chart.jpg",
+    link: "https://www.split.io/blog/advanced-typescript-patterns-for-enterprise-applications/", 
   },
   
   // Tech Trends Articles
@@ -38,8 +38,8 @@ const articles = [
     readTime: "6 min read",
     category: "Tech Trends",
     tags: ["Web3", "AI", "Future Tech"],
-    imageUrl: "/images/next.png",
-    link: "/articles/future-of-web-development", // Add link
+    imageUrl: "/images/typescript.png",
+    link: "https://www.nividasoftware.com/blog/detail/how-the-future-of-web-development-will-change-till-2030", 
   },
   {
     title: "AI in Modern Web Applications",
@@ -49,7 +49,7 @@ const articles = [
     category: "Tech Trends",
     tags: ["AI", "Innovation", "Web Dev"],
     imageUrl: "/images/web.jpg",
-    link: "/articles/ai-in-modern-web-applications", // Add link
+    link: "https://www.digitalocean.com/resources/articles/ai-tools-web-development", 
   },
 
   // CSS Articles
@@ -61,7 +61,7 @@ const articles = [
     category: "CSS",
     tags: ["CSS", "Layout", "Design"],
     imageUrl: "/images/develop.jpg",
-    link: "/articles/mastering-css-grid", // Add link
+    link: "https://www.coltsteele.com/tutorials/mastering-css-grid", 
   },
   {
     title: "Modern CSS Animation Techniques",
@@ -70,8 +70,8 @@ const articles = [
     readTime: "9 min read",
     category: "CSS",
     tags: ["CSS", "Animation", "UI"],
-    imageUrl: "/images/web.jpg",
-    link: "/articles/modern-css-animation-techniques", // Add link
+    imageUrl: "/images/css.png",
+    link: "https://developer.mozilla.org/en-US/docs/Web/CSS/animation", 
   },
 
   // JavaScript Articles
@@ -82,8 +82,8 @@ const articles = [
     readTime: "11 min read",
     category: "JavaScript",
     tags: ["JavaScript", "Async", "ES6"],
-    imageUrl: "/images/react.jpg",
-    link: "/articles/understanding-javascript-promises", // Add link
+    imageUrl: "/images/future.jpg",
+    link: "https://dev.to/alexmercedcoder/understanding-javascript-promises-in-depth-5ga9", 
   },
   {
     title: "JavaScript Performance Optimization",
@@ -93,7 +93,7 @@ const articles = [
     category: "JavaScript",
     tags: ["JavaScript", "Performance", "Optimization"],
     imageUrl: "/images/next.png",
-    link: "/articles/javascript-performance-optimization", // Add link
+    link: "https://romgrk.com/posts/optimizing-javascript", 
   },
 
   // Career Articles
@@ -104,8 +104,8 @@ const articles = [
     readTime: "15 min read",
     category: "Career",
     tags: ["Career", "Guide", "Tech"],
-    imageUrl: "/images/develop.jpg",
-    link: "/articles/breaking-into-tech-guide", // Add link
+    imageUrl: "/images/javascript.jpg",
+    link: "https://www.allskilled.com/post/breaking-into-the-tech-industry-your-guide-to-success-and-growth", 
   },
   {
     title: "From Junior to Senior Developer",
@@ -114,8 +114,8 @@ const articles = [
     readTime: "13 min read",
     category: "Career",
     tags: ["Career", "Growth", "Skills"],
-    imageUrl: "/images/web.jpg",
-    link: "/articles/from-junior-to-senior-developer", // Add link
+    imageUrl: "/images/senior.png",
+    link: "https://zerotomastery.io/blog/dont-be-a-junior-developer-the-roadmap", 
   },
 ];
 

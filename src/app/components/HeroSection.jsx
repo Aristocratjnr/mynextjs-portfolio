@@ -9,7 +9,7 @@ const HeroSection = () => {
   const floatingStars = Array(40).fill(null)
 
   const skillBadges = [
-    { icon: <Code className="w-4 h-4" />, text: "Aspirant Full Stack Dev" },
+    { icon: <Code className="w-4 h-4" />, text: "Aspiring Full Stack Dev" },
     { icon: <Boxes className="w-4 h-4" />, text: "UI/UX Design" },
     { icon: <Sparkles className="w-4 h-4" />, text: "Problem Solving" },
   ]
