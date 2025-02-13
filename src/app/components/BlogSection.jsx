@@ -114,7 +114,7 @@ const articles = [
     readTime: "13 min read",
     category: "Career",
     tags: ["Career", "Growth", "Skills"],
-    imageUrl: "/images/web.jpg",
+    imageUrl: "/images/senior.png",
     link: "https://zerotomastery.io/blog/dont-be-a-junior-developer-the-roadmap", 
   },
 ];
