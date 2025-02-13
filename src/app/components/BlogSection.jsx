@@ -26,7 +26,7 @@ const articles = [
     readTime: "12 min read",
     category: "Development",
     tags: ["TypeScript", "Patterns", "Development"],
-    imageUrl: "/images/develop.jpg",
+    imageUrl: "/images/chart.jpg",
     link: "https://www.split.io/blog/advanced-typescript-patterns-for-enterprise-applications/", 
   },
   
@@ -38,7 +38,7 @@ const articles = [
     readTime: "6 min read",
     category: "Tech Trends",
     tags: ["Web3", "AI", "Future Tech"],
-    imageUrl: "/images/next.png",
+    imageUrl: "/images/typescript.png",
     link: "https://www.nividasoftware.com/blog/detail/how-the-future-of-web-development-will-change-till-2030", 
   },
   {
@@ -82,7 +82,7 @@ const articles = [
     readTime: "11 min read",
     category: "JavaScript",
     tags: ["JavaScript", "Async", "ES6"],
-    imageUrl: "/images/react.jpg",
+    imageUrl: "/images/future.jpg",
     link: "https://dev.to/alexmercedcoder/understanding-javascript-promises-in-depth-5ga9", 
   },
   {
@@ -104,7 +104,7 @@ const articles = [
     readTime: "15 min read",
     category: "Career",
     tags: ["Career", "Guide", "Tech"],
-    imageUrl: "/images/develop.jpg",
+    imageUrl: "/images/javascript.jpg",
     link: "https://www.allskilled.com/post/breaking-into-the-tech-industry-your-guide-to-success-and-growth", 
   },
   {
