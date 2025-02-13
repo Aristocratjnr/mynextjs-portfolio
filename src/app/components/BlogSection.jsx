@@ -17,7 +17,7 @@ const articles = [
     category: "Development",
     tags: ["React", "Architecture", "Performance"],
     imageUrl: "/images/react.jpg",
-    link: "/articles/building-scalable-react-applications", // Add link
+    link: "https://brainhub.eu/library/react-security-scalability", 
   },
   {
     title: "Advanced TypeScript Patterns",
