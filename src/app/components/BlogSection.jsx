@@ -71,7 +71,7 @@ const articles = [
     category: "CSS",
     tags: ["CSS", "Animation", "UI"],
     imageUrl: "/images/web.jpg",
-    link: "/articles/modern-css-animation-techniques", // Add link
+    link: "https://developer.mozilla.org/en-US/docs/Web/CSS/animation", 
   },
 
   // JavaScript Articles
