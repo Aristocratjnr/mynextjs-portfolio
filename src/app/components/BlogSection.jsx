@@ -27,7 +27,7 @@ const articles = [
     category: "Development",
     tags: ["TypeScript", "Patterns", "Development"],
     imageUrl: "/images/develop.jpg",
-    link: "/articles/advanced-typescript-patterns", // Add link
+    link: "https://www.split.io/blog/advanced-typescript-patterns-for-enterprise-applications/", 
   },
   
   // Tech Trends Articles
