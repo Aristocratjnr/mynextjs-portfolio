@@ -70,7 +70,7 @@ const articles = [
     readTime: "9 min read",
     category: "CSS",
     tags: ["CSS", "Animation", "UI"],
-    imageUrl: "/images/web.jpg",
+    imageUrl: "/images/css.png",
     link: "https://developer.mozilla.org/en-US/docs/Web/CSS/animation", 
   },
 
