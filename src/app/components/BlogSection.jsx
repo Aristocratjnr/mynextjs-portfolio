@@ -115,7 +115,7 @@ const articles = [
     category: "Career",
     tags: ["Career", "Growth", "Skills"],
     imageUrl: "/images/web.jpg",
-    link: "/articles/from-junior-to-senior-developer", // Add link
+    link: "https://zerotomastery.io/blog/dont-be-a-junior-developer-the-roadmap", 
   },
 ];
 
