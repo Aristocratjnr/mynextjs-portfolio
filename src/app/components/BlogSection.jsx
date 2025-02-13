@@ -49,7 +49,7 @@ const articles = [
     category: "Tech Trends",
     tags: ["AI", "Innovation", "Web Dev"],
     imageUrl: "/images/web.jpg",
-    link: "/articles/ai-in-modern-web-applications", // Add link
+    link: "https://www.digitalocean.com/resources/articles/ai-tools-web-development", 
   },
 
   // CSS Articles
