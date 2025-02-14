@@ -265,10 +265,34 @@ const TAB_DATA = [
   },
 ]
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100
+    }
+  }
+}
+
 const AboutSection = () => {
   const [tab, setTab] = useState("skills")
   const [isPending, startTransition] = useTransition()
   const [isClient, setIsClient] = useState(false)
+  const [hoveredTech, setHoveredTech] = useState(null)
   const { theme } = useTheme()
 
   useEffect(() => {
@@ -281,143 +305,226 @@ const AboutSection = () => {
     })
   }
 
+  const backgroundAnimation = {
+    initial: {
+      borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%"
+    },
+    animate: {
+      borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%"],
+      transition: {
+        duration: 8,
+        repeat: Infinity,
+        repeatType: "reverse",
+        ease: "easeInOut"
+      }
+    }
+  }
+
   return (
     <section className="relative py-16 sm:py-24 lg:py-32 overflow-hidden bg-gray-50 dark:bg-gray-900" id="about">
-      {/* Animated background elements */}
+      {/* Enhanced animated background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          animate={{
-            rotate: 360,
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
-          }}
-          className="absolute top-1/3 left-1/4 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-[100px] sm:blur-[120px]"
+          variants={backgroundAnimation}
+          initial="initial"
+          animate="animate"
+          className="absolute top-1/3 left-1/4 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-gradient-to-br from-cyan-500/5 via-transparent to-orange-500/5 dark:from-cyan-500/10 dark:to-orange-500/10 blur-[100px] sm:blur-[120px]"
         />
         <motion.div
-          animate={{
-            rotate: -360,
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 35,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
-          }}
-          className="absolute bottom-1/4 right-1/4 w-[250px] sm:w-[350px] lg:w-[450px] h-[250px] sm:h-[350px] lg:h-[450px] bg-orange-500/5 dark:bg-orange-500/10 rounded-full blur-[100px] sm:blur-[120px]"
+          variants={backgroundAnimation}
+          initial="initial"
+          animate="animate"
+          className="absolute bottom-1/4 right-1/4 w-[250px] sm:w-[350px] lg:w-[450px] h-[250px] sm:h-[350px] lg:h-[450px] bg-gradient-to-bl from-orange-500/5 via-transparent to-cyan-500/5 dark:from-orange-500/10 dark:to-cyan-500/10 blur-[100px] sm:blur-[120px]"
         />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image Section */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+        >
+          {/* Enhanced Image Section */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
             className="relative group max-w-[600px] mx-auto lg:mx-0"
           >
-            <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-transparent to-orange-500/20 dark:from-cyan-500/30 dark:via-transparent dark:to-orange-500/30 rounded-3xl blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-500" />
             <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 backdrop-blur-sm"
-            >
+              animate={{
+                opacity: [0.4, 0.6, 0.4],
+                scale: [1, 1.02, 1],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+              className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-transparent to-orange-500/20 dark:from-cyan-500/30 dark:to-orange-500/30 rounded-3xl blur-2xl"
+            />
+            <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
               <Image
                 src="/images/web.jpg"
                 width={800}
                 height={800}
                 alt="About Image"
-                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transform transition-all duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent dark:from-black/80 dark:via-black/20 opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
               <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent"
+              />
+              <motion.div
+                variants={itemVariants}
                 className="absolute bottom-0 left-0 right-0 p-6 sm:p-8"
               >
-                <h3 className="text-2xl font-bold text-white mb-2">David Ayim Obuobi</h3>
-                <p className="text-lg text-cyan-300 mb-4 font-semibold">Aspirant Full Stack Developer</p>
+                <motion.h3 
+                  whileHover={{ scale: 1.05 }}
+                  className="text-2xl font-bold text-white mb-2"
+                >
+                  David Ayim Obuobi
+                </motion.h3>
+                <motion.p
+                  animate={{
+                    color: ["#67e8f9", "#94a3b8", "#67e8f9"],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                  }}
+                  className="text-lg mb-4 font-semibold"
+                >
+                  Aspirant Full Stack Developer
+                </motion.p>
                 <div className="flex gap-4">
-                  <a
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     href="#"
                     className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 hover:border-white/40 transition-all duration-300 text-white"
                   >
                     <Github className="w-4 h-4" />
                     <span className="text-sm">GitHub</span>
-                  </a>
-                  <a
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     href="#"
                     className="flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/20 hover:bg-cyan-500/30 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/50 transition-all duration-300 text-white"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span className="text-sm">Portfolio</span>
-                  </a>
+                  </motion.a>
                 </div>
               </motion.div>
-            </motion.div>
+            </div>
           </motion.div>
 
-          {/* Content Section */}
+          {/* Enhanced Content Section */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
+            variants={containerVariants}
             className="space-y-8 sm:space-y-10"
           >
-            {/* Header Section */}
             <div className="space-y-6 sm:space-y-8">
-              <motion.div className="inline-block" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                className="inline-block"
+              >
                 <span className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-gray-200/50 dark:bg-white/5 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/50 transition-all duration-300">
-                  <span className="relative flex h-2.5 w-2.5">
+                  <motion.span
+                    animate={{
+                      scale: [1, 1.2, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                    }}
+                    className="relative flex h-2.5 w-2.5"
+                  >
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400" />
-                  </span>
+                  </motion.span>
                   <span className="text-sm font-medium bg-gradient-to-r from-cyan-500 to-orange-500 bg-clip-text text-transparent">
                     About Me
                   </span>
                 </span>
               </motion.div>
 
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold">
+              <motion.h2
+                variants={itemVariants}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold"
+              >
                 <span className="bg-gradient-to-r from-cyan-500 to-orange-500 bg-clip-text text-transparent">
                   Crafting Digital
                 </span>
                 <br />
                 <span className="text-gray-900 dark:text-white">Experiences</span>
-              </h2>
+              </motion.h2>
 
-              <div className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed space-y-6">
+              <motion.div variants={itemVariants} className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed space-y-6">
                 <p>
                   Passionate developer specializing in modern web technologies, dedicated to creating{" "}
-                  <span className="text-cyan-600 dark:text-cyan-300">immersive digital solutions</span> that blend
-                  technical excellence with intuitive design.
+                  <motion.span
+                    animate={{
+                      color: ["#0891b2", "#c2410c", "#0891b2"],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  >
+                    immersive digital solutions
+                  </motion.span>{" "}
+                  that blend technical excellence with intuitive design.
                 </p>
 
                 <div className="flex flex-wrap gap-3">
                   {["Next.js", "React", "TypeScript", "Python", "TailwindCSS"].map((tech, index) => (
                     <motion.span
                       key={tech}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      variants={itemVariants}
+                      whileHover={{ 
+                        scale: 1.1,
+                        backgroundColor: "rgba(6, 182, 212, 0.1)",
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      onHoverStart={() => setHoveredTech(tech)}
+                      onHoverEnd={() => setHoveredTech(null)}
                       className="px-4 py-2 text-sm rounded-full bg-gray-200/50 dark:bg-white/5 backdrop-blur-sm border border-gray-300 dark:border-gray-700 hover:border-cyan-500/30 hover:text-cyan-600 dark:hover:text-cyan-300 transition-all duration-300"
                     >
                       {tech}
+                      {hoveredTech === tech && (
+                        <motion.div
+                          layoutId="techHighlight"
+                          className="absolute inset-0 -z-10 rounded-full bg-cyan-500/10"
+                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        />
+                      )}
                     </motion.span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             </div>
 
-            {/* Tabs Section */}
-            <div className="space-y-8">
+            {/* Enhanced Tabs Section */}
+            <motion.div variants={containerVariants} className="space-y-8">
               <div className="flex flex-wrap gap-3">
                 {TAB_DATA.map((tabItem) => (
-                  <TabButton key={tabItem.id} selectTab={() => handleTabChange(tabItem.id)} active={tab === tabItem.id}>
-                    <div className="flex items-center gap-2.5 px-4 py-2.5 text-base">
+                  <TabButton 
+                    key={tabItem.id} 
+                    selectTab={() => handleTabChange(tabItem.id)} 
+                    active={tab === tabItem.id}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-base"
+                    >
                       {tabItem.icon}
                       {tabItem.title}
                       {tab === tabItem.id && (
@@ -427,7 +534,7 @@ const AboutSection = () => {
                           transition={{ type: "spring", stiffness: 500 }}
                         />
                       )}
-                    </div>
+                    </motion.div>
                   </TabButton>
                 ))}
               </div>
@@ -437,23 +544,22 @@ const AboutSection = () => {
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={tab}
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.3 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ type: "spring", stiffness: 200, damping: 20 }}
                     >
                       {TAB_DATA.find((t) => t.id === tab).content}
                     </motion.div>
                   </AnimatePresence>
                 )}
               </div>
-            </div>
+            </motion.div>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
 }
 
 export default AboutSection
-
