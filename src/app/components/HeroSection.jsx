@@ -164,7 +164,7 @@ const HeroSection = () => {
                 whileHover={{ y: -5, scale: 1.05 }}
               >
                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-xs sm:text-sm md:text-base font-medium bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-300 dark:via-white dark:to-secondary-300 bg-clip-text text-transparent whitespace-nowrap">
+                <span className="text-xs sm:text-sm md:text-base font-medium bg-gradient-to-r from-primary-900 to-secondary-600 dark:from-primary-300 dark:via-white dark:to-secondary-300 bg-clip-text text-transparent whitespace-nowrap">
                   Available for work🧑‍💻
                 </span>
               </motion.div>
