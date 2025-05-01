@@ -4,6 +4,9 @@ import { TypeAnimation } from "react-type-animation"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowDownRight, Download, Sparkles, Code, Boxes } from "lucide-react"
+import { useCallback } from "react"
+import Particles from "react-tsparticles"
+import { loadSlim } from "tsparticles-slim"
 
 const HeroSection = () => {
   const floatingStars = Array(40).fill(null)
@@ -14,8 +17,86 @@ const HeroSection = () => {
     { icon: <Sparkles className="w-4 h-4" />, text: "Problem Solving" },
   ]
 
+  // Initialize tsParticles
+  const particlesInit = useCallback(async (engine) => {
+    await loadSlim(engine)
+  }, [])
+
   return (
     <section className="min-h-screen flex items-center py-8 lg:py-24 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 relative">
+      {/* Particles background */}
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        className="absolute inset-0"
+        options={{
+          fpsLimit: 60,
+          fullScreen: { enable: false },
+          interactivity: {
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push",
+              },
+              onHover: {
+                enable: true,
+                mode: "repulse",
+                distance: 100,
+              },
+            },
+            modes: {
+              push: {
+                quantity: 4,
+              },
+              repulse: {
+                distance: 100,
+                duration: 0.4,
+              },
+            },
+          },
+          particles: {
+            color: {
+              value: ["#6d28d9", "#8b5cf6", "#a855f7"], // Primary and secondary colors
+            },
+            links: {
+              color: "#8b5cf6",
+              distance: 150,
+              enable: true,
+              opacity: 0.2,
+              width: 1,
+            },
+            move: {
+              direction: "none",
+              enable: true,
+              outModes: {
+                default: "bounce",
+              },
+              random: false,
+              speed: 1,
+              straight: false,
+            },
+            number: {
+              density: {
+                enable: true,
+                area: 800,
+              },
+              value: 60,
+            },
+            opacity: {
+              value: 0.3,
+            },
+            shape: {
+              type: "circle",
+            },
+            size: {
+              value: { min: 1, max: 3 },
+            },
+          },
+          detectRetina: true,
+        }}
+      />
+
+      {/* Existing background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
         {floatingStars.map((_, i) => (
           <motion.div
