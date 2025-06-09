@@ -663,7 +663,7 @@ const AboutSection = () => {
                   }}
                   className="text-lg mb-4 font-semibold"
                 >
-                  Aspirant Full Stack Developer
+                 
                 </motion.p>
                 <div className="flex gap-4">
                   <motion.a
