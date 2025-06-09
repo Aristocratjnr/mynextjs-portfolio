@@ -648,19 +648,20 @@ const AboutSection = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className ="relative"
+                className="relative"
               >
                 <Image
                   src="/images/web.jpg"
-                  width={800}
-                  height={800}
+                  width={900}
+                  height={1200}
                   alt="About Image"
-                  className="w-full h-auto object-cover"
+                  className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] object-cover"
+                  priority
                 />
               </motion.div>
               <motion.div
                 variants={itemVariants}
-                className="absolute bottom-0 left-0 right-0 p-6 sm:p-8"
+                className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 bg-gradient-to-t from-black/60 via-black/20 to-transparent"
               >
                 <motion.h3 
                   whileHover={{ scale: 1.05 }}
