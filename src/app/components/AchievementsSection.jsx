@@ -61,7 +61,7 @@ const AchievementsSection = () => {
     animate: {
       y: [0, -10, 0],
       transition: {
-        duration: 3,
+        duration: 2, // Reduced from 3
         repeat: Infinity,
         repeatType: "reverse",
         ease: "easeInOut",
@@ -74,7 +74,7 @@ const AchievementsSection = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1, // Reduced from 0.2
       },
     },
   }
@@ -86,8 +86,9 @@ const AchievementsSection = () => {
       y: 0,
       transition: {
         type: "spring",
-        stiffness: 100,
-        damping: 10,
+        stiffness: 200, // Increased from 100
+        damping: 20,    // Increased from 10
+        duration: 0.4   // Added explicit duration
       },
     },
   }
@@ -125,7 +126,7 @@ const AchievementsSection = () => {
             : "bg-gradient-to-br from-slate-50 to-indigo-50/50"
         }`}
     >
-      {/* Subtle background waves - reduced for mobile */}
+      {/* Subtle background waves - faster animation */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(3)].map((_, i) => (
           <motion.div
@@ -161,8 +162,8 @@ const AchievementsSection = () => {
               scale: [1, 1.1, 1],
             }}
             transition={{
-              rotate: { duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-              scale: { duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
+              rotate: { duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "linear" }, // Reduced from 20
+              scale: { duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }, // Reduced from 2
             }}
             className="absolute opacity-10"
           >
@@ -203,7 +204,7 @@ const AchievementsSection = () => {
                 whileHover={{
                   scale: 1.05,
                   y: -8,
-                  transition: { duration: 0.3, ease: "easeOut" },
+                  transition: { duration: 0.2, ease: "easeOut" }, // Reduced from 0.3
                 }}
                 whileTap={{
                   scale: 0.98,
@@ -211,18 +212,18 @@ const AchievementsSection = () => {
                 }}
                 className="relative group cursor-pointer"
               >
-                {/* Animated background glow */}
+                {/* Animated background glow - faster */}
                 <motion.div
-                  className={`absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 ${
+                  className={`absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 ${
                     achievement.color === 'indigo' ? 'bg-indigo-500/40' :
                     achievement.color === 'purple' ? 'bg-purple-500/40' :
                     achievement.color === 'amber' ? 'bg-amber-500/40' : 'bg-indigo-500/40'
-                  }`}
+                  }`} // Reduced from duration-500
                   animate={{
                     scale: [1, 1.02, 1],
                   }}
                   transition={{
-                    duration: 4,
+                    duration: 3, // Reduced from 4
                     repeat: Infinity,
                     repeatType: "reverse",
                   }}
@@ -230,7 +231,7 @@ const AchievementsSection = () => {
 
                 {/* Card content */}
                 <div
-                  className={`relative rounded-2xl p-6 sm:p-7 lg:p-8 border-2 backdrop-blur-sm transition-all duration-300 h-full
+                  className={`relative rounded-2xl p-6 sm:p-7 lg:p-8 border-2 backdrop-blur-sm transition-all duration-200 h-full
                     ${
                       isDarkMode
                         ? "bg-gradient-to-br from-slate-800/90 to-slate-900/90 border-slate-700/50 text-white shadow-xl shadow-black/20"
@@ -240,28 +241,28 @@ const AchievementsSection = () => {
                     ${achievement.color === 'indigo' ? 'group-hover:border-indigo-500/50' :
                       achievement.color === 'purple' ? 'group-hover:border-purple-500/50' :
                       achievement.color === 'amber' ? 'group-hover:border-amber-500/50' : 'group-hover:border-indigo-500/50'
-                    }`}
+                    }`} // Reduced from duration-300
                 >
-                  {/* Icon section */}
+                  {/* Icon section - faster animations */}
                   <div className="flex justify-center mb-6">
                     <motion.div 
                       className={`relative flex items-center justify-center w-16 h-16 sm:w-18 sm:h-18 rounded-full ${colorClasses.bg} ${colorClasses.border} border-2 shadow-lg`}
                       whileHover={{ 
                         rotate: [0, -10, 10, -10, 0],
                         scale: 1.1,
-                        transition: { duration: 0.5 }
+                        transition: { duration: 0.3 } // Reduced from 0.5
                       }}
                     >
                       <motion.span 
                         className={colorClasses.icon}
                         initial={{ scale: 1 }}
                         whileHover={{ scale: 1.2 }}
-                        transition={{ duration: 0.2 }}
+                        transition={{ duration: 0.15 }} // Reduced from 0.2
                       >
                         {achievement.icon}
                       </motion.span>
                       
-                      {/* Floating particles effect */}
+                      {/* Floating particles effect - faster */}
                       <motion.div
                         className={`absolute inset-0 rounded-full ${
                           achievement.color === 'indigo' ? 'bg-indigo-500/20' :
@@ -273,7 +274,7 @@ const AchievementsSection = () => {
                           opacity: [0, 0.3, 0],
                         }}
                         transition={{
-                          duration: 2,
+                          duration: 1.5, // Reduced from 2
                           repeat: Infinity,
                           repeatType: "reverse",
                         }}
@@ -281,13 +282,13 @@ const AchievementsSection = () => {
                     </motion.div>
                   </div>
 
-                  {/* Number and metric */}
+                  {/* Number and metric - faster hover */}
                   <div className="text-center space-y-3 mb-6">
                     <motion.h3 
                       className="flex flex-row items-center justify-center text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight" 
                       aria-label={`${achievement.value} ${achievement.metric}`}
                       whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.15 }} // Reduced from 0.2
                     >
                       {achievement.prefix && (
                         <span className={`mr-1 ${achievement.color === 'indigo' ? (isDarkMode ? 'text-indigo-400' : 'text-indigo-600') :
@@ -304,8 +305,8 @@ const AchievementsSection = () => {
                         className={isDarkMode ? "text-white" : "text-slate-800"}
                         configs={(_, index) => ({
                           mass: 1,
-                          friction: 100,
-                          tensions: 140 * (index + 1),
+                          friction: 120, // Increased from 100
+                          tensions: 180 * (index + 1), // Increased from 140
                         })}
                       />
                       {achievement.postfix && (
@@ -335,16 +336,16 @@ const AchievementsSection = () => {
                     </p>
                   </div>
 
-                  {/* Bottom accent line */}
+                  {/* Bottom accent line - faster animation */}
                   <motion.div
-                    className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 rounded-full transition-all duration-300 ${
+                    className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 rounded-full transition-all duration-200 ${
                       achievement.color === 'indigo' ? 'bg-indigo-500' :
                       achievement.color === 'purple' ? 'bg-purple-500' :
                       achievement.color === 'amber' ? 'bg-amber-500' : 'bg-indigo-500'
-                    }`}
+                    }`} // Reduced from duration-300
                     initial={{ width: '20%' }}
                     whileHover={{ width: '80%' }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.2 }} // Reduced from 0.3
                   />
                 </div>
               </motion.div>
