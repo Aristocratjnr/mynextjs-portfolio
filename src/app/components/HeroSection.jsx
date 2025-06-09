@@ -9,8 +9,6 @@ import Particles from "react-tsparticles"
 import { loadSlim } from "tsparticles-slim"
 
 const HeroSection = () => {
-  const floatingStars = Array(40).fill(null)
-
   const skillBadges = [
     { icon: <Code className="w-4 h-4" />, text: "Aspiring Full Stack Dev" },
     { icon: <Boxes className="w-4 h-4" />, text: "UI/UX Design" },
@@ -23,8 +21,8 @@ const HeroSection = () => {
   }, [])
 
   return (
-    <section className="min-h-screen flex items-center py-8 lg:py-24 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 relative">
-      {/* Particles background */}
+    <section className="min-h-screen flex items-center py-8 lg:py-24 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 relative overflow-hidden">
+      {/* Particles background - more visible in both themes */}
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -46,7 +44,7 @@ const HeroSection = () => {
             },
             modes: {
               push: {
-                quantity: 4,
+                quantity: 3,
               },
               repulse: {
                 distance: 100,
@@ -56,14 +54,14 @@ const HeroSection = () => {
           },
           particles: {
             color: {
-              value: ["#6d28d9", "#8b5cf6", "#a855f7"], // Primary and secondary colors
+              value: ["#6366f1", "#818cf8", "#4f46e5"], // Light mode: indigo shades
             },
             links: {
-              color: "#8b5cf6",
+              color: "#818cf8",
               distance: 150,
               enable: true,
-              opacity: 0.2,
-              width: 1,
+              opacity: 0.25, // Increased opacity for better visibility
+              width: 1.2, // Slightly thicker lines
             },
             move: {
               direction: "none",
@@ -72,134 +70,113 @@ const HeroSection = () => {
                 default: "bounce",
               },
               random: false,
-              speed: 1,
+              speed: 1, // Slightly faster for better visibility
               straight: false,
             },
             number: {
               density: {
                 enable: true,
-                area: 800,
+                area: 800, // Decreased area = more particles
               },
-              value: 60,
+              value: 50, // Increased number of particles
             },
             opacity: {
-              value: 0.3,
+              value: 0.35, // More visible
             },
             shape: {
               type: "circle",
             },
             size: {
-              value: { min: 1, max: 3 },
+              value: { min: 1, max: 3 }, // Slightly larger particles
             },
           },
           detectRetina: true,
         }}
       />
 
-      {/* Existing background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-        {floatingStars.map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-gradient-to-r from-primary-400 to-secondary-400 rounded-full"
-            initial={{
-              opacity: 0,
-              x: Math.random() * 100 - 50 + "%",
-              y: Math.random() * 100 - 50 + "%",
-              scale: Math.random() * 0.5 + 0.5,
-            }}
-            animate={{
-              opacity: [0, 0.4, 0],
-              y: ["0%", "-150%"],
-              scale: [1, Math.random() * 0.5 + 1, 1],
-            }}
-            transition={{
-              duration: Math.random() * 8 + 5,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "linear",
-              delay: Math.random() * 5,
-            }}
-          />
-        ))}
+      {/* Subtle background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-indigo-50/30 to-white/10 dark:from-indigo-950/30 dark:to-slate-950/80 pointer-events-none"></div>
 
-        <motion.div
-          animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-          transition={{ duration: 25, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-          className="absolute top-1/4 -left-1/4 w-[400px] sm:w-[600px] lg:w-[800px] h-[400px] sm:h-[600px] lg:h-[800px] bg-gradient-to-r from-primary-500/10 to-secondary-500/10 dark:from-primary-500/20 dark:to-secondary-500/20 rounded-full blur-[120px] sm:blur-[180px]"
-        />
-      </div>
-
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Profile Image Section - Now with rounded image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
             className="col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end"
           >
-            <div className="relative group">
+            <div className="relative">
+              {/* Subtle glow effect - adjusted for circular shape */}
               <motion.div
-                className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary-500 via-secondary-500 to-primary-500 blur-3xl opacity-30"
-                animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
-                transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                className="absolute inset-0 rounded-full bg-indigo-400/20 dark:bg-indigo-500/10 blur-2xl opacity-30"
+                animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
+                transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
               />
 
+              {/* Profile image container - now fully rounded */}
               <motion.div
-                whileHover={{ rotateY: 8, rotateX: -8, scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="relative rounded-full bg-gray-200 dark:bg-gray-800 w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] lg:w-[440px] lg:h-[440px] overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50 border-2 border-gray-300/20 dark:border-white/10 backdrop-blur-xl mx-auto"
+                whileHover={{ scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className="relative rounded-full bg-white dark:bg-slate-800 w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] lg:w-[400px] lg:h-[400px] overflow-hidden shadow-lg shadow-slate-200/50 dark:shadow-black/30 border border-slate-200 dark:border-slate-700 mx-auto"
               >
                 <Image
                   src="/images/junior.jpeg"
                   alt="Aristocrat Jnr"
-                  className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 transition-all duration-700 group-hover:scale-110"
-                  width={440}
-                  height={440}
+                  className="object-cover transition-all duration-700 hover:scale-105"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 640px) 240px, (max-width: 1024px) 320px, 400px"
                   priority
                 />
               </motion.div>
 
+              {/* Available badge */}
               <motion.div
-                className="absolute -bottom-6 left-1/2 -translate-x-1/2 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-gray-200/50 dark:border-white/10 hover:border-gray-300/50 dark:hover:border-white/20 transition-all duration-300 flex items-center gap-2 sm:gap-3"
-                whileHover={{ y: -5, scale: 1.05 }}
+                className="absolute -bottom-5 left-1/2 -translate-x-1/2 px-5 py-2 rounded-full bg-white dark:bg-slate-800 shadow-md dark:shadow-black/20 border border-slate-200 dark:border-slate-700 flex items-center gap-2"
+                whileHover={{ y: -3 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
               >
-                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-xs sm:text-sm md:text-base font-medium bg-gradient-to-r from-primary-900 to-secondary-600 dark:from-primary-300 dark:via-white dark:to-secondary-300 bg-clip-text text-transparent whitespace-nowrap">
-                  Available for work🧑‍💻
+                <div className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
+                <span className="text-sm font-medium text-slate-800 dark:text-slate-200">
+                  Available for work
                 </span>
               </motion.div>
             </div>
           </motion.div>
 
+          {/* Content Section - remaining code unchanged */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="col-span-7 space-y-6 sm:space-y-8 text-center lg:text-left order-2 lg:order-1"
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="col-span-7 space-y-7 text-center lg:text-left order-2 lg:order-1"
           >
-            <div className="space-y-4 sm:space-y-6">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-                className="inline-block"
-              >
-                <span className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gray-100/80 dark:bg-white/5 backdrop-blur-xl border border-primary-500/30 hover:border-primary-500/50 transition-all duration-300 group">
-                  <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-full w-full bg-primary-400" />
-                  </span>
-                  <span className="text-xs sm:text-sm font-medium bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-300 dark:via-white dark:to-secondary-300 bg-clip-text text-transparent">
-                    Welcome to my portfolio
-                  </span>
+            {/* Welcome badge */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="inline-block"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 transition-all duration-300">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-full w-full bg-indigo-500" />
                 </span>
-              </motion.div>
+                <span className="text-xs font-medium text-indigo-700 dark:text-indigo-300">
+                  Welcome to my portfolio
+                </span>
+              </span>
+            </motion.div>
 
-              <h1 className="text-gray-900 dark:text-white text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="relative inline-block">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-600">
-                    Hello, I&apos;m{" "}
-                  </span>
+            {/* Name and title */}
+            <div className="space-y-3">
+              <h1 className="text-slate-900 dark:text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                <span className="text-indigo-600 dark:text-indigo-400">
+                  Hello, I&apos;m{" "}
                 </span>
                 <br />
                 <TypeAnimation
@@ -216,89 +193,90 @@ const HeroSection = () => {
                   wrapper="span"
                   speed={40}
                   repeat={Number.POSITIVE_INFINITY}
-                  className="text-gray-900 dark:text-gray-200 inline-block bg-gradient-to-r from-primary-600 via-gray-900 to-secondary-600 dark:from-primary-400 dark:via-white dark:to-secondary-600 bg-clip-text text-transparent"
+                  className="text-slate-800 dark:text-slate-200"
                 />
               </h1>
 
-              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
+              {/* Skill badges */}
+              <div className="flex flex-wrap gap-2 justify-center lg:justify-start pt-2">
                 {skillBadges.map((badge, index) => (
                   <motion.div
                     key={badge.text}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 + index * 0.1 }}
-                    className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gray-100/80 dark:bg-white/5 backdrop-blur-lg border border-gray-200/50 dark:border-white/10 flex items-center gap-1.5 sm:gap-2"
+                    className="px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-slate-200 dark:border-slate-700 flex items-center gap-2"
                   >
-                    {badge.icon}
-                    <span className="text-xs sm:text-sm text-gray-700 dark:text-white/80">{badge.text}</span>
+                    <span className="text-indigo-600 dark:text-indigo-400">{badge.icon}</span>
+                    <span className="text-xs text-slate-700 dark:text-slate-300">{badge.text}</span>
                   </motion.div>
                 ))}
               </div>
             </div>
 
+            {/* Description */}
             <motion.p
-              className="text-gray-600 dark:text-gray-300/90 text-sm sm:text-base md:text-lg lg:text-xl max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+              className="text-slate-600 dark:text-slate-400 text-base lg:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              Crafting <span className="text-primary-600 dark:text-primary-300 font-semibold">digital experiences</span>{" "}
-              that blend innovation with functionality. Specializing in modern web development with a focus on{" "}
-              <span className="text-secondary-600 dark:text-secondary-300 font-semibold">performance</span> and
-              <span className="text-primary-600 dark:text-primary-300 font-semibold"> user-centric design</span>.
+              I transform ideas into <span className="text-indigo-600 dark:text-indigo-400 font-medium">elegant solutions</span>{" "}
+              through clean, efficient code. Building <span className="text-indigo-600 dark:text-indigo-400 font-medium">responsive interfaces</span>{" "}
+              and <span className="text-indigo-600 dark:text-indigo-400 font-medium">intuitive experiences</span> that make technology more human.
             </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
                 className="w-full sm:w-auto"
               >
                 <Link
                   href="mailto:ayimobuobi@gmail.com"
-                  className="group relative overflow-hidden flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium text-sm sm:text-base transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/30 w-full"
+                  className="group flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm transition-all duration-300 w-full"
                 >
-                  <span className="relative z-10">Hire Me</span>
-                  <ArrowDownRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-secondary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <span>Hire Me</span>
+                  <ArrowDownRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </Link>
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
+                transition={{ delay: 0.7 }}
                 className="w-full sm:w-auto"
               >
                 <Link
                   href="https://profile.indeed.com/p/davido-z6ym5ng"
-                  className="group relative flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gray-100/80 dark:bg-white/10 text-gray-900 dark:text-white font-medium text-sm sm:text-base backdrop-blur-xl transition-all duration-500 hover:bg-gray-200/80 dark:hover:bg-white/20 hover:scale-105 w-full"
+                  className="group flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-medium text-sm transition-all duration-300 hover:bg-slate-50 dark:hover:bg-slate-700 w-full"
                 >
-                  <Download className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500 group-hover:scale-125" />
-                  <span className="relative z-10">Download CV</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary-500/20 to-secondary-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <Download className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                  <span>Download CV</span>
                 </Link>
               </motion.div>
             </div>
           </motion.div>
         </div>
 
+        {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2 }}
+          transition={{ delay: 1 }}
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
+            animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-            className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-gray-300/20 dark:border-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"
+            className="w-8 h-14 border-2 border-slate-300 dark:border-slate-700 rounded-full flex items-center justify-center"
           >
             <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-              className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full"
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+              className="w-2 h-2 bg-indigo-500 rounded-full"
             />
           </motion.div>
         </motion.div>

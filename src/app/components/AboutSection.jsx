@@ -18,35 +18,109 @@ const TAB_DATA = [
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4"
       >
         {[
-          { icon: <FaHtml5 className="text-2xl sm:text-3xl text-orange-400" />, name: "HTML", level: 90 },
-          { icon: <SiNextdotjs className="text-2xl sm:text-3xl" />, name: "Next.js", level: 85 },
-          { icon: <SiTailwindcss className="text-2xl sm:text-3xl text-cyan-400" />, name: "Tailwind", level: 95 },
-          { icon: <FaPython className="text-2xl sm:text-3xl text-amber-300" />, name: "Python", level: 80 },
-          { icon: <FaJsSquare className="text-2xl sm:text-3xl text-yellow-300" />, name: "JavaScript", level: 88 },
-          { icon: <FaReact className="text-2xl sm:text-3xl text-sky-400" />, name: "React", level: 92 },
+          {
+            icon: <FaHtml5 className="text-lg sm:text-xl text-orange-400" />,
+            name: "HTML",
+            level: 90,
+          },
+          {
+            icon: <SiNextdotjs className="text-lg sm:text-xl" />,
+            name: "Next.js",
+            level: 85,
+          },
+          {
+            icon: <SiTailwindcss className="text-lg sm:text-xl text-cyan-400" />,
+            name: "Tailwind",
+            level: 95,
+          },
+          {
+            icon: <FaPython className="text-lg sm:text-xl text-amber-300" />,
+            name: "Python",
+            level: 80,
+          },
+          {
+            icon: <FaJsSquare className="text-lg sm:text-xl text-yellow-300" />,
+            name: "JavaScript",
+            level: 88,
+          },
+          {
+            icon: <FaReact className="text-lg sm:text-xl text-sky-400" />,
+            name: "React",
+            level: 92,
+          },
         ].map((skill, index) => (
           <motion.div
             key={index}
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: index * 0.1 }}
             whileHover={{ y: -4, scale: 1.02 }}
-            className="group relative p-4 sm:p-5 rounded-xl bg-background/50 dark:bg-white/[0.03] backdrop-blur-lg hover:bg-muted/80 dark:hover:bg-white/[0.06] border border-border dark:border-white/10 transition-all duration-300"
+            className="group relative overflow-hidden p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white dark:bg-gray-800/50 backdrop-blur-lg border border-gray-100 dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-300"
           >
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-500/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-            <div className="flex flex-col items-center text-center space-y-3">
-              <div className="transform group-hover:scale-110 transition-transform duration-300">{skill.icon}</div>
-              <span className="font-medium text-base sm:text-lg text-foreground">{skill.name}</span>
-              <div className="w-full bg-muted/50 dark:bg-white/10 rounded-full h-1.5">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1, delay: index * 0.1 }}
-                  className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-orange-400"
-                />
+            {/* Simplified gradient hover overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+            
+            {/* Reduced decorative elements */}
+            <div className="absolute top-0 left-0 w-8 h-8 overflow-hidden">
+              <div className="absolute top-0 left-0 w-8 h-8 bg-gradient-to-br from-cyan-500/15 to-transparent -translate-y-1/2 -translate-x-1/2 rounded-full blur-sm" />
+            </div>
+            
+            <div className="flex flex-col items-center text-center space-y-2 sm:space-y-3">
+              {/* Smaller icon container */}
+              <motion.div 
+                whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
+                transition={{ duration: 0.4 }}
+                className="relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-50 dark:bg-gray-700/50 shadow-sm group-hover:shadow-md transition-all duration-300"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-orange-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="transform group-hover:scale-105 transition-transform duration-300">
+                  {skill.icon}
+                </div>
+              </motion.div>
+              
+              {/* Smaller skill name */}
+              <h3 className="font-semibold text-sm sm:text-base text-gray-800 dark:text-gray-100 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors duration-300 leading-tight">
+                {skill.name}
+              </h3>
+              
+              {/* Compact progress bar */}
+              <div className="w-full space-y-1 sm:space-y-1.5">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">Level</span>
+                  <span className="text-xs font-medium text-cyan-600 dark:text-cyan-400">{skill.level}%</span>
+                </div>
+                <div className="w-full h-1.5 sm:h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${skill.level}%` }}
+                    transition={{ 
+                      duration: 1, 
+                      delay: index * 0.1,
+                      ease: "easeOut" 
+                    }}
+                    className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-orange-400"
+                  />
+                </div>
+              </div>
+              
+              {/* Smaller decorative dots */}
+              <div className="absolute bottom-2 right-2 flex space-x-0.5">
+                {[...Array(2)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0.2 }}
+                    animate={{ opacity: [0.2, 0.5, 0.2] }}
+                    transition={{ 
+                      duration: 1.5,
+                      delay: i * 0.2,
+                      repeat: Infinity,
+                    }}
+                    className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600"
+                  />
+                ))}
               </div>
             </div>
           </motion.div>

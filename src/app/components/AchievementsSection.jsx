@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
-import { Sparkles } from "lucide-react"
+import { Sparkles, Rocket, Award, Globe, Clock } from "lucide-react"
 import { useTheme } from "next-themes"
 
 const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
@@ -14,27 +14,31 @@ const achievementsList = [
     metric: "Projects",
     value: "45",
     postfix: "+",
-    icon: "🚀",
+    icon: <Rocket className="w-6 h-6 sm:w-8 sm:h-8" />,
     description: "Completed projects across various domains",
+    color: "indigo",
   },
   {
     prefix: "~",
     metric: "LinkedIn Connections",
     value: "500000",
-    icon: "🌐",
+    icon: <Globe className="w-6 h-6 sm:w-8 sm:h-8" />,
     description: "Professional network reach",
+    color: "purple",
   },
   {
     metric: "Awards",
     value: "3",
-    icon: "🏆",
+    icon: <Award className="w-6 h-6 sm:w-8 sm:h-8" />,
     description: "Recognition for excellence",
+    color: "amber",
   },
   {
     metric: "Years",
     value: "2",
-    icon: "⭐",
+    icon: <Clock className="w-6 h-6 sm:w-8 sm:h-8" />,
     description: "Years of dedicated experience",
+    color: "indigo",
   },
 ]
 
@@ -57,7 +61,7 @@ const AchievementsSection = () => {
     animate: {
       y: [0, -10, 0],
       transition: {
-        duration: 2,
+        duration: 3,
         repeat: Infinity,
         repeatType: "reverse",
         ease: "easeInOut",
@@ -88,22 +92,46 @@ const AchievementsSection = () => {
     },
   }
 
+  const getColorClasses = (color, isDarkMode) => {
+    const colorMap = {
+      indigo: {
+        icon: isDarkMode ? "text-indigo-400" : "text-indigo-600",
+        bg: isDarkMode ? "bg-indigo-900/30" : "bg-indigo-100",
+        border: isDarkMode ? "border-indigo-700/30" : "border-indigo-200",
+      },
+      purple: {
+        icon: isDarkMode ? "text-purple-400" : "text-purple-600",
+        bg: isDarkMode ? "bg-purple-900/30" : "bg-purple-100",
+        border: isDarkMode ? "border-purple-700/30" : "border-purple-200",
+      },
+      amber: {
+        icon: isDarkMode ? "text-amber-400" : "text-amber-600",
+        bg: isDarkMode ? "bg-amber-900/30" : "bg-amber-100",
+        border: isDarkMode ? "border-amber-700/30" : "border-amber-200",
+      },
+    }
+    
+    return colorMap[color] || colorMap.indigo
+  }
+
   return (
-    <div
-      className={`rounded-lg py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 relative
+    <section
+      id="achievements"
+      aria-labelledby="achievements-heading"
+      className={`py-4 sm:py-6 lg:py-8 px-3 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 relative
         ${
           isDarkMode
-            ? "bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950"
-            : "bg-gradient-to-br from-indigo-100 via-purple-200 to-indigo-100"
+            ? "bg-gradient-to-br from-slate-900 to-slate-800"
+            : "bg-gradient-to-br from-slate-50 to-indigo-50/50"
         }`}
     >
-      {/* Animated background waves */}
+      {/* Subtle background waves - reduced for mobile */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(3)].map((_, i) => (
           <motion.div
             key={i}
             className={`absolute w-full h-64 ${
-              isDarkMode ? "bg-purple-600/5" : "bg-purple-300/5"
+              isDarkMode ? "bg-indigo-600/3" : "bg-indigo-300/5"
             }`}
             style={{
               top: `${i * 30}%`,
@@ -121,11 +149,12 @@ const AchievementsSection = () => {
 
       <motion.div
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
         variants={containerVariants}
         className="max-w-7xl mx-auto relative z-10"
       >
-        <div className="flex items-center justify-center mb-10 sm:mb-16 relative">
+        <div className="flex items-center justify-center mb-6 sm:mb-8 lg:mb-12 relative">
           <motion.div
             animate={{
               rotate: 360,
@@ -135,141 +164,195 @@ const AchievementsSection = () => {
               rotate: { duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
               scale: { duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
             }}
-            className="absolute opacity-20"
+            className="absolute opacity-10"
           >
-            <Sparkles size={120} className={isDarkMode ? "text-purple-300" : "text-purple-500"} />
+            <Sparkles size={60} className={`sm:w-20 sm:h-20 lg:w-24 lg:h-24 ${isDarkMode ? "text-indigo-300" : "text-indigo-500"}`} />
           </motion.div>
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-2 sm:space-y-3">
             <motion.h2
+              id="achievements-heading"
               variants={itemVariants}
-              className={`text-3xl sm:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent 
-                ${
-                  isDarkMode
-                    ? "bg-gradient-to-r from-purple-300 to-indigo-300"
-                    : "bg-gradient-to-r from-purple-600 to-indigo-700"
-                }`}
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight
+                ${isDarkMode ? "text-white" : "text-slate-800"}`}
             >
-              Milestones & Achievements
+              Milestones & <span className={`${isDarkMode ? "text-indigo-400" : "text-indigo-600"}`}>Achievements</span>
             </motion.h2>
             <motion.p 
               variants={itemVariants}
-              className={`text-sm sm:text-base max-w-2xl mx-auto ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}
+              className={`text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}
             >
               Celebrating the journey of continuous growth and success
             </motion.p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-          {achievementsList.map((achievement, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{
-                scale: 1.05,
-                rotate: [0, -1, 1, -1, 0],
-                transition: { duration: 0.3 },
-              }}
-              className="relative group"
-            >
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {achievementsList.map((achievement, index) => {
+            const colorClasses = getColorClasses(achievement.color, isDarkMode);
+            
+            return (
               <motion.div
-                className={`absolute inset-0 rounded-2xl blur-xl transition-all duration-300 
-                  ${
-                    isDarkMode
-                      ? "bg-gradient-to-r from-purple-500/20 to-indigo-500/20"
-                      : "bg-gradient-to-r from-purple-200/30 to-indigo-300/30"
-                  }`}
-                animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [0.5, 0.8, 0.5],
+                key={index}
+                variants={itemVariants}
+                whileHover={{
+                  scale: 1.05,
+                  y: -8,
+                  transition: { duration: 0.3, ease: "easeOut" },
                 }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  repeatType: "reverse",
+                whileTap={{
+                  scale: 0.98,
+                  transition: { duration: 0.1 }
                 }}
-              />
-              <div
-                className={`relative rounded-2xl p-6 sm:p-8 border backdrop-blur-sm transition-all duration-300
-                  ${
-                    isDarkMode
-                      ? "bg-gray-900/80 border-purple-500/10 text-white"
-                      : "bg-white border-gray-200 text-gray-900"
-                  } 
-                  group-hover:border-purple-500/20`}
+                className="relative group cursor-pointer"
               >
-                <div className="flex flex-col items-center space-y-4">
-                  <motion.div
-                    className="relative"
-                    whileHover={{ 
-                      scale: 1.2,
-                      rotate: [0, -10, 10, -10, 0],
-                    }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <span className="text-4xl sm:text-5xl relative z-10">{achievement.icon}</span>
+                {/* Animated background glow */}
+                <motion.div
+                  className={`absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 ${
+                    achievement.color === 'indigo' ? 'bg-indigo-500/40' :
+                    achievement.color === 'purple' ? 'bg-purple-500/40' :
+                    achievement.color === 'amber' ? 'bg-amber-500/40' : 'bg-indigo-500/40'
+                  }`}
+                  animate={{
+                    scale: [1, 1.02, 1],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                  }}
+                />
+
+                {/* Card content */}
+                <div
+                  className={`relative rounded-2xl p-6 sm:p-7 lg:p-8 border-2 backdrop-blur-sm transition-all duration-300 h-full
+                    ${
+                      isDarkMode
+                        ? "bg-gradient-to-br from-slate-800/90 to-slate-900/90 border-slate-700/50 text-white shadow-xl shadow-black/20"
+                        : "bg-gradient-to-br from-white/95 to-gray-50/95 border-gray-200/50 text-slate-900 shadow-xl shadow-gray-200/50"
+                    } 
+                    group-hover:border-opacity-80 group-hover:shadow-2xl
+                    ${achievement.color === 'indigo' ? 'group-hover:border-indigo-500/50' :
+                      achievement.color === 'purple' ? 'group-hover:border-purple-500/50' :
+                      achievement.color === 'amber' ? 'group-hover:border-amber-500/50' : 'group-hover:border-indigo-500/50'
+                    }`}
+                >
+                  {/* Icon section */}
+                  <div className="flex justify-center mb-6">
                     <motion.div 
-                      className="absolute inset-0 blur-xl rounded-full"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.5, 0.8, 0.5],
+                      className={`relative flex items-center justify-center w-16 h-16 sm:w-18 sm:h-18 rounded-full ${colorClasses.bg} ${colorClasses.border} border-2 shadow-lg`}
+                      whileHover={{ 
+                        rotate: [0, -10, 10, -10, 0],
+                        scale: 1.1,
+                        transition: { duration: 0.5 }
                       }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    />
-                  </motion.div>
+                    >
+                      <motion.span 
+                        className={colorClasses.icon}
+                        initial={{ scale: 1 }}
+                        whileHover={{ scale: 1.2 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {achievement.icon}
+                      </motion.span>
+                      
+                      {/* Floating particles effect */}
+                      <motion.div
+                        className={`absolute inset-0 rounded-full ${
+                          achievement.color === 'indigo' ? 'bg-indigo-500/20' :
+                          achievement.color === 'purple' ? 'bg-purple-500/20' :
+                          achievement.color === 'amber' ? 'bg-amber-500/20' : 'bg-indigo-500/20'
+                        }`}
+                        animate={{
+                          scale: [1, 1.3, 1],
+                          opacity: [0, 0.3, 0],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                        }}
+                      />
+                    </motion.div>
+                  </div>
 
-                  <h3 className="flex flex-row items-center justify-center gap-1 text-3xl sm:text-4xl font-bold">
-                    {achievement.prefix && (
-                      <span className={isDarkMode ? "text-purple-300" : "text-purple-500"}>{achievement.prefix}</span>
-                    )}
-                    <AnimatedNumbers
-                      includeComma
-                      animateToNumber={Number.parseInt(achievement.value.replace(/,/g, ""))}
-                      locale="en-US"
-                      className={`bg-clip-text text-transparent ${
-                        isDarkMode
-                          ? "bg-gradient-to-r from-purple-300 to-indigo-300"
-                          : "bg-gradient-to-r from-purple-500 to-indigo-700"
-                      }`}
-                      configs={(_, index) => ({
-                        mass: 1,
-                        friction: 100,
-                        tensions: 140 * (index + 1),
-                      })}
-                    />
-                    {achievement.postfix && (
-                      <span className={isDarkMode ? "text-purple-300" : "text-purple-500"}>
-                        {achievement.postfix}
-                      </span>
-                    )}
-                  </h3>
-
-                  <div className="space-y-2 text-center">
-                    <p className={`text-base sm:text-lg font-medium ${isDarkMode ? "text-purple-300" : "text-purple-500"}`}>
+                  {/* Number and metric */}
+                  <div className="text-center space-y-3 mb-6">
+                    <motion.h3 
+                      className="flex flex-row items-center justify-center text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight" 
+                      aria-label={`${achievement.value} ${achievement.metric}`}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {achievement.prefix && (
+                        <span className={`mr-1 ${achievement.color === 'indigo' ? (isDarkMode ? 'text-indigo-400' : 'text-indigo-600') :
+                          achievement.color === 'purple' ? (isDarkMode ? 'text-purple-400' : 'text-purple-600') :
+                          achievement.color === 'amber' ? (isDarkMode ? 'text-amber-400' : 'text-amber-600') :
+                          (isDarkMode ? 'text-indigo-400' : 'text-indigo-600')}`}>
+                          {achievement.prefix}
+                        </span>
+                      )}
+                      <AnimatedNumbers
+                        includeComma
+                        animateToNumber={Number.parseInt(achievement.value.replace(/,/g, ""))}
+                        locale="en-US"
+                        className={isDarkMode ? "text-white" : "text-slate-800"}
+                        configs={(_, index) => ({
+                          mass: 1,
+                          friction: 100,
+                          tensions: 140 * (index + 1),
+                        })}
+                      />
+                      {achievement.postfix && (
+                        <span className={`ml-1 ${achievement.color === 'indigo' ? (isDarkMode ? 'text-indigo-400' : 'text-indigo-600') :
+                          achievement.color === 'purple' ? (isDarkMode ? 'text-purple-400' : 'text-purple-600') :
+                          achievement.color === 'amber' ? (isDarkMode ? 'text-amber-400' : 'text-amber-600') :
+                          (isDarkMode ? 'text-indigo-400' : 'text-indigo-600')}`}>
+                          {achievement.postfix}
+                        </span>
+                      )}
+                    </motion.h3>
+                    
+                    <p className={`text-lg sm:text-xl font-semibold tracking-wide ${
+                      achievement.color === 'indigo' ? (isDarkMode ? 'text-indigo-300' : 'text-indigo-700') :
+                      achievement.color === 'purple' ? (isDarkMode ? 'text-purple-300' : 'text-purple-700') :
+                      achievement.color === 'amber' ? (isDarkMode ? 'text-amber-300' : 'text-amber-700') :
+                      (isDarkMode ? 'text-indigo-300' : 'text-indigo-700')
+                    }`}>
                       {achievement.metric}
                     </p>
-                    <p
-                      className={`text-xs sm:text-sm transition-all duration-300 max-h-0 group-hover:max-h-20 overflow-hidden 
-                        ${
-                          isDarkMode
-                            ? "text-gray-400 opacity-0 group-hover:opacity-100"
-                            : "text-gray-600 opacity-0 group-hover:opacity-100"
-                        }`}
-                    >
+                  </div>
+
+                  {/* Description */}
+                  <div className="text-center">
+                    <p className={`text-sm sm:text-base leading-relaxed ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
                       {achievement.description}
                     </p>
                   </div>
+
+                  {/* Bottom accent line */}
+                  <motion.div
+                    className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 rounded-full transition-all duration-300 ${
+                      achievement.color === 'indigo' ? 'bg-indigo-500' :
+                      achievement.color === 'purple' ? 'bg-purple-500' :
+                      achievement.color === 'amber' ? 'bg-amber-500' : 'bg-indigo-500'
+                    }`}
+                    initial={{ width: '20%' }}
+                    whileHover={{ width: '80%' }}
+                    transition={{ duration: 0.3 }}
+                  />
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </motion.div>
-    </div>
+    </section>
   )
 }
 

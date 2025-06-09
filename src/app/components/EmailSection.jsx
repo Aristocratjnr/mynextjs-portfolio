@@ -165,21 +165,21 @@ const EmailSection = () => {
           >
             <motion.span 
               variants={fadeInUpVariant}
-              className="inline-block text-sm sm:text-base bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-700 dark:text-purple-400 py-2 px-4 rounded-full"
+              className="inline-block text-sm sm:text-base font-semibold bg-gradient-to-r from-purple-500/20 to-indigo-500/20 text-purple-600 dark:text-purple-400 py-2 px-4 rounded-full tracking-wider"
             >
               Let&apos;s Talk
             </motion.span>
             
             <motion.h2 
               variants={fadeInUpVariant}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white"
+              className="text-4xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400"
             >
               Get in Touch
             </motion.h2>
             
             <motion.p 
               variants={fadeInUpVariant}
-              className="text-gray-700 dark:text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl"
+              className="text-gray-700 dark:text-gray-400 text-base sm:text-lg lg:text-xl leading-loose max-w-2xl"
             >
               I&apos;m currently looking for new opportunities in tech industries. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you! 🧸🎈
             </motion.p>
@@ -330,7 +330,7 @@ const EmailSection = () => {
                     variants={formFieldVariant}
                     custom={index}
                   >
-                    <label htmlFor={field.type} className="flex gap-2 text-gray-900 dark:text-white text-sm font-medium mb-2">
+                    <label htmlFor={field.type} className="flex gap-2 text-gray-700 dark:text-gray-200 text-sm font-semibold mb-2">
                       <field.icon className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                       {field.label}
                     </label>
@@ -349,7 +349,7 @@ const EmailSection = () => {
 
                 {/* Message textarea */}
                 <motion.div variants={formFieldVariant}>
-                  <label htmlFor="message" className="flex gap-2 text-gray-900 dark:text-white text-sm font-medium mb-2">
+                  <label htmlFor="message" className="flex gap-2 text-gray-700 dark:text-gray-200 text-sm font-semibold mb-2">
                     <MessageSquare className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                     Message
                   </label>
@@ -370,7 +370,7 @@ const EmailSection = () => {
                   type="submit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full py-3 rounded-lg bg-purple-600 dark:bg-indigo-500 text-white font-medium transition-all duration-300 hover:shadow-lg"
+                  className="w-full py-3 rounded-lg bg-purple-600 dark:bg-indigo-500 text-white font-semibold text-base transition-all duration-300 hover:shadow-lg"
                 >
                   Send Message <Send className="w-4 h-4 inline ml-2" />
                 </motion.button>

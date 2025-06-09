@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Clock, ChevronRight, BookOpen, Code2, TrendingUp, Palette, FileCode, Briefcase, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
-import Link from 'next/link'; // Import the Link component
+import Link from 'next/link';
 
 const articles = [
   // Development Articles
@@ -120,19 +120,22 @@ const articles = [
 ];
 
 const categories = [
-  { id: "All", icon: <BookOpen className="w-4 h-4" />, color: "from-blue-500 to-indigo-500" },
-  { id: "Development", icon: <Code2 className="w-4 h-4" />, color: "from-emerald-500 to-teal-500" },
-  { id: "Tech Trends", icon: <TrendingUp className="w-4 h-4" />, color: "from-violet-500 to-purple-500" },
-  { id: "CSS", icon: <Palette className="w-4 h-4" />, color: "from-pink-500 to-rose-500" },
-  { id: "JavaScript", icon: <FileCode className="w-4 h-4" />, color: "from-amber-500 to-orange-500" },
-  { id: "Career", icon: <Briefcase className="w-4 h-4" />, color: "from-cyan-500 to-sky-500" },
+  { id: "All", icon: <BookOpen className="w-4 h-4" />, color: "indigo" },
+  { id: "Development", icon: <Code2 className="w-4 h-4" />, color: "indigo" },
+  { id: "Tech Trends", icon: <TrendingUp className="w-4 h-4" />, color: "purple" },
+  { id: "CSS", icon: <Palette className="w-4 h-4" />, color: "purple" },
+  { id: "JavaScript", icon: <FileCode className="w-4 h-4" />, color: "amber" },
+  { id: "Career", icon: <Briefcase className="w-4 h-4" />, color: "indigo" },
 ];
 
 const BlogSection = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [hoveredArticle, setHoveredArticle] = useState(null);
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+  
+  const currentTheme = theme === "system" ? systemTheme : theme;
+  const isDarkMode = currentTheme === "dark";
 
   const filteredArticles = articles.filter(article => {
     const matchesCategory = selectedCategory === "All" || article.category === selectedCategory;
@@ -144,40 +147,85 @@ const BlogSection = () => {
 
   const getCategoryColor = (categoryId) => {
     const category = categories.find(c => c.id === categoryId);
-    return category ? category.color : "from-blue-500 to-indigo-500";
+    return category ? category.color : "indigo";
+  };
+
+  const getColorClasses = (color, isDarkMode) => {
+    const colorMap = {
+      indigo: {
+        bg: isDarkMode ? "bg-indigo-900/30" : "bg-indigo-100",
+        text: isDarkMode ? "text-indigo-300" : "text-indigo-700",
+        border: isDarkMode ? "border-indigo-700/30" : "border-indigo-200",
+        hover: isDarkMode ? "hover:bg-indigo-800/40" : "hover:bg-indigo-200",
+        active: isDarkMode ? "bg-indigo-800/60" : "bg-indigo-300",
+        icon: isDarkMode ? "text-indigo-400" : "text-indigo-600",
+      },
+      purple: {
+        bg: isDarkMode ? "bg-purple-900/30" : "bg-purple-100",
+        text: isDarkMode ? "text-purple-300" : "text-purple-700",
+        border: isDarkMode ? "border-purple-700/30" : "border-purple-200",
+        hover: isDarkMode ? "hover:bg-purple-800/40" : "hover:bg-purple-200",
+        active: isDarkMode ? "bg-purple-800/60" : "bg-purple-300",
+        icon: isDarkMode ? "text-purple-400" : "text-purple-600",
+      },
+      amber: {
+        bg: isDarkMode ? "bg-amber-900/30" : "bg-amber-100",
+        text: isDarkMode ? "text-amber-300" : "text-amber-700",
+        border: isDarkMode ? "border-amber-700/30" : "border-amber-200",
+        hover: isDarkMode ? "hover:bg-amber-800/40" : "hover:bg-amber-200",
+        active: isDarkMode ? "bg-amber-800/60" : "bg-amber-300",
+        icon: isDarkMode ? "text-amber-400" : "text-amber-600",
+      },
+    };
+    
+    return colorMap[color] || colorMap.indigo;
+  };
+
+  const waveVariants = {
+    animate: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        repeatType: "reverse",
+        ease: "easeInOut",
+      },
+    },
   };
 
   return (
-    <div className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          animate={{ 
-            rotate: 360,
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ 
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 rounded-full blur-[120px]"
-        />
-        <motion.div
-          animate={{ 
-            rotate: -360,
-            scale: [1, 1.3, 1],
-          }}
-          transition={{ 
-            duration: 35,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full blur-[120px]"
-        />
+    <section 
+      className={`py-16 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 relative
+        ${
+          isDarkMode
+            ? "bg-gradient-to-br from-slate-900 to-slate-800"
+            : "bg-gradient-to-br from-slate-50 to-indigo-50/50"
+        }`}
+      id="blog"
+    >
+      {/* Background waves similar to AchievementsSection */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(3)].map((_, i) => (
+          <motion.div
+            key={i}
+            className={`absolute w-full h-64 ${
+              isDarkMode ? "bg-indigo-600/3" : "bg-indigo-300/5"
+            }`}
+            style={{
+              top: `${i * 30}%`,
+              left: 0,
+              right: 0,
+              maskImage: "linear-gradient(to bottom, transparent, black, transparent)",
+              WebkitMaskImage: "linear-gradient(to bottom, transparent, black, transparent)",
+            }}
+            variants={waveVariants}
+            animate="animate"
+            custom={i}
+          />
+        ))}
       </div>
 
-      <div className="max-w-7xl mx-auto relative">
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">
           <motion.div
@@ -186,19 +234,17 @@ const BlogSection = () => {
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-blue-400">
-                Tech Insights
-              </span>
+            <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold ${isDarkMode ? "text-white" : "text-slate-800"}`}>
+              <span className={isDarkMode ? "text-indigo-400" : "text-indigo-600"}>Tech</span> Insights
             </h2>
-            <p className="text-muted-foreground text-lg sm:text-xl max-w-2xl mx-auto">
+            <p className={`text-base sm:text-lg max-w-2xl mx-auto ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
               Exploring the latest in web development, design patterns, and technology trends
             </p>
           </motion.div>
         </div>
 
         {/* Search and Filter */}
-        <div className="mb-12 sm:mb-16 space-y-6 sm:space-y-8">
+        <div className="mb-10 sm:mb-14 space-y-6">
           {/* Search Bar */}
           <div className="relative max-w-lg mx-auto">
             <motion.div
@@ -207,19 +253,17 @@ const BlogSection = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+              <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${isDarkMode ? "text-slate-400" : "text-slate-500"}`} />
               <input
                 type="text"
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-muted/50 dark:bg-white/5 backdrop-blur-xl border border-border
-                  focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50
-                  text-foreground placeholder-muted-foreground transition-all duration-300 rounded-2xl"
-              />
-              <motion.div
-                className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-violet-500/20 to-blue-500/20 opacity-0 transition-opacity duration-300 blur-xl"
-                animate={{ opacity: searchQuery ? 0.5 : 0 }}
+                className={`w-full pl-12 pr-4 py-3 rounded-lg border focus:ring-2 focus:outline-none transition-all duration-300
+                  ${isDarkMode 
+                    ? "bg-slate-800/70 border-slate-700 text-white placeholder-slate-500 focus:border-indigo-500/50 focus:ring-indigo-500/20" 
+                    : "bg-white border-slate-200 text-slate-800 placeholder-slate-400 focus:border-indigo-500/50 focus:ring-indigo-500/20"
+                  }`}
               />
             </motion.div>
           </div>
@@ -231,25 +275,30 @@ const BlogSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-wrap justify-center gap-3"
           >
-            {categories.map(({ id, icon, color }) => (
-              <motion.button
-                key={id}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedCategory(id)}
-                className={`
-                  px-4 py-2.5 rounded-xl text-sm font-medium
-                  flex items-center gap-2 transition-all duration-300
-                  ${selectedCategory === id
-                    ? `bg-gradient-to-r ${color} text-white shadow-lg shadow-violet-500/25`
-                    : 'bg-muted/50 dark:bg-white/5 hover:bg-muted dark:hover:bg-white/10 backdrop-blur-lg text-foreground'
-                  }
-                `}
-              >
-                {icon}
-                {id}
-              </motion.button>
-            ))}
+            {categories.map(({ id, icon, color }) => {
+              const colorClasses = getColorClasses(color, isDarkMode);
+              const isSelected = selectedCategory === id;
+              
+              return (
+                <motion.button
+                  key={id}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedCategory(id)}
+                  className={`
+                    px-4 py-2 rounded-lg text-sm font-medium
+                    flex items-center gap-2 transition-all duration-300 border
+                    ${isSelected 
+                      ? `${colorClasses.active} ${colorClasses.text} ${colorClasses.border} shadow-sm` 
+                      : `${colorClasses.bg} ${colorClasses.text} ${colorClasses.border} ${colorClasses.hover}`
+                    }
+                  `}
+                >
+                  <span className={colorClasses.icon}>{icon}</span>
+                  {id}
+                </motion.button>
+              );
+            })}
           </motion.div>
         </div>
 
@@ -259,116 +308,147 @@ const BlogSection = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {filteredArticles.map((article, index) => (
-              <Link href={article.link} key={article.title} passHref> {/* Add Link here */}
-                <motion.article
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="group relative bg-card/50 dark:bg-white/[0.02] backdrop-blur-xl rounded-2xl overflow-hidden
-                    border border-border hover:border-primary/20
-                    transition-all duration-500 hover:shadow-2xl hover:shadow-violet-500/10"
-                >
-                  {/* Image Container */}
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    <Image
-                      src={article.imageUrl}
-                      alt={article.title}
-                      width={800}
-                      height={450}
-                      className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6 space-y-4">
-                    {/* Meta Info */}
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                      <span className="flex items-center gap-1.5">
-                        <Calendar className="w-4 h-4" />
-                        {new Date(article.date).toLocaleDateString('en-US', { 
-                          month: 'short',
-                          day: 'numeric',
-                          year: 'numeric'
-                        })}
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <Clock className="w-4 h-4" />
-                        {article.readTime}
-                      </span>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-foreground">
-                      {article.title}
-                    </h3>
-
-                    {/* Excerpt */}
-                    <p className="text-muted-foreground line-clamp-2">
-                      {article.excerpt}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {article.tags.map(tag => (
-                        <span
-                          key={tag}
-                          className="px-2.5 py-1 text-xs font-medium rounded-lg
-                            bg-muted/50 dark:bg-white/5 text-foreground border border-border
-                            hover:bg-muted dark:hover:bg-white/10 transition-colors duration-300"
-                        >
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Read More Button */}
-                    <motion.button 
-                      whileHover={{ x: 5 }}
-                      className="flex items-center gap-2 text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors duration-300"
-                    >
-                      Read Article
-                      <ChevronRight className="w-4 h-4" />
-                    </motion.button>
-                  </div>
-
-                  {/* Hover Overlay */}
+            {filteredArticles.length > 0 ? (
+              filteredArticles.map((article, index) => {
+                const categoryColor = getCategoryColor(article.category);
+                const colorClasses = getColorClasses(categoryColor, isDarkMode);
+                
+                return (
                   <motion.div
-                    initial={false}
-                    animate={{ opacity: hoveredArticle === article.title ? 1 : 0 }}
-                    className="absolute inset-0 bg-gradient-to-t from-violet-950/50 via-transparent to-transparent pointer-events-none"
-                  />
-                </motion.article>
-              </Link>
-            ))}
+                    key={article.title}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                  >
+                    <Link href={article.link} passHref>
+                      <motion.article
+                        onMouseEnter={() => setHoveredArticle(article.title)}
+                        onMouseLeave={() => setHoveredArticle(null)}
+                        whileHover={{ y: -5 }}
+                        className={`group h-full flex flex-col rounded-xl overflow-hidden border transition-all duration-300 shadow-sm hover:shadow-md
+                          ${isDarkMode 
+                            ? "bg-slate-800/70 border-slate-700 hover:border-indigo-500/30" 
+                            : "bg-white border-slate-200 hover:border-indigo-500/30"
+                          }
+                        `}
+                      >
+                        {/* Image Container */}
+                        <div className="relative aspect-video overflow-hidden">
+                          <Image
+                            src={article.imageUrl}
+                            alt={article.title}
+                            width={800}
+                            height={450}
+                            className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700"
+                          />
+                          
+                          {/* Category Badge */}
+                          <div className="absolute top-3 right-3">
+                            <span className={`px-2.5 py-1 text-xs font-medium rounded-md ${colorClasses.bg} ${colorClasses.text} ${colorClasses.border}`}>
+                              {article.category}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Content */}
+                        <div className="flex flex-col flex-grow p-5 space-y-4">
+                          {/* Meta Info */}
+                          <div className={`flex items-center gap-4 text-xs ${isDarkMode ? "text-slate-400" : "text-slate-500"}`}>
+                            <span className="flex items-center gap-1.5">
+                              <Calendar className="w-3.5 h-3.5" />
+                              {new Date(article.date).toLocaleDateString('en-US', { 
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric'
+                              })}
+                            </span>
+                            <span className="flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5" />
+                              {article.readTime}
+                            </span>
+                          </div>
+
+                          {/* Title */}
+                          <h3 className={`text-xl font-bold group-hover:text-indigo-500 transition-colors duration-300 ${isDarkMode ? "text-white" : "text-slate-800"}`}>
+                            {article.title}
+                          </h3>
+
+                          {/* Excerpt */}
+                          <p className={`text-sm flex-grow ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+                            {article.excerpt}
+                          </p>
+
+                          {/* Tags */}
+                          <div className="flex flex-wrap gap-2 pt-2">
+                            {article.tags.map(tag => (
+                              <span
+                                key={tag}
+                                className={`px-2 py-0.5 text-xs font-medium rounded-md
+                                  ${isDarkMode 
+                                    ? "bg-slate-700/70 text-slate-300 border border-slate-600" 
+                                    : "bg-slate-100 text-slate-700 border border-slate-200"
+                                  }
+                                `}
+                              >
+                                #{tag}
+                              </span>
+                            ))}
+                          </div>
+
+                          {/* Read More Button */}
+                          <div className={`pt-2 flex items-center gap-1 text-sm font-medium ${colorClasses.icon} group-hover:translate-x-1 transition-transform duration-300`}>
+                            Read Article
+                            <ChevronRight className="w-4 h-4" />
+                          </div>
+                        </div>
+                      </motion.article>
+                    </Link>
+                  </motion.div>
+                );
+              })
+            ) : (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="col-span-1 sm:col-span-2 lg:col-span-3 text-center py-16"
+              >
+                <p className={`text-lg ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+                  No articles found matching your search criteria.
+                </p>
+              </motion.div>
+            )}
           </AnimatePresence>
         </motion.div>
 
         {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-12 sm:mt-16 text-center"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-6 py-3 
-              bg-gradient-to-r from-violet-500 to-blue-500 
-              hover:from-violet-600 hover:to-blue-600
-              text-white rounded-xl font-medium
-              shadow-lg shadow-violet-500/25 transition-all duration-300"
+        {filteredArticles.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-12 sm:mt-16 text-center"
           >
-            <BookOpen className="w-5 h-5" />
-            Browse All Articles
-          </motion.button>
-        </motion.div>
+            <Link href="/blog" passHref>
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300
+                  ${isDarkMode 
+                    ? "bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-900/20" 
+                    : "bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/20"
+                  }
+                `}
+              >
+                <BookOpen className="w-4 h-4" />
+                Browse All Articles
+              </motion.button>
+            </Link>
+          </motion.div>
+        )}
       </div>
-    </div>
+    </section>
   );
 };
 
