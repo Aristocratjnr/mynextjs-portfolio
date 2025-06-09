@@ -106,23 +106,6 @@ const TAB_DATA = [
                   />
                 </div>
               </div>
-              
-              {/* Smaller decorative dots */}
-              <div className="absolute bottom-2 right-2 flex space-x-0.5">
-                {[...Array(2)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0.2 }}
-                    animate={{ opacity: [0.2, 0.5, 0.2] }}
-                    transition={{ 
-                      duration: 1.5,
-                      delay: i * 0.2,
-                      repeat: Infinity,
-                    }}
-                    className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600"
-                  />
-                ))}
-              </div>
             </div>
           </motion.div>
         ))}
