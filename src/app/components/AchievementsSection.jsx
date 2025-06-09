@@ -118,7 +118,7 @@ const AchievementsSection = () => {
     <section
       id="achievements"
       aria-labelledby="achievements-heading"
-      className={`rounded-xl py-8 sm:py-12 lg:py-20 px-3 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 relative
+      className={`py-4 sm:py-6 lg:py-8 px-3 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 relative
         ${
           isDarkMode
             ? "bg-gradient-to-br from-slate-900 to-slate-800"
@@ -154,7 +154,7 @@ const AchievementsSection = () => {
         variants={containerVariants}
         className="max-w-7xl mx-auto relative z-10"
       >
-        <div className="flex items-center justify-center mb-6 sm:mb-10 lg:mb-16 relative">
+        <div className="flex items-center justify-center mb-6 sm:mb-8 lg:mb-12 relative">
           <motion.div
             animate={{
               rotate: 360,
@@ -166,20 +166,20 @@ const AchievementsSection = () => {
             }}
             className="absolute opacity-10"
           >
-            <Sparkles size={80} className={`sm:text-[100px] lg:text-[120px] ${isDarkMode ? "text-indigo-300" : "text-indigo-500"}`} />
+            <Sparkles size={60} className={`sm:w-20 sm:h-20 lg:w-24 lg:h-24 ${isDarkMode ? "text-indigo-300" : "text-indigo-500"}`} />
           </motion.div>
-          <div className="text-center space-y-1 sm:space-y-2">
+          <div className="text-center space-y-2 sm:space-y-3">
             <motion.h2
               id="achievements-heading"
               variants={itemVariants}
-              className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold 
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight
                 ${isDarkMode ? "text-white" : "text-slate-800"}`}
             >
               Milestones & <span className={`${isDarkMode ? "text-indigo-400" : "text-indigo-600"}`}>Achievements</span>
             </motion.h2>
             <motion.p 
               variants={itemVariants}
-              className={`text-xs sm:text-sm md:text-base max-w-2xl mx-auto ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}
+              className={`text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}
             >
               Celebrating the journey of continuous growth and success
             </motion.p>
@@ -187,7 +187,7 @@ const AchievementsSection = () => {
         </div>
 
         <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -222,21 +222,21 @@ const AchievementsSection = () => {
                   }}
                 />
                 <div
-                  className={`relative rounded-2xl p-4 sm:p-6 lg:p-8 border backdrop-blur-sm transition-all duration-300
+                  className={`relative rounded-2xl p-5 sm:p-6 lg:p-7 border backdrop-blur-sm transition-all duration-300
                     ${
                       isDarkMode
                         ? "bg-slate-800/70 border-slate-700 text-white shadow-lg shadow-black/10"
                         : "bg-white/90 border-slate-200 text-slate-900 shadow-lg shadow-indigo-200/30"
                     } 
-                    group-hover:border-indigo-500/30 h-full flex flex-col`}
+                    group-hover:border-indigo-500/30 h-full flex flex-col justify-between`}
                 >
-                  <div className="flex flex-col items-center text-center space-y-4 sm:space-y-6">
-                    <div className={`flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full mb-1 ${colorClasses.bg} ${colorClasses.border} border`}>
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <div className={`flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full ${colorClasses.bg} ${colorClasses.border} border`}>
                       <span className={colorClasses.icon}>{achievement.icon}</span>
                     </div>
 
-                    <div className="space-y-1">
-                      <h3 className="flex flex-row items-center justify-center text-xl sm:text-2xl md:text-3xl font-bold" aria-label={`${achievement.value} ${achievement.metric}`}>
+                    <div className="space-y-2">
+                      <h3 className="flex flex-row items-center justify-center text-2xl sm:text-3xl md:text-4xl font-bold" aria-label={`${achievement.value} ${achievement.metric}`}>
                         {achievement.prefix && (
                           <span className={isDarkMode ? "text-indigo-300" : "text-indigo-600"}>{achievement.prefix}</span>
                         )}
@@ -258,16 +258,16 @@ const AchievementsSection = () => {
                         )}
                       </h3>
                       
-                      <p className={`text-sm sm:text-base md:text-lg font-medium ${isDarkMode ? "text-indigo-300" : "text-indigo-700"}`}>
+                      <p className={`text-base sm:text-lg font-semibold ${isDarkMode ? "text-indigo-300" : "text-indigo-700"}`}>
                         {achievement.metric}
                       </p>
                     </div>
+                  </div>
 
-                    <div className="space-y-3 flex-grow">
-                      <p className={`text-xs sm:text-sm ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
-                        {achievement.description}
-                      </p>
-                    </div>
+                  <div className="mt-4">
+                    <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-600"} text-center leading-relaxed`}>
+                      {achievement.description}
+                    </p>
                   </div>
                 </div>
               </motion.div>
