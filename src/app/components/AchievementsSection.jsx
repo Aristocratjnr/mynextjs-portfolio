@@ -14,7 +14,7 @@ const achievementsList = [
     metric: "Projects",
     value: "45",
     postfix: "+",
-    icon: <Rocket className="w-8 h-8" />,
+    icon: <Rocket className="w-6 h-6 sm:w-8 sm:h-8" />,
     description: "Completed projects across various domains",
     color: "indigo",
   },
@@ -22,21 +22,21 @@ const achievementsList = [
     prefix: "~",
     metric: "LinkedIn Connections",
     value: "500000",
-    icon: <Globe className="w-8 h-8" />,
+    icon: <Globe className="w-6 h-6 sm:w-8 sm:h-8" />,
     description: "Professional network reach",
     color: "purple",
   },
   {
     metric: "Awards",
     value: "3",
-    icon: <Award className="w-8 h-8" />,
+    icon: <Award className="w-6 h-6 sm:w-8 sm:h-8" />,
     description: "Recognition for excellence",
     color: "amber",
   },
   {
     metric: "Years",
     value: "2",
-    icon: <Clock className="w-8 h-8" />,
+    icon: <Clock className="w-6 h-6 sm:w-8 sm:h-8" />,
     description: "Years of dedicated experience",
     color: "indigo",
   },
@@ -118,14 +118,14 @@ const AchievementsSection = () => {
     <section
       id="achievements"
       aria-labelledby="achievements-heading"
-      className={`rounded-xl py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 relative
+      className={`rounded-xl py-8 sm:py-12 lg:py-20 px-3 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 relative
         ${
           isDarkMode
             ? "bg-gradient-to-br from-slate-900 to-slate-800"
             : "bg-gradient-to-br from-slate-50 to-indigo-50/50"
         }`}
     >
-      {/* Subtle background waves */}
+      {/* Subtle background waves - reduced for mobile */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(3)].map((_, i) => (
           <motion.div
@@ -154,7 +154,7 @@ const AchievementsSection = () => {
         variants={containerVariants}
         className="max-w-7xl mx-auto relative z-10"
       >
-        <div className="flex items-center justify-center mb-10 sm:mb-16 relative">
+        <div className="flex items-center justify-center mb-6 sm:mb-10 lg:mb-16 relative">
           <motion.div
             animate={{
               rotate: 360,
@@ -166,20 +166,20 @@ const AchievementsSection = () => {
             }}
             className="absolute opacity-10"
           >
-            <Sparkles size={120} className={isDarkMode ? "text-indigo-300" : "text-indigo-500"} />
+            <Sparkles size={80} className={`sm:text-[100px] lg:text-[120px] ${isDarkMode ? "text-indigo-300" : "text-indigo-500"}`} />
           </motion.div>
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-1 sm:space-y-2">
             <motion.h2
               id="achievements-heading"
               variants={itemVariants}
-              className={`text-3xl sm:text-4xl lg:text-5xl font-bold 
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold 
                 ${isDarkMode ? "text-white" : "text-slate-800"}`}
             >
               Milestones & <span className={`${isDarkMode ? "text-indigo-400" : "text-indigo-600"}`}>Achievements</span>
             </motion.h2>
             <motion.p 
               variants={itemVariants}
-              className={`text-sm sm:text-base max-w-2xl mx-auto ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}
+              className={`text-xs sm:text-sm md:text-base max-w-2xl mx-auto ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}
             >
               Celebrating the journey of continuous growth and success
             </motion.p>
@@ -187,7 +187,7 @@ const AchievementsSection = () => {
         </div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -222,7 +222,7 @@ const AchievementsSection = () => {
                   }}
                 />
                 <div
-                  className={`relative rounded-2xl p-8 border backdrop-blur-sm transition-all duration-300
+                  className={`relative rounded-2xl p-4 sm:p-6 lg:p-8 border backdrop-blur-sm transition-all duration-300
                     ${
                       isDarkMode
                         ? "bg-slate-800/70 border-slate-700 text-white shadow-lg shadow-black/10"
@@ -230,13 +230,13 @@ const AchievementsSection = () => {
                     } 
                     group-hover:border-indigo-500/30 h-full flex flex-col`}
                 >
-                  <div className="flex flex-col items-center text-center space-y-6">
-                    <div className={`flex items-center justify-center w-16 h-16 rounded-full mb-1 ${colorClasses.bg} ${colorClasses.border} border`}>
+                  <div className="flex flex-col items-center text-center space-y-4 sm:space-y-6">
+                    <div className={`flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full mb-1 ${colorClasses.bg} ${colorClasses.border} border`}>
                       <span className={colorClasses.icon}>{achievement.icon}</span>
                     </div>
 
                     <div className="space-y-1">
-                      <h3 className="flex flex-row items-center justify-center text-3xl font-bold" aria-label={`${achievement.value} ${achievement.metric}`}>
+                      <h3 className="flex flex-row items-center justify-center text-xl sm:text-2xl md:text-3xl font-bold" aria-label={`${achievement.value} ${achievement.metric}`}>
                         {achievement.prefix && (
                           <span className={isDarkMode ? "text-indigo-300" : "text-indigo-600"}>{achievement.prefix}</span>
                         )}
@@ -258,13 +258,13 @@ const AchievementsSection = () => {
                         )}
                       </h3>
                       
-                      <p className={`text-lg font-medium ${isDarkMode ? "text-indigo-300" : "text-indigo-700"}`}>
+                      <p className={`text-sm sm:text-base md:text-lg font-medium ${isDarkMode ? "text-indigo-300" : "text-indigo-700"}`}>
                         {achievement.metric}
                       </p>
                     </div>
 
                     <div className="space-y-3 flex-grow">
-                      <p className={`text-sm ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+                      <p className={`text-xs sm:text-sm ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
                         {achievement.description}
                       </p>
                     </div>
