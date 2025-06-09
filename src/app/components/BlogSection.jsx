@@ -422,31 +422,7 @@ const BlogSection = () => {
           </AnimatePresence>
         </motion.div>
 
-        {/* View All Button */}
-        {filteredArticles.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-12 sm:mt-16 text-center"
-          >
-            <Link href="/blog" passHref>
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300
-                  ${isDarkMode 
-                    ? "bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-900/20" 
-                    : "bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/20"
-                  }
-                `}
-              >
-                <BookOpen className="w-4 h-4" />
-                Browse All Articles
-              </motion.button>
-            </Link>
-          </motion.div>
-        )}
+        
       </div>
     </section>
   );
