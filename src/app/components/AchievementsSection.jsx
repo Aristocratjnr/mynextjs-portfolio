@@ -90,7 +90,7 @@ const AchievementsSection = () => {
 
   return (
     <div
-      className={`rounded-lg py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 relative
+      className={`rounded-xl py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 relative
         ${
           isDarkMode
             ? "bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-950"
@@ -160,28 +160,25 @@ const AchievementsSection = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {achievementsList.map((achievement, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
               whileHover={{
-                scale: 1.05,
-                rotate: [0, -1, 1, -1, 0],
+                scale: 1.03,
                 transition: { duration: 0.3 },
               }}
               className="relative group"
             >
               <motion.div
-                className={`absolute inset-0 rounded-2xl blur-xl transition-all duration-300 
-                  ${
-                    isDarkMode
-                      ? "bg-gradient-to-r from-purple-500/20 to-indigo-500/20"
-                      : "bg-gradient-to-r from-purple-200/30 to-indigo-300/30"
-                  }`}
+                className={`absolute inset-0 rounded-2xl ${
+                  isDarkMode
+                    ? "bg-gradient-to-r from-purple-500/10 to-indigo-500/10"
+                    : "bg-gradient-to-r from-purple-200/20 to-indigo-300/20"
+                }`}
                 animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [0.5, 0.8, 0.5],
+                  opacity: [0.5, 0.7, 0.5],
                 }}
                 transition={{
                   duration: 3,
@@ -190,41 +187,23 @@ const AchievementsSection = () => {
                 }}
               />
               <div
-                className={`relative rounded-2xl p-6 sm:p-8 border backdrop-blur-sm transition-all duration-300
+                className={`relative rounded-2xl p-8 border backdrop-blur-sm transition-all duration-300
                   ${
                     isDarkMode
-                      ? "bg-gray-900/80 border-purple-500/10 text-white"
-                      : "bg-white border-gray-200 text-gray-900"
+                      ? "bg-gray-900/70 border-purple-500/20 text-white shadow-lg shadow-purple-900/10"
+                      : "bg-white/90 border-gray-200 text-gray-900 shadow-lg shadow-purple-200/30"
                   } 
-                  group-hover:border-purple-500/20`}
+                  group-hover:border-purple-500/30 h-full flex flex-col`}
               >
-                <div className="flex flex-col items-center space-y-4">
-                  <motion.div
-                    className="relative"
-                    whileHover={{ 
-                      scale: 1.2,
-                      rotate: [0, -10, 10, -10, 0],
-                    }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <span className="text-4xl sm:text-5xl relative z-10">{achievement.icon}</span>
-                    <motion.div 
-                      className="absolute inset-0 blur-xl rounded-full"
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0.5, 0.8, 0.5],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                      }}
-                    />
-                  </motion.div>
+                <div className="flex flex-col items-center text-center space-y-5">
+                  <div className="flex items-center justify-center w-16 h-16 rounded-full mb-1
+                    ${isDarkMode ? 'bg-purple-900/30' : 'bg-purple-100'}">
+                    <span className="text-3xl" aria-hidden="true">{achievement.icon}</span>
+                  </div>
 
-                  <h3 className="flex flex-row items-center justify-center gap-1 text-3xl sm:text-4xl font-bold">
+                  <h3 className="flex flex-row items-center justify-center text-3xl font-bold" aria-label={`${achievement.value} ${achievement.metric}`}>
                     {achievement.prefix && (
-                      <span className={isDarkMode ? "text-purple-300" : "text-purple-500"}>{achievement.prefix}</span>
+                      <span className={isDarkMode ? "text-purple-300" : "text-purple-600"}>{achievement.prefix}</span>
                     )}
                     <AnimatedNumbers
                       includeComma
@@ -233,7 +212,7 @@ const AchievementsSection = () => {
                       className={`bg-clip-text text-transparent ${
                         isDarkMode
                           ? "bg-gradient-to-r from-purple-300 to-indigo-300"
-                          : "bg-gradient-to-r from-purple-500 to-indigo-700"
+                          : "bg-gradient-to-r from-purple-600 to-indigo-700"
                       }`}
                       configs={(_, index) => ({
                         mass: 1,
@@ -242,24 +221,17 @@ const AchievementsSection = () => {
                       })}
                     />
                     {achievement.postfix && (
-                      <span className={isDarkMode ? "text-purple-300" : "text-purple-500"}>
+                      <span className={isDarkMode ? "text-purple-300" : "text-purple-600"}>
                         {achievement.postfix}
                       </span>
                     )}
                   </h3>
 
-                  <div className="space-y-2 text-center">
-                    <p className={`text-base sm:text-lg font-medium ${isDarkMode ? "text-purple-300" : "text-purple-500"}`}>
+                  <div className="space-y-3 flex-grow">
+                    <p className={`text-lg font-medium ${isDarkMode ? "text-purple-300" : "text-purple-700"}`}>
                       {achievement.metric}
                     </p>
-                    <p
-                      className={`text-xs sm:text-sm transition-all duration-300 max-h-0 group-hover:max-h-20 overflow-hidden 
-                        ${
-                          isDarkMode
-                            ? "text-gray-400 opacity-0 group-hover:opacity-100"
-                            : "text-gray-600 opacity-0 group-hover:opacity-100"
-                        }`}
-                    >
+                    <p className={`text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
                       {achievement.description}
                     </p>
                   </div>
