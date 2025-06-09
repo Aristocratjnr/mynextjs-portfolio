@@ -221,10 +221,9 @@ const HeroSection = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              Crafting <span className="text-indigo-600 dark:text-indigo-400 font-medium">digital experiences</span>{" "}
-              that blend innovation with functionality. Specializing in modern web development with a focus on{" "}
-              <span className="text-indigo-600 dark:text-indigo-400 font-medium">performance</span> and
-              <span className="text-indigo-600 dark:text-indigo-400 font-medium"> user-centric design</span>.
+              I transform ideas into <span className="text-indigo-600 dark:text-indigo-400 font-medium">elegant solutions</span>{" "}
+              through clean, efficient code. Building <span className="text-indigo-600 dark:text-indigo-400 font-medium">responsive interfaces</span>{" "}
+              and <span className="text-indigo-600 dark:text-indigo-400 font-medium">intuitive experiences</span> that make technology more human.
             </motion.p>
 
             {/* CTA Buttons */}
