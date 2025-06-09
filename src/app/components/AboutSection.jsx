@@ -18,6 +18,7 @@ const TAB_DATA = [
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4"
       >
         {[
@@ -56,9 +57,9 @@ const TAB_DATA = [
             key={index}
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: index * 0.1 }}
+            transition={{ delay: index * 0.05, duration: 0.3 }}
             whileHover={{ y: -4, scale: 1.02 }}
-            className="group relative overflow-hidden p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white dark:bg-gray-800/50 backdrop-blur-lg border border-gray-100 dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-300"
+            className="group relative overflow-hidden p-3 sm:p-4 rounded-lg sm:rounded-xl bg-white dark:bg-gray-800/50 backdrop-blur-lg border border-gray-100 dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-200"
           >
             {/* Simplified gradient hover overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
@@ -72,11 +73,11 @@ const TAB_DATA = [
               {/* Smaller icon container */}
               <motion.div 
                 whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
-                transition={{ duration: 0.4 }}
-                className="relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-50 dark:bg-gray-700/50 shadow-sm group-hover:shadow-md transition-all duration-300"
+                transition={{ duration: 0.2 }}
+                className="relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-50 dark:bg-gray-700/50 shadow-sm group-hover:shadow-md transition-all duration-200"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-orange-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="transform group-hover:scale-105 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-orange-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                <div className="transform group-hover:scale-105 transition-transform duration-200">
                   {skill.icon}
                 </div>
               </motion.div>
@@ -133,139 +134,264 @@ const TAB_DATA = [
     id: "experience",
     icon: <Briefcase className="w-5 h-5" />,
     content: (
-      <motion.div className="space-y-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-background/50 to-transparent dark:from-white/[0.05] backdrop-blur-lg border border-border dark:border-white/10 hover:border-primary/20 dark:hover:border-white/20 transition-all duration-300"
-        >
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-transparent to-orange-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center">
-              <Briefcase className="w-6 h-6 text-cyan-500" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold bg-gradient-to-r from-cyan-500 to-orange-500 bg-clip-text text-transparent">
-                Intern
-              </h3>
-              <p className="text-muted-foreground mt-1">Automation Ghana</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <span className="px-3 py-1 text-sm rounded-full bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
-                  February 2024 - March 2024
-                </span>
-                <span className="px-3 py-1 text-sm rounded-full bg-orange-500/10 text-orange-700 dark:text-orange-300 border border-orange-500/20">
-                  Spintex-Accra
-                </span>
+      <motion.div className="space-y-3 sm:space-y-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+        {[
+          {
+            role: "Intern",
+            company: "Automation Ghana",
+            duration: "February 2024 - March 2024",
+            location: "Spintex-Accra",
+            description: "Expanded technical knowledge by learning Access Control Systems and developing an Alexa-based project for a non-smart system.",
+            icon: <Briefcase className="w-4 h-4 sm:w-5 sm:h-5" />,
+            color: "cyan",
+            type: "On-site"
+          },
+          {
+            role: "Quality Assurance Engineer",
+            company: "Inkris CA",
+            duration: "March 2024 - August 2024",
+            location: "Remote",
+            description: "Developed and executed test cases to ensure a high-quality user experience and improved client visibility.",
+            icon: <Code className="w-4 h-4 sm:w-5 sm:h-5" />,
+            color: "purple",
+            type: "Remote"
+          },
+          {
+            role: "Web Developer",
+            company: "University of Ghana Actuarial and Statistical Society",
+            duration: "August 2022 - October 2023",
+            location: "Legon, Accra",
+            description: "Implemented updates and improvements to enhance user experience and ensure website accessibility.",
+            icon: <Laptop className="w-4 h-4 sm:w-5 sm:h-5" />,
+            color: "green",
+            type: "On-site"
+          }
+        ].map((experience, index) => (
+          <motion.div
+            key={index}
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: index * 0.05, type: "spring", stiffness: 200, damping: 20 }}
+            whileHover={{ scale: 1.01, y: -2 }}
+            className="group relative overflow-hidden"
+          >
+            <div className={`relative p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/90 dark:to-gray-900/90 backdrop-blur-lg border border-gray-200/50 dark:border-gray-700/50 hover:border-${experience.color}-500/50 shadow-sm hover:shadow-md transition-all duration-200`}>
+              
+              <motion.div
+                className={`absolute inset-0 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-r ${
+                  experience.color === 'cyan' ? 'from-cyan-500/5 via-cyan-500/3 to-transparent' :
+                  experience.color === 'purple' ? 'from-purple-500/5 via-purple-500/3 to-transparent' :
+                  'from-green-500/5 via-green-500/3 to-transparent'
+                }`}
+              />
+              
+              <div className="relative flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                <motion.div 
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                  className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg ${
+                    experience.color === 'cyan' ? 'bg-cyan-500/15 text-cyan-600 dark:text-cyan-400' :
+                    experience.color === 'purple' ? 'bg-purple-500/15 text-purple-600 dark:text-purple-400' :
+                    'bg-green-500/15 text-green-600 dark:text-green-400'
+                  } flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-200`}
+                >
+                  {experience.icon}
+                </motion.div>
+                
+                <div className="flex-1 space-y-2 sm:space-y-3">
+                  <div className="space-y-1">
+                    <motion.h3 
+                      whileHover={{ scale: 1.01 }}
+                      transition={{ duration: 0.1 }}
+                      className={`text-base sm:text-lg font-bold bg-gradient-to-r ${
+                        experience.color === 'cyan' ? 'from-cyan-600 to-cyan-500' :
+                        experience.color === 'purple' ? 'from-purple-600 to-purple-500' :
+                        'from-green-600 to-green-500'
+                      } bg-clip-text text-transparent`}
+                    >
+                      {experience.role}
+                    </motion.h3>
+                    <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 font-medium">
+                      {experience.company}
+                    </p>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    <motion.span
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.1 }}
+                      className={`inline-flex items-center gap-1.5 px-2 py-1 text-xs rounded-full font-medium border ${
+                        experience.color === 'cyan' ? 'bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/30' :
+                        experience.color === 'purple' ? 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/30' :
+                        'bg-green-500/10 text-green-700 dark:text-green-300 border-green-500/30'
+                      } backdrop-blur-sm`}
+                    >
+                      <div className={`w-1 h-1 rounded-full ${
+                        experience.color === 'cyan' ? 'bg-cyan-500' :
+                        experience.color === 'purple' ? 'bg-purple-500' :
+                        'bg-green-500'
+                      }`} />
+                      {experience.duration}
+                    </motion.span>
+                    
+                    <motion.span
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.1 }}
+                      className="inline-flex items-center gap-1.5 px-2 py-1 text-xs rounded-full bg-gray-500/10 text-gray-700 dark:text-gray-300 border border-gray-500/30 font-medium backdrop-blur-sm"
+                    >
+                      <div className="w-1 h-1 rounded-full bg-gray-500" />
+                      {experience.location}
+                    </motion.span>
+                    
+                    <motion.span
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.1 }}
+                      className={`inline-flex items-center px-2 py-1 text-xs rounded-full font-medium ${
+                        experience.type === 'Remote' ? 'bg-blue-500/10 text-blue-700 dark:text-blue-300' : 'bg-orange-500/10 text-orange-700 dark:text-orange-300'
+                      }`}
+                    >
+                      {experience.type}
+                    </motion.span>
+                  </div>
+                  
+                  <motion.p 
+                    initial={{ opacity: 0.8 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.1 }}
+                    className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed"
+                  >
+                    {experience.description}
+                  </motion.p>
+                </div>
               </div>
-              <div className="mt-4 text-sm text-muted-foreground">
-              Expanded technical knowledge by learning Access Control Systems and developing an Alexa-based project for a non-smart system, demonstrating an ability to adapt and learn new technologies.
-              </div>
+              
+              <motion.div
+                className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 rounded-full transition-all duration-200 ${
+                  experience.color === 'cyan' ? 'bg-cyan-500' :
+                  experience.color === 'purple' ? 'bg-purple-500' :
+                  'bg-green-500'
+                }`}
+                initial={{ width: '15%' }}
+                whileHover={{ width: '60%' }}
+              />
             </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-background/50 to-transparent dark:from-white/[0.05] backdrop-blur-lg border border-border dark:border-white/10 hover:border-primary/20 dark:hover:border-white/20 transition-all duration-300"
-        >
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-transparent to-orange-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
-              <Code className="w-6 h-6 text-purple-500" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Quality Assurance Engineer
-              </h3>
-              <p className="text-muted-foreground mt-1">Inkris CA</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <span className="px-3 py-1 text-sm rounded-full bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">
-                  March 2024 -  August 2024
-                </span>
-                <span className="px-3 py-1 text-sm rounded-full bg-pink-500/10 text-pink-700 dark:text-pink-300 border border-pink-500/20">
-                  Remote
-                </span>
-              </div>
-              <div className="mt-4 text-sm text-muted-foreground">
-              Developed and executed test cases to ensure a high-quality user experience and improved client visibility.
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-background/50 to-transparent dark:from-white/[0.05] backdrop-blur-lg border border-border dark:border-white/10 hover:border-primary/20 dark:hover:border-white/20 transition-all duration-300"
-        >
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-transparent to-orange-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center">
-              <Laptop className="w-6 h-6 text-green-500" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold bg-gradient-to-r from-green-500 to-teal-500 bg-clip-text text-transparent">
-                Web Developer
-              </h3>
-              <p className="text-muted-foreground mt-1">University of Ghana Actuarial and Statistical Society</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <span className="px-3 py-1 text-sm rounded-full bg-green-500/10 text-green-700 dark:text-green-300 border border-green-500/20">
-                  August 2022 - October 2023
-                </span>
-                <span className="px-3 py-1 text-sm rounded-full bg-teal-500/10 text-teal-700 dark:text-teal-300 border border-teal-500/20">
-                  Legon, Accra
-                </span>
-              </div>
-              <div className="mt-4 text-sm text-muted-foreground">
-              Implemented updates and improvements to enhance user experience and ensure website accessibility.
-              </div>
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        ))}
       </motion.div>
     ),
   },
+  
   {
     title: "Education",
     id: "education",
     icon: <BookOpen className="w-5 h-5" />,
     content: (
-      <motion.div className="space-y-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <motion.div className="space-y-3 sm:space-y-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
         <motion.div
-          whileHover={{ scale: 1.02 }}
-          className="relative p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-background/50 to-transparent dark:from-white/[0.05] backdrop-blur-lg border border-border dark:border-white/10 hover:border-primary/20 dark:hover:border-white/20 transition-all duration-300"
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
+          whileHover={{ scale: 1.01, y: -3 }}
+          className="group relative overflow-hidden"
         >
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-transparent to-orange-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center">
-              <BookOpen className="w-6 h-6 text-cyan-500" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold bg-gradient-to-r from-cyan-500 to-orange-500 bg-clip-text text-transparent">
-                Information Technology
-              </h3>
-              <p className="text-muted-foreground mt-1">University of Ghana</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <span className="px-3 py-1 text-sm rounded-full bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
-                  2021 - Present
-                </span>
-                <span className="px-3 py-1 text-sm rounded-full bg-orange-500/10 text-orange-700 dark:text-orange-300 border border-orange-500/20">
-                  GPA: 2.93/4.0
-                </span>
+          <div className="relative p-4 sm:p-5 rounded-lg sm:rounded-xl bg-gradient-to-br from-white/95 to-indigo-50/95 dark:from-gray-800/95 dark:to-indigo-900/20 backdrop-blur-lg border border-indigo-200/50 dark:border-indigo-700/50 hover:border-indigo-500/50 shadow-sm hover:shadow-md transition-all duration-200">
+            
+            <motion.div
+              className="absolute inset-0 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-r from-indigo-500/5 via-purple-500/3 to-transparent"
+            />
+            
+            <div className="relative flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+                className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-indigo-500/15 to-purple-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-200"
+              >
+                <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />
+              </motion.div>
+              
+              <div className="flex-1 space-y-3">
+                <div className="space-y-1">
+                  <motion.h3 
+                    whileHover={{ scale: 1.01 }}
+                    transition={{ duration: 0.1 }}
+                    className="text-base sm:text-lg font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent"
+                  >
+                    Bachelor of Science in Information Technology
+                  </motion.h3>
+                  <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 font-medium">
+                    University of Ghana
+                  </p>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+                    Specializing in Software Engineering and Web Development
+                  </p>
+                </div>
+                
+                <div className="flex flex-wrap gap-2">
+                  <motion.span
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.1 }}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/30 font-medium backdrop-blur-sm"
+                  >
+                    <div className="w-1 h-1 rounded-full bg-indigo-500" />
+                    2021 - Present
+                  </motion.span>
+                  
+                  <motion.span
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.1 }}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-full bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/30 font-medium backdrop-blur-sm"
+                  >
+                    <div className="w-1 h-1 rounded-full bg-purple-500" />
+                    GPA: 2.93/4.0
+                  </motion.span>
+                  
+                  <motion.span
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.1 }}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-full bg-green-500/10 text-green-700 dark:text-green-300 border border-green-500/30 font-medium backdrop-blur-sm"
+                  >
+                    <div className="w-1 h-1 rounded-full bg-green-500" />
+                    Expected 2025
+                  </motion.span>
+                </div>
+                
+                <div className="space-y-1.5">
+                  <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-300">Key Areas of Study:</h4>
+                  <div className="flex flex-wrap gap-1.5">
+                    {["Software Engineering", "Web Development", "Database Systems", "Data Structures", "Computer Networks"].map((subject, index) => (
+                      <motion.span
+                        key={subject}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.02, duration: 0.2 }}
+                        whileHover={{ scale: 1.02 }}
+                        className="px-2 py-0.5 text-xs rounded-full bg-gray-200/70 dark:bg-gray-700/70 text-gray-600 dark:text-gray-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/30 transition-colors duration-150"
+                      >
+                        {subject}
+                      </motion.span>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <div className="mt-4 text-sm text-muted-foreground">
-                Specializing in Software Engineering and Web Development.
-              </div>
             </div>
+            
+            <motion.div
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-200"
+              initial={{ width: '20%' }}
+              whileHover={{ width: '70%' }}
+            />
           </div>
         </motion.div>
       </motion.div>
     ),
   },
+  
   {
     title: "Certifications",
     id: "certifications",
     icon: <Award className="w-5 h-5" />,
     content: (
-      <motion.div className="grid gap-4 sm:gap-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <motion.div className="space-y-3 sm:space-y-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
         {[
           {
             title: "Python Data Science",
@@ -274,14 +400,16 @@ const TAB_DATA = [
             link: "#",
             color: "orange",
             skills: ["Data Analysis", "Machine Learning", "Visualization"],
+            level: "Intermediate"
           },
           {
             title: "Data Analysis",
             issuer: "IBM",
-            date: "2023",
+            date: "2023", 
             link: "#",
             color: "cyan",
             skills: ["SQL", "Statistics", "Excel"],
+            level: "Professional"
           },
           {
             title: "AI Fundamentals",
@@ -290,47 +418,123 @@ const TAB_DATA = [
             link: "#",
             color: "purple",
             skills: ["Neural Networks", "Deep Learning", "TensorFlow"],
-          },
+            level: "Beginner"
+          }
         ].map((cert, index) => (
           <motion.div
             key={index}
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: index * 0.1 }}
-            whileHover={{ scale: 1.01 }}
-            className="group relative p-5 sm:p-6 rounded-2xl bg-background/50 dark:bg-white/[0.03] backdrop-blur-lg hover:bg-muted/80 dark:hover:bg-white/[0.06] border border-border dark:border-white/10 transition-all duration-300"
+            transition={{ delay: index * 0.05, type: "spring", stiffness: 200, damping: 20 }}
+            whileHover={{ scale: 1.01, y: -2 }}
+            className="group relative overflow-hidden cursor-pointer"
           >
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-500/10 via-transparent to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold text-foreground group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
-                  {cert.title}
-                </h3>
-                <div className="mt-2 flex items-center gap-3">
-                  <span className="px-3 py-1 text-sm rounded-full bg-muted/50 dark:bg-white/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
-                    {cert.issuer}
-                  </span>
-                  <span className="text-sm text-muted-foreground">{cert.date}</span>
-                </div>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {cert.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="px-2 py-1 text-xs rounded-full bg-muted/30 dark:bg-white/5 text-muted-foreground"
+            <div className={`relative p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-br from-white/95 to-gray-50/95 dark:from-gray-800/95 dark:to-gray-900/95 backdrop-blur-lg border ${
+              cert.color === 'orange' ? 'border-orange-200/50 hover:border-orange-500/50' :
+              cert.color === 'cyan' ? 'border-cyan-200/50 hover:border-cyan-500/50' :
+              'border-purple-200/50 hover:border-purple-500/50'
+            } shadow-sm hover:shadow-md transition-all duration-200`}>
+              
+              <motion.div
+                className={`absolute inset-0 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${
+                  cert.color === 'orange' ? 'bg-gradient-to-r from-orange-500/5 via-orange-500/3 to-transparent' :
+                  cert.color === 'cyan' ? 'bg-gradient-to-r from-cyan-500/5 via-cyan-500/3 to-transparent' :
+                  'bg-gradient-to-r from-purple-500/5 via-purple-500/3 to-transparent'
+                }`}
+              />
+              
+              <div className="relative flex items-start justify-between gap-3">
+                <div className="flex-1 space-y-2.5">
+                  <div className="flex items-start gap-3">
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 45 }}
+                      transition={{ duration: 0.15 }}
+                      className="text-lg sm:text-xl"
                     >
-                      {skill}
-                    </span>
-                  ))}
+                      {cert.icon}
+                    </motion.div>
+                    
+                    <div className="flex-1 space-y-1">
+                      <motion.h3
+                        whileHover={{ scale: 1.01 }}
+                        transition={{ duration: 0.1 }}
+                        className={`text-sm sm:text-base font-bold ${
+                          cert.color === 'orange' ? 'text-orange-600 dark:text-orange-400' :
+                          cert.color === 'cyan' ? 'text-cyan-600 dark:text-cyan-400' :
+                          'text-purple-600 dark:text-purple-400'
+                        }`}
+                      >
+                        {cert.title}
+                      </motion.h3>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <motion.span
+                          whileHover={{ scale: 1.02 }}
+                          transition={{ duration: 0.1 }}
+                          className={`px-2 py-0.5 text-xs rounded-full font-medium border backdrop-blur-sm ${
+                            cert.color === 'orange' ? 'bg-orange-500/10 text-orange-700 dark:text-orange-300 border-orange-500/30' :
+                            cert.color === 'cyan' ? 'bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/30' :
+                            'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/30'
+                          }`}
+                        >
+                          {cert.issuer}
+                        </motion.span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">{cert.date}</span>
+                        <motion.span
+                          whileHover={{ scale: 1.02 }}
+                          transition={{ duration: 0.1 }}
+                          className="px-1.5 py-0.5 text-xs rounded-full bg-gray-200/70 dark:bg-gray-700/70 text-gray-600 dark:text-gray-400 font-medium"
+                        >
+                          {cert.level}
+                        </motion.span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-1">
+                    <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-300">Skills:</h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {cert.skills.map((skill, skillIndex) => (
+                        <motion.span
+                          key={skillIndex}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: skillIndex * 0.02, duration: 0.2 }}
+                          whileHover={{ scale: 1.02 }}
+                          className="px-2 py-0.5 text-xs rounded-full bg-gray-200/70 dark:bg-gray-700/70 text-gray-600 dark:text-gray-400 hover:bg-gray-300/70 dark:hover:bg-gray-600/70 transition-colors duration-150"
+                        >
+                          {skill}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
+                
+                <motion.a
+                  href={cert.link}
+                  whileHover={{ scale: 1.05, rotate: 10 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.1 }}
+                  className={`flex-shrink-0 p-1.5 rounded-full ${
+                    cert.color === 'orange' ? 'bg-orange-500/10 hover:bg-orange-500/20 text-orange-600 dark:text-orange-400' :
+                    cert.color === 'cyan' ? 'bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400' :
+                    'bg-purple-500/10 hover:bg-purple-500/20 text-purple-600 dark:text-purple-400'
+                  } transition-colors duration-150`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+                </motion.a>
               </div>
-              <a
-                href={cert.link}
-                className="flex-shrink-0 p-2 rounded-full bg-muted/30 dark:bg-white/5 hover:bg-muted dark:hover:bg-white/10 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ExternalLink className="w-4 h-4 text-cyan-600 dark:text-cyan-300" />
-              </a>
+              
+              <motion.div
+                className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 rounded-full transition-all duration-200 ${
+                  cert.color === 'orange' ? 'bg-orange-500' :
+                  cert.color === 'cyan' ? 'bg-cyan-500' :
+                  'bg-purple-500'
+                }`}
+                initial={{ width: '20%' }}
+                whileHover={{ width: '60%' }}
+              />
             </div>
           </motion.div>
         ))}
@@ -339,13 +543,14 @@ const TAB_DATA = [
   },
 ]
 
+// Update the main section animations too
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
+      staggerChildren: 0.05, // Reduced from 0.1
+      delayChildren: 0.1      // Reduced from 0.2
     }
   }
 }
@@ -357,7 +562,8 @@ const itemVariants = {
     opacity: 1,
     transition: {
       type: "spring",
-      stiffness: 100
+      stiffness: 200,  // Increased from 100
+      damping: 20      // Added for faster settling
     }
   }
 }
@@ -438,19 +644,20 @@ const AboutSection = () => {
               className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 via-transparent to-orange-500/20 dark:from-cyan-500/30 dark:to-orange-500/30 rounded-3xl blur-2xl"
             />
             <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
-              <Image
-                src="/images/web.jpg"
-                width={800}
-                height={800}
-                alt="About Image"
-                className="w-full h-full object-cover transform transition-all duration-700 group-hover:scale-110"
-              />
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent"
-              />
+                className ="relative"
+              >
+                <Image
+                  src="/images/web.jpg"
+                  width={800}
+                  height={800}
+                  alt="About Image"
+                  className="w-full h-auto object-cover"
+                />
+              </motion.div>
               <motion.div
                 variants={itemVariants}
                 className="absolute bottom-0 left-0 right-0 p-6 sm:p-8"
