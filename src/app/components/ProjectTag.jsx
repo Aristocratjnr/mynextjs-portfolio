@@ -1,100 +1,141 @@
 "use client"
 import { motion } from "framer-motion"
+import { Filter, Check } from "lucide-react"
 
 const ProjectTag = ({ name, onClick, isSelected }) => {
   return (
     <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.02, y: -1 }}
+      whileTap={{ scale: 0.98 }}
       onClick={() => onClick(name)}
       className={`
-        relative px-7 py-3 rounded-full text-lg font-medium
+        relative px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 lg:px-6 lg:py-3
+        rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-medium
         transition-all duration-300 ease-out
-        group overflow-hidden
+        group overflow-hidden border
+        min-w-[60px] sm:min-w-[80px] md:min-w-[100px]
+        flex items-center justify-center gap-1 sm:gap-2
         ${
           isSelected
-            ? "text-white dark:text-white shadow-lg shadow-primary-500/20 dark:shadow-primary-500/30"
-            : "text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 hover:text-gray-900 dark:hover:text-white"
+            ? "text-white dark:text-white shadow-lg shadow-cyan-500/25 dark:shadow-cyan-400/30 border-cyan-500/50 dark:border-cyan-400/50"
+            : "text-slate-600 dark:text-slate-300 bg-white/70 dark:bg-slate-800/70 border-slate-200/80 dark:border-slate-700/80 hover:bg-slate-50 dark:hover:bg-slate-700/90 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-600"
         }
       `}
     >
-      {/* Background layer */}
+      {/* Animated background */}
       {isSelected && (
         <motion.div
-          layoutId="activeTab"
-          className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-400 to-secondary-400 dark:from-primary-500 dark:to-secondary-500"
+          layoutId="activeTagBackground"
+          className="absolute inset-0 rounded-lg sm:rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400"
           initial={false}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          transition={{ 
+            type: "spring", 
+            stiffness: 400, 
+            damping: 30,
+            mass: 0.8
+          }}
         />
       )}
 
-      {/* Border animation */}
-      <div className="absolute inset-0 rounded-full overflow-hidden">
+      {/* Glow effect */}
+      {isSelected && (
         <motion.div
-          className={`absolute inset-0 rounded-full border ${
-            isSelected
-              ? "border-primary-400/50 dark:border-primary-500/50"
-              : "border-gray-300 dark:border-white/10 group-hover:border-gray-400 dark:group-hover:border-white/20"
-          }`}
-          initial={false}
+          className="absolute inset-0 rounded-lg sm:rounded-xl bg-gradient-to-r from-cyan-500/50 via-blue-500/50 to-indigo-500/50 blur-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.6 }}
+          transition={{ duration: 0.3 }}
         />
-      </div>
+      )}
 
-      {/* Content */}
-      <span className="relative z-10 flex items-center gap-2">
-        {name}
-        {isSelected && (
-          <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-2 h-2 bg-white rounded-full" />
+      {/* Icon indicator */}
+      <span className="relative z-10 flex items-center gap-1 sm:gap-1.5">
+        {isSelected ? (
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <Check className="w-3 h-3 sm:w-4 sm:h-4" />
+          </motion.div>
+        ) : (
+          <Filter className="w-3 h-3 sm:w-4 sm:h-4 opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
         )}
+        
+        {/* Tag name */}
+        <span className="relative">
+          {name}
+          
+          {/* Underline animation for non-selected tags */}
+          {!isSelected && (
+            <motion.div
+              className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
+              initial={{ scaleX: 0 }}
+              whileHover={{ scaleX: 1 }}
+              transition={{ duration: 0.2 }}
+            />
+          )}
+        </span>
       </span>
 
-      {/* Shine effect */}
-      <div className="absolute inset-0 rounded-full overflow-hidden">
+      {/* Hover shimmer effect */}
+      <div className="absolute inset-0 rounded-lg sm:rounded-xl overflow-hidden">
         <motion.div
-          className={`
-            absolute top-0 left-0 w-1/4 h-full 
-            bg-gradient-to-r from-transparent via-white/20 to-transparent
-            transform -skew-x-45 translate-x-[-200%]
-            ${isSelected ? "opacity-40" : "opacity-0"}
-          `}
-          animate={{
-            translateX: isSelected ? ["-200%", "400%"] : "400%",
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
-            delay: isSelected ? 0 : 0.3,
-          }}
+          className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12"
+          initial={{ x: "-100%" }}
+          whileHover={{ x: "100%" }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
         />
       </div>
 
-      {/* Particles effect */}
+      {/* Selected tag particles */}
       {isSelected && (
-        <div className="absolute inset-0 rounded-full overflow-hidden">
-          {[...Array(8)].map((_, i) => (
+        <div className="absolute inset-0 rounded-lg sm:rounded-xl overflow-hidden pointer-events-none">
+          {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-0.5 h-0.5 bg-white/30 rounded-full"
-              initial={{
-                scale: 0,
-                opacity: 0,
-                x: Math.random() * 100 - 50 + "%",
-                y: Math.random() * 100 - 50 + "%",
+              className="absolute w-1 h-1 bg-white/40 rounded-full"
+              style={{
+                left: `${20 + (i * 10)}%`,
+                top: `${30 + (i % 2) * 40}%`,
               }}
               animate={{
                 scale: [0, 1, 0],
-                opacity: [0, 0.5, 0],
+                opacity: [0, 0.8, 0],
+                y: [-5, -15, -5],
               }}
               transition={{
-                duration: 1.5,
-                repeat: Number.POSITIVE_INFINITY,
-                delay: Math.random() * 1.5,
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.3,
+                ease: "easeInOut"
               }}
             />
           ))}
         </div>
       )}
+
+      {/* Pulse effect for selected tag */}
+      {isSelected && (
+        <motion.div
+          className="absolute inset-0 rounded-lg sm:rounded-xl border-2 border-white/30"
+          animate={{
+            scale: [1, 1.05, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      )}
+
+      {/* Mobile touch feedback */}
+      <motion.div
+        className="absolute inset-0 rounded-lg sm:rounded-xl bg-slate-900/10 dark:bg-white/10 opacity-0"
+        whileTap={{ opacity: 0.2 }}
+        transition={{ duration: 0.1 }}
+      />
     </motion.button>
   )
 }
