@@ -35,3 +35,37 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* Loader animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(6, 182, 212, 0.8);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Prevent scroll during loading */
+body.loading {
+  overflow: hidden;
+}
